@@ -1,9 +1,21 @@
 <x-guest-layout>
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Atte</title>
+        <link rel="stylesheet" href="{{ asset('css/sanitize.css') }}" />
+        <link rel="stylesheet" href="{{ asset('css/login.css') }}">
+        <script src="https://kit.fontawesome.com/7f44e1f3ad.js" crossorigin="anonymous"></script>
+    </head>
+
+    <header class="header">
+        <div class="header__inner">
+            <div class="header__logo">Rese</div>
+        </div>
+    </header>
     <x-auth-card>
         <x-slot name="logo">
-            <a href="/">
-                <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
-            </a>
         </x-slot>
 
         <!-- Session Status -->
@@ -13,13 +25,13 @@
         <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
 
-        <div class="bg-blue-400 mt-4 mb-4">Login</div>
-        
+        <div class="form_ttl">Login</div>
         <form method="POST" action="{{ route('login') }}">
             @csrf
 
             <!-- Email Address -->
             <div>
+                <i class="fa-solid fa-envelope"></i>
                 <x-label for="email" :value="__('')" />
 
                 <x-input id="email" class="block mt-4 w-full" type="email" name="email" placeholder="Email" :value="old('email')" required autofocus />
@@ -27,6 +39,7 @@
 
             <!-- Password -->
             <div class="mt-4">
+                <i class="fa-solid fa-unlock-keyhole fa-lg"></i>
                 <x-label for="password" :value="__('')" />
                 <x-input id="password" class="block w-full"
                                 type="password"
