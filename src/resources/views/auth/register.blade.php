@@ -7,11 +7,13 @@
         <!-- Validation Errors -->
         <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
+        <div class="bg-blue-400 mt-2 mb-2">Registration</div>
+
         <form method="POST" action="{{ route('register') }}">
             @csrf
             <!-- Name -->
             <div>
-                <x-label class=" fa-envelope" for="name"  :value="__('Name')" />
+                <x-label class="mt-4" for="name"  :value="__('Name')" />
                 <x-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" placeholder="Username" required autofocus />
             </div>
 
