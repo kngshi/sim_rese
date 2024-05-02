@@ -3,7 +3,7 @@
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Atte</title>
+        <title>Rese</title>
         <link rel="stylesheet" href="{{ asset('css/sanitize.css') }}" />
         <link rel="stylesheet" href="{{ asset('css/login.css') }}">
         <script src="https://kit.fontawesome.com/7f44e1f3ad.js" crossorigin="anonymous"></script>
@@ -11,6 +11,7 @@
 
     <header class="header">
         <div class="header__inner">
+            <div class="openbtn6"><span></span><span></span><span></span></div>
             <div class="header__logo">Rese</div>
         </div>
     </header>
@@ -28,34 +29,27 @@
         <div class="form_ttl">Login</div>
         <form method="POST" action="{{ route('login') }}">
             @csrf
-
-            <!-- Email Address -->
-            <div>
-                <i class="fa-solid fa-envelope"></i>
-                <x-label for="email" :value="__('')" />
-
-                <x-input id="email" class="block mt-4 w-full" type="email" name="email" placeholder="Email" :value="old('email')" required autofocus />
-            </div>
-
-            <!-- Password -->
-            <div class="mt-4">
-                <i class="fa-solid fa-unlock-keyhole fa-lg"></i>
-                <x-label for="password" :value="__('')" />
-                <x-input id="password" class="block w-full"
+            <table>
+            <tr>
+            <th class="form-icon">
+                <i class="fa-solid fa-envelope fa-xl"></i>
+            </th>
+            <td class="form-input">
+                <x-input id="email" class="block mt-4 w-full border-none" type="email" name="email" :value="old('email')" placeholder="Email" required /></td>
+            </tr>
+            <tr>
+            <th class="form-icon">
+                <i class="fa-solid fa-unlock-keyhole fa-xl"></i>
+            </th>
+            <td class="form-input"><x-input id="password" class="block mt-1 w-full border-none"
                                 type="password"
                                 name="password"
                                 placeholder="Password"
-                                required autocomplete="current-password" />
-            </div>
-
-            <div class="flex items-center justify-end mt-4">
-                @if (Route::has('password.request'))
-                    <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('password.request') }}">
-                        {{ __('Forgot your password?') }}
-                    </a>
-                @endif
-
-                <x-button class="ml-3">
+                                required autocomplete="new-password" /></td>
+            </tr>
+            </table>
+            <div class="flex items-center justify-end">
+                <x-button class="form-button">
                     {{ __('ログイン') }}
                 </x-button>
             </div>
