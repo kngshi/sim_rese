@@ -27,3 +27,7 @@ Route::get('/thanks', function () {
     return view('thanks');
 });
 
+Route::get('/done', function () {
+    return view('done');
+});
+

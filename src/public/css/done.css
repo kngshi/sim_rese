@@ -1,0 +1,105 @@
+.header {
+    background: #f5f5f5;
+}
+
+.header__inner {
+    margin: 0 auto;
+    padding: 20px 15px;
+    max-width: 1230px;
+    display: flex;
+    align-items: center;
+}
+
+.openbtn6 {
+    position: relative;
+    /*ボタン内側の基点となるためrelativeを指定*/
+    background: blue;
+    margin-left: 50px;
+    cursor: pointer;
+    width: 50px;
+    height: 50px;
+    border-radius: 5px;
+}
+
+/*ボタン内側*/
+.openbtn6 span {
+    display: inline-block;
+    transition: all .4s;
+    /*アニメーションの設定*/
+    position: absolute;
+    left: 14px;
+    height: 3px;
+    border-radius: 2px;
+    background: #fff;
+}
+
+
+.openbtn6 span:nth-of-type(1) {
+    top: 15px;
+    width: 30%;
+}
+
+.openbtn6 span:nth-of-type(2) {
+    top: 23px;
+    width: 45%;
+}
+
+.openbtn6 span:nth-of-type(3) {
+    top: 31px;
+    width: 20%;
+}
+
+.header__logo {
+    color: blue;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 30px;
+    margin: 0 20px;
+}
+
+main {
+    background-color: #f5f5f5;
+    display: flex;
+    flex-direction: column;
+}
+
+.done-page {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 90vh;
+}
+
+.done-page__inner{
+    padding: 64px 96px;
+        border: none;
+        border-radius: 5px;
+        background-color: #FDFEFE;
+        box-shadow: 3px 3px 3px gray;
+        position: absolute;
+        cursor: pointer;
+        left:auto;
+        top:20%;
+
+}
+
+.done-page__message {
+    font-size: 22px;
+}
+
+.done-page__btn {
+    margin: 32px auto 0;
+    color: white;
+    background-color: blue;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    text-align: center;
+    align-items: center;
+    height: 40px;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    width: 25%;
+    display: flex;
+    justify-content: center;
+}
