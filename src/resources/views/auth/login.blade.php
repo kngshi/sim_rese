@@ -11,20 +11,19 @@
 
     <header class="header">
         <div class="header__inner">
+            <a href="#modal-01">
             <div class="openbtn6"><span></span><span></span><span></span></div>
+            </a>
             <div class="header__logo">Rese</div>
         </div>
     </header>
     <x-auth-card>
         <x-slot name="logo">
         </x-slot>
-
         <!-- Session Status -->
         <x-auth-session-status class="mb-4" :status="session('status')" />
-
         <!-- Validation Errors -->
         <x-auth-validation-errors class="mb-4" :errors="$errors" />
-
 
         <div class="form_ttl">Login</div>
         <form method="POST" action="{{ route('login') }}">
@@ -55,4 +54,18 @@
             </div>
         </form>
     </x-auth-card>
+    <!-- モーダルウィンドウ -->
+<div class="modal-wrapper" id="modal-01">
+  <a href="#!" class="modal-overlay"></a>
+  <div class="modal-window">
+    <div class="modal-content">
+      <ul>
+            <li><a href="{{ route('login') }}">Home</a></li>
+            <li><a href="{{ route('register') }}">Registration</a></li>
+            <li><a href="{{ route('login') }}">Login</a></li>
+        </ul>
+    </div>
+    <a href="#!" class="modal-close">×</a>
+  </div>
+</div>
 </x-guest-layout>

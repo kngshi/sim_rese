@@ -8,22 +8,22 @@
         <link rel="stylesheet" href="{{ asset('css/thanks.css') }}">
         <script src="https://kit.fontawesome.com/7f44e1f3ad.js" crossorigin="anonymous"></script>
     </head>
+    <body>
     <header class="header">
         <div class="header__inner">
+            <div class="openbtn6"><span></span><span></span><span></span></div>
             <div class="header__logo">Rese</div>
         </div>
     </header>
-    <x-guest-layout>
-    <x-auth-card class="card">
-        <x-slot name="logo">
-        </x-slot>
-        <div class="content">
-        <div class="message">会員登録ありがとうございます</div> 
-                <x-button class="form-button" >
-                    {{ __('ログインする') }}
-                </x-button>
+    <main>
+        <div class="thanks-page">
+        <div class="thanks-page__inner">
+            <p class="thanks-page__message">会員登録ありがとうございます</p>
+            <form class="thanks-page__form" action="/login" method="get">
+            <button class="thanks-page__btn btn">ログインする</button>
+            </form>
         </div>
         </div>
-    </x-auth-card>
-</x-guest-layout>
+    </main>
+    </body>
 </html>
