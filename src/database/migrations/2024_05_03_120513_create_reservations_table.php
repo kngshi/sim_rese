@@ -17,9 +17,9 @@ class CreateReservationsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('shop_id');
-            $table->date('reservation_date');
-            $table->time('reservation_time');
-            $table->integer('number_of_people');
+            $table->date('date');
+            $table->time('time');
+            $table->integer('number');
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

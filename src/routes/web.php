@@ -1,7 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ShopController;
+use App\Http\Controllers\ReservationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,7 +26,7 @@ Route::get('/', [ShopController::class, 'index']);
 Route::get('/shop/{shop}', [ShopController::class, 'detail'])->name('shop.detail');
 Route::get('/search', [ShopController::class, 'search']);
 
-Route::post('/reservation/store', [ReservationController::class, 'store'])->name('reservation.store');
+Route::post('/reservation', [ReservationController::class, 'store'])->name('reservation.store')->middleware('auth');;
 
 require __DIR__.'/auth.php';
 

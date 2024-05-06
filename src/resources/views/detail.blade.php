@@ -82,6 +82,7 @@
                 <td>1人</td>
             </tr>
         </table>
+        <input type="hidden" name="shop_id" value="{{ $shop->id }}">
             <button type="submit">予約する</button>
         </form>
     </div>

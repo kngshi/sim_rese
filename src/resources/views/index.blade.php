@@ -76,6 +76,20 @@
         @endforeach
     </div>
 </div>
+<!-- モーダルウィンドウ -->
+    <div class="modal-wrapper" id="modal-01">
+    <a href="#!" class="modal-overlay"></a>
+    <div class="modal-window">
+        <div class="modal-content">
+        <ul>
+                <li><a href="{{ route('login') }}">Home</a></li>
+                <li><a href="{{ route('register') }}">Registration</a></li>
+                <li><a href="{{ route('login') }}">Login</a></li>
+            </ul>
+        </div>
+        <a href="#!" class="modal-close">×</a>
+    </div>
+    </div>
 </main>
 </body>
 </html>

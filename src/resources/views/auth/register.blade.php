@@ -43,6 +43,13 @@
                                 placeholder="Password"
                                 required autocomplete="new-password" /></td>
             </tr>
+            <div class="mt-4">
+                <x-label for="password_confirmation"  :value="__('')" />
+                <x-input id="password_confirmation" class="form-content"
+                                placeholder="確認用パスワード"
+                                type="password"
+                                name="password_confirmation" required />
+            </div>
             </table>
             <div class="flex items-center justify-end">
                 <x-button class="form-button">
