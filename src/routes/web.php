@@ -37,4 +37,3 @@ Route::get('/thanks', function () {
 Route::get('/done', function () {
     return view('done');
 });
-
