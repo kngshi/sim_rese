@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ShopController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,13 +14,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
+// ※マイページは認証で入れるように設定。
+
+Route::get('/', [ShopController::class, 'index']);
+Route::get('/shop/{shop}', [ShopController::class, 'detail'])->name('shop.detail');
+Route::get('/search', [ShopController::class, 'search']);
+
+Route::post('/reservation/store', [ReservationController::class, 'store'])->name('reservation.store');
 
 require __DIR__.'/auth.php';
 
