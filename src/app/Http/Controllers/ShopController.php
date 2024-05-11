@@ -3,6 +3,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Shop;
 use App\Models\Area;
 use App\Models\Genre;
@@ -49,5 +50,20 @@ class ShopController extends Controller
 
         return view('index', compact('shops', 'areas', 'genres'));
     }
+
+
+    public function mypage(Request $request)
+    {
+
+    $user= User::select('id')->get();
+
+    $shops = Shop::with('area', 'genre')->get();
+    $areas = Area::all();
+    $genres = Genre::all();
+
+    return view('mypage', compact( 'user','shops', 'areas', 'genres' ));
+    }
+
+
 
 }
