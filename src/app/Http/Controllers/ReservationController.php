@@ -43,4 +43,13 @@ class ReservationController extends Controller
         }
     }
 
+    public function getReservation()
+    {
+        // ログインユーザーの予約情報を取得
+        $reservations = Reservation::where('user_id', Auth::id())->get();
+
+        // マイページビューに予約情報を渡して表示
+        return view('mypage', ['reservations' => $reservations]);
+    }
+
 }

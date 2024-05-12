@@ -23,7 +23,7 @@
     <div class="mypage__content">
       <div class="mypage__heading">
         @auth
-        <h2>{{Auth::user()->name}}さん</h2>
+        <h2>{{Auth::user()->name}}さんお疲れ様です！</h2>
         @endauth
       </div>
     </div>
@@ -35,19 +35,19 @@
         <table class="reservation-form-table">
             <tr>
                 <th>Shop</th>
-                <td>店舗名</td>
+                <td>name</td>
             </tr>
             <tr>
                 <th>Date</th>
-                <td>2024-05-05</td>
+                <td>date</td>
             </tr>
             <tr>
                 <th>Time</th>
-                <td>17:00</td>
+                <td>time</td>
             </tr>
             <tr>
                 <th>Number</th>
-                <td>1人</td>
+                <td>number人</td>
             </tr>
         </table>
     </div>

@@ -8,6 +8,7 @@ use App\Models\Shop;
 use App\Models\Area;
 use App\Models\Genre;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ShopController extends Controller
 {
@@ -55,13 +56,11 @@ class ShopController extends Controller
     public function mypage(Request $request)
     {
 
-    $user= User::select('id')->get();
-
     $shops = Shop::with('area', 'genre')->get();
-    $areas = Area::all();
-    $genres = Genre::all();
 
-    return view('mypage', compact( 'user','shops', 'areas', 'genres' ));
+    $reservations = Auth::user()->reservations()->with('shop')->get();
+
+    return view('mypage', compact('shops', 'reservations' ));
     }
 
 

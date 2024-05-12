@@ -22,6 +22,11 @@ class Shop extends Model
         return $this->belongsTo(Genre::class, 'genre_id');
     }
 
+     public function reservations()
+    {
+        return $this->hasMany(Reservation::class);
+    }
+
     public function scopeCategorySearchArea($query, $area_id)
     {
     if (!empty($area_id)) {

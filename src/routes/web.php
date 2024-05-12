@@ -41,8 +41,8 @@ Route::get('/done', function () {
 // reservastionsテーブルへの登録
 Route::post('/reservation', [ReservationController::class, 'store'])->name('reservation.store')->middleware('auth');
 
-Route::get('/mypage', [ShopController::class, 'mypage'])->middleware('auth');
 
+Route::get('/mypage', [ShopController::class, 'mypage'])->middleware('auth');
 
 require __DIR__.'/auth.php';
 
