@@ -63,6 +63,4 @@ class ShopController extends Controller
     return view('mypage', compact('shops', 'reservations' ));
     }
 
-
-
 }

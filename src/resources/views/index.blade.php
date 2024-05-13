@@ -7,6 +7,7 @@
   <title>Atte</title>
   <link rel="stylesheet" href="{{ asset('css/sanitize.css') }}" />
   <link rel="stylesheet" href="{{ asset('css/index.css') }}" />
+  
     <script src="https://kit.fontawesome.com/7f44e1f3ad.js" crossorigin="anonymous"></script>
 </head>
 <body>
@@ -61,6 +62,16 @@
 
   </header>
   <main>
+    @if (session('create'))
+    <div class="flash-message__create">
+      {{ session('create') }}
+    </div>
+    @endif
+    @if (session('delete'))
+    <div class="flash-message__delete">
+      {{ session('delete') }}
+    </div>
+    @endif
 <div class="container">
     <div class="object-container">
         @foreach($shops as $shop)
@@ -73,14 +84,31 @@
                         <span class="tag">#{{ $shop->genre->name }}</span>
                     </div>
                     <div class="object-item">
-                    <a href="{{ route('shop.detail', $shop->id) }}" class="btn-details">詳しくみる</a><button class="btn-favorite" data-shop-id="{{ $shop->id }}">
-                    <i class="far fa-heart fa-2x"></i>
-                    </button>
+                    <a href="{{ route('shop.detail', $shop->id) }}" class="btn-details">詳しくみる</a>
+                    @if(Auth::check() && Auth::user()->favorites()->where('shop_id', $shop->id)->exists())
+                    <form action="{{ route('favorites.delete') }}" method="POST">
+                      @csrf
+                      @method('DELETE')
+                      <input type="hidden" name="shop_id" value="{{ $shop->id }}">
+                      <button class="btn-favorite" type="submit">
+                          <i class="fa-solid fa-heart fa-2x" style="color: #ff0000;"></i>
+                      </button>
+                    </form>
+                    @else
+                    <form action="{{ route('favorite.addFavorite') }}" method="POST">
+                      @csrf
+                      <input type="hidden" name="shop_id" value="{{ $shop->id }}">
+                      <button class="btn-favorite" type="submit">
+                          <i class="far fa-heart fa-2x"></i>
+                      </button>
+                    </form>
+                    @endif
                     </div>
                 </div>
             </div>
         @endforeach
     </div>
+
 </div>
 <!-- モーダルウィンドウ -->
 @if(auth()->check())

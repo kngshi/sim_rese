@@ -11,19 +11,30 @@
 </head>
 <body>
   <header class="header">
-    <div class="header__inner">
-        <a href="#modal-01">
-            <div class="openbtn6"><span></span><span></span><span></span></div>
+     <div class="header__inner">
+        @if(auth()->check())
+        <a href="#modal-02">
+        <div class="openbtn6"><span></span><span></span><span></span></div>
         </a>
+        @else
+        <a href="#modal-01">
+        <div class="openbtn6"><span></span><span></span><span></span></div>
+        </a>
+        @endif
         <div class="header__logo">
             Rese
         </div>
   </header>
   <main>
+      @if (session('success'))
+    <div class="flash-message__success">
+      {{ session('success') }}
+    </div>
+    @endif
     <div class="mypage__content">
       <div class="mypage__heading">
         @auth
-        <h2>{{Auth::user()->name}}さんお疲れ様です！</h2>
+        <h2>{{Auth::user()->name}}さん</h2>
         @endauth
       </div>
     </div>
@@ -51,23 +62,29 @@
             </tr>
         </table>
     </div>
-     <!-- 右側のお気に入り店舗表示 -->
+    <!-- 右側のお気に入り店舗表示 -->
     <div class="favorite-index">
         <h2 class="favorite-ttl">お気に入り店舗</h2>
     <div class="object-container">
-          @foreach($shops as $shop)
+        @foreach($favoriteShops as $favorite)
             <div class="object">
-                <img src="{{ $shop->image_path }}" class="object-img-top" alt="店舗画像">
+                <img src="{{ $favorite->shop->image_path }}" class="object-img-top" alt="店舗画像">
                 <div class="object-body">
-                    <h5 class="object-title">{{ $shop->name }}</h5>
+                    <h5 class="object-title">{{ $favorite->shop->name }}</h5>
                     <div class="tags">
-                        <span class="tag">#{{ $shop->area->name }}</span>
-                        <span class="tag">#{{ $shop->genre->name }}</span>
+                        <span class="tag">#{{ $favorite->shop->area->name }}</span>
+                        <span class="tag">#{{ $favorite->shop->genre->name }}</span>
                     </div>
                     <div class="object-item">
-                    <a href="{{ route('shop.detail', $shop->id) }}" class="btn-details">詳しくみる</a><button class="btn-favorite" data-shop-id="{{ $shop->id }}">
-                    <i class="far fa-heart fa-2x"></i>
-                    </button>
+                        <a href="{{ route('shop.detail', $favorite->shop->id) }}" class="btn-details">詳しくみる</a>
+                        <form action="{{ route('mypage.delete') }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <input type="hidden" name="shop_id" value="{{ $favorite->shop->id }}">
+                            <button class="btn-favorite" type="submit">
+                                <i class="fa-solid fa-heart fa-2x" style="color: #ff0000;"></i>
+                            </button>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -76,19 +93,43 @@
 </div>
 </div>
 <!-- モーダルウィンドウ -->
+@if(auth()->check())
+    <div class="modal-wrapper" id="modal-02">
+    <a href="#!" class="modal-overlay"></a>
+        <div class="modal-window">
+            <div class="modal-content">
+            <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="{{ route('logout') }}">Logout</a></li>
+                    <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <x-responsive-nav-link :href="route('logout')"
+                            onclick="event.preventDefault();
+                                        this.closest('form').submit();">
+                        {{ __('Logout') }}
+                    </x-responsive-nav-link>
+                    </form>
+                    <li><a href="/mypage">Mypage</a></li>
+                </ul>
+            </div>
+            <a href="#!" class="modal-close">×</a>
+        </div>
+    </div>
+@else
     <div class="modal-wrapper" id="modal-01">
     <a href="#!" class="modal-overlay"></a>
-    <div class="modal-window">
-        <div class="modal-content">
-        <ul>
-                <li><a href="{{ route('login') }}">Home</a></li>
-                <li><a href="{{ route('register') }}">Registration</a></li>
-                <li><a href="{{ route('login') }}">Login</a></li>
-            </ul>
+        <div class="modal-window">
+            <div class="modal-content">
+            <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="{{ route('register') }}">Registration</a></li>
+                    <li><a href="{{ route('login') }}">Login</a></li>
+                </ul>
+            </div>
+            <a href="#!" class="modal-close">×</a>
         </div>
-        <a href="#!" class="modal-close">×</a>
     </div>
-    </div>
+@endif
 </main>
 </body>
 </html>

@@ -144,6 +144,24 @@
     background-color: #D9C6B5;
 }
 
+/* sessionメッセージ */
+.flash-message__create {
+    padding: 15px 30px;
+    margin-bottom: 10px;
+    border-color: #badbcc;
+    background-color: #d1e7dd;
+    color: #0f5132;
+    font-size: 20px;
+}
+
+.flash-message__delete {
+    padding: 15px 30px;
+    margin-bottom: 10px;
+    border-color: #f5c2c7;
+    background-color: #f8d7da;
+    color: #842029;
+    font-size: 20px;
+}
 
 /* 飲食店一覧表示 */
 main {
@@ -231,17 +249,20 @@ main {
     outline: none;
 }
 
-.btn-favorite .far.fa-heart {
+.btn-favorite
+.heart {
     font-size: 2em;
     /* ハートマークのサイズに合わせる */
     color: gray;
     /* デフォルトの色 */
 }
 
-.btn-favorite.active .far.fa-heart {
+.btn-favorite.active
+.my-red.active {
     color: red;
     /* アクティブな状態の色 */
 }
+
 
 /* モーダルウィンドウ */
 .modal-wrapper {

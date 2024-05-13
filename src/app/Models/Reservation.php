@@ -12,12 +12,14 @@ class Reservation extends Model
     protected $fillable = ['user_id','shop_id','date', 'time', 'number'];
 
 
-    public function reservations()
+   public function user()
     {
-    return $this->belongsToMany(User::class, 'user_reservation', 'shop_id', 'user_id')->withPivot('date', 'time', 'number');
+        return $this->belongsTo(User::class);
+    }
 
-    return $this->belongsToMany(Shop::class, 'user_reservation', 'user_id', 'shop_id')->withPivot('date', 'time', 'number');
-
+    public function shop()
+    {
+        return $this->belongsTo(Shop::class);
     }
 
 

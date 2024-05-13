@@ -48,4 +48,10 @@ class Shop extends Model
     }
     }
 
+    public function user()
+    {
+        return $this->belongsToMany(User::class, 'favorites', 'shop_id', 'user_id')->withTimestamps();
+    }
 }
+
+
