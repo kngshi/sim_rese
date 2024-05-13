@@ -108,7 +108,6 @@
             </div>
         @endforeach
     </div>
-
 </div>
 <!-- モーダルウィンドウ -->
 @if(auth()->check())
