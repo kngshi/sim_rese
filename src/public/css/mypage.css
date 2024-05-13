@@ -150,15 +150,15 @@ h2{
 
 /* 右側のお気に入り店舗一覧 */
 .favorite-ttl{
-    margin-left:14%;
+    margin-left: 15%;
 }
 
 .object-container {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     flex-wrap: wrap;
-    gap: 50px;
-    padding: 0px 25px;
+    gap: 60px;
+    padding-left: 70px;
     margin: 20px 40px;
 }
 
