@@ -32,19 +32,17 @@ Route::get('/thanks', function () {
 });
 
 Route::get('/', [ShopController::class, 'index']);
-Route::get('/search', [ShopController::class, 'search']);
-
-
-Route::post('/shop/toggle-favorite', [ShopController::class, 'toggleFavorite'])->name('shop.toggleFavorite')->middleware('auth');
-
+//飲食店詳細取得機能
 Route::get('/shop/{shop}', [ShopController::class, 'detail'])->name('shop.detail');
+//飲食店一覧ページ検索機能
+Route::get('/search', [ShopController::class, 'search']);
 
 // 予約完了ページへの遷移
 Route::get('/done', function () {
     return view('done');
 });
 
-// reservastionsテーブルへの登録
+// 予約情報追加機能
 Route::post('/reservation', [ReservationController::class, 'store'])->name('reservation.store')->middleware('auth');
 
 //お気に入り追加機能
@@ -58,4 +56,3 @@ Route::get('/mypage', [FavoriteController::class, 'favoriteIndex'])->middleware(
 
 //マイページでのお気に入り削除機能
 Route::delete('/mypage/delete/', [FavoriteController::class, 'delete'])->name('mypage.delete')->middleware('auth');
-
