@@ -46,14 +46,6 @@ class FavoriteController extends Controller
         }
     }
 
-    public function favoriteIndex()
-    {
-        // ログインユーザーのお気に入りの店舗情報を取得
-        $favoriteShops = Favorite::where('user_id', auth()->id())->with('shop')->get();
-
-        return view('mypage', compact('favoriteShops'));
-    }
-
     public function delete(Request $request)
     {
         $user_id = $request->user()->id; // ログインユーザーのID

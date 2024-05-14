@@ -64,6 +64,11 @@ class User extends Authenticatable
         return $this->belongsToMany(Shop::class, 'favorites', 'user_id', 'shop_id')->withTimestamps();
     }
 
+    public function shopReservation()
+    {
+        return $this->belongsToMany(Shop::class, 'reservations', 'user_id', 'shop_id')->withTimestamps();
+    }
+
     
 
 

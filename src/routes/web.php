@@ -51,8 +51,11 @@ Route::post('/favorite', [FavoriteController::class, 'addFavorite'])->name('favo
 //お気に入り削除機能
 Route::delete('/favorites/delete', [FavoriteController::class, 'deleteFavorite'])->name('favorites.delete')->middleware('auth');
 
-//お気に入り一覧取得機能
-Route::get('/mypage', [FavoriteController::class, 'favoriteIndex'])->middleware('auth');
-
 //マイページでのお気に入り削除機能
 Route::delete('/mypage/delete/', [FavoriteController::class, 'delete'])->name('mypage.delete')->middleware('auth');
+
+//マイページお気に入り、予約情報一覧取得
+Route::get('/mypage', [ShopController::class, 'mypageIndex'])->name('mypage.mypageIndex')->middleware('auth');
+
+//マイページ予約削除機能
+Route::delete('/reservations/{id}', [ReservationController::class, 'destroy'])->name('reservation.destroy');

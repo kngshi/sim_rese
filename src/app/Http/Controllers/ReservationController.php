@@ -43,13 +43,16 @@ class ReservationController extends Controller
         }
     }
 
-    public function getReservation()
+    public function destroy($id)
     {
-        // ログインユーザーの予約情報を取得
-        $reservations = Reservation::where('user_id', Auth::id())->get();
+        $reservation = Reservation::find($id);
 
-        // マイページビューに予約情報を渡して表示
-        return view('mypage', ['reservations' => $reservations]);
+        if ($reservation && $reservation->user_id == Auth::id()) {
+            $reservation->delete();
+            return redirect()->route('mypage.mypageIndex')->with('success', '予約が削除されました。');
+        }
+
+        return redirect()->route('mypage.mypageIndex')->with('error', '予約の削除に失敗しました。');
     }
 
 }

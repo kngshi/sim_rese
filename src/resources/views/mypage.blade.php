@@ -42,55 +42,68 @@
     <!-- 左側の予約情報表示 -->
     <div class="reservation-form">
         <h2>予約状況</h2>
-        <!-- 予約情報のテーブル -->
-        <table class="reservation-form-table">
-            <tr>
-                <th>Shop</th>
-                <td>name</td>
-            </tr>
-            <tr>
-                <th>Date</th>
-                <td>date</td>
-            </tr>
-            <tr>
-                <th>Time</th>
-                <td>time</td>
-            </tr>
-            <tr>
-                <th>Number</th>
-                <td>number人</td>
-            </tr>
-        </table>
+        @foreach ($reservations as $reservation)
+        <div class="card">
+            <div class="card-header">
+                <h2><i class="far fa-clock xl"></i> 予約１</h2>
+                <form action="{{ route('reservation.destroy', $reservation->id) }}" class="reservation-delete-form" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="close-btn-reservation">&times;</button>
+                </form>
+            </div>
+            <!-- 予約情報のテーブル -->
+            <table class="reservation-form-table">
+                <tr>
+                    <th>Shop</th>
+                    <td>{{ $reservation->shop->name }}</td>
+                </tr>
+                <tr>
+                    <th>Date</th>
+                    <td>{{ $reservation->date }}</td>
+                </tr>
+                <tr>
+                    <th>Time</th>
+                    <td>{{ $reservation->time }}</td>
+                </tr>
+                <tr>
+                    <th>Number</th>
+                    <td>{{ $reservation->number }}人</td>
+                </tr>
+            </table>
+            <button class="reservation-form-button">予約する</button>
+        </div>
+        @endforeach
     </div>
     <!-- 右側のお気に入り店舗表示 -->
     <div class="favorite-index">
         <h2 class="favorite-ttl">お気に入り店舗</h2>
-    <div class="object-container">
-        @foreach($favoriteShops as $favorite)
-            <div class="object">
-                <img src="{{ $favorite->shop->image_path }}" class="object-img-top" alt="店舗画像">
-                <div class="object-body">
-                    <h5 class="object-title">{{ $favorite->shop->name }}</h5>
-                    <div class="tags">
-                        <span class="tag">#{{ $favorite->shop->area->name }}</span>
-                        <span class="tag">#{{ $favorite->shop->genre->name }}</span>
-                    </div>
-                    <div class="object-item">
-                        <a href="{{ route('shop.detail', $favorite->shop->id) }}" class="btn-details">詳しくみる</a>
-                        <form action="{{ route('mypage.delete') }}" method="POST">
-                            @csrf
-                            @method('DELETE')
-                            <input type="hidden" name="shop_id" value="{{ $favorite->shop->id }}">
-                            <button class="btn-favorite" type="submit">
-                                <i class="fa-solid fa-heart fa-2x" style="color: #ff0000;"></i>
-                            </button>
-                        </form>
+        <div class="object-container">
+            @foreach($favorites as $favorite)
+                <div class="object">
+                    <img src="{{ $favorite->shop->image_path }}" class="object-img-top" alt="店舗画像">
+                    <div class="object-body">
+                        <h5 class="object-title">{{ $favorite->shop->name }}</h5>
+                        <div class="tags">
+                            <span class="tag">#{{ $favorite->shop->area->name }}</span>
+                            <span class="tag">#{{ $favorite->shop->genre->name }}</span>
+                        </div>
+                        <div class="object-item">
+                            <a href="{{ route('shop.detail', $favorite->shop->id) }}" class="btn-details">詳しくみる</a>
+                            <form action="{{ route('mypage.delete') }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <input type="hidden" name="shop_id" value="{{ $favorite->shop->id }}">
+                                <button class="btn-favorite" type="submit">
+                                    <i class="fa-solid fa-heart fa-2x" style="color: #ff0000;"></i>
+                                </button>
+                            </form>
+                        </div>
                     </div>
                 </div>
-            </div>
-        @endforeach
+            @endforeach
+        </div>
     </div>
-</div>
 </div>
 <!-- モーダルウィンドウ -->
 @if(auth()->check())

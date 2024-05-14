@@ -7,6 +7,8 @@ use App\Models\User;
 use App\Models\Shop;
 use App\Models\Area;
 use App\Models\Genre;
+use App\Models\Favorite;
+use App\Models\Reservation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -53,14 +55,17 @@ class ShopController extends Controller
     }
 
 
-    public function mypage(Request $request)
+    public function mypageIndex()
     {
+        $user_id = Auth::id();
 
-    $shops = Shop::with('area', 'genre')->get();
+        // お気に入り店舗の取得
+        $favorites = Favorite::where('user_id', $user_id)->with('shop')->get();
 
-    $reservations = Auth::user()->reservations()->with('shop')->get();
+        // 予約情報の取得
+        $reservations = Reservation::where('user_id', $user_id)->with('shop')->orderBy('date', 'asc')->get();
 
-    return view('mypage', compact('shops', 'reservations' ));
+        return view('mypage', compact('favorites', 'reservations'));
     }
 
 }
