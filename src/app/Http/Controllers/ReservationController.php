@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Shop;
 use App\Models\Reservation;
 use Illuminate\Support\Facades\Auth;
 
@@ -53,6 +54,51 @@ class ReservationController extends Controller
         }
 
         return redirect()->route('mypage.mypageIndex')->with('error', '予約の削除に失敗しました。');
+    }
+
+    public function edit(Reservation $reservation)
+    {
+        $user = Auth::user();
+
+        // ログインユーザーの予約であることを確認
+        if ($reservation->user_id !== $user->id) {
+            return redirect()->route('mypage.mypageIndex')->with('error', '不正なアクセスです。');
+        }
+
+        // 時間の選択肢を生成
+        $times = [];
+        for ($hour = 12; $hour <= 15; $hour++) {
+            $times[] = sprintf('%02d:00', $hour);
+            $times[] = sprintf('%02d:30', $hour);
+        }
+        for ($hour = 17; $hour <= 23; $hour++) {
+            $times[] = sprintf('%02d:00', $hour);
+            $times[] = sprintf('%02d:00', $hour);
+        }
+
+        return view('edit', compact('reservation', 'times'));
+    }
+
+    // 予約情報更新
+    public function update(Request $request, Reservation $reservation)
+    {
+        // バリデーション
+        $request->validate([
+            'date' => 'required|date',
+            'time' => 'required',
+            'number' => 'required|numeric|min:1|max:10',
+        ]);
+
+        // ログインユーザーの予約であることを確認
+        $user = Auth::user();
+        if ($reservation->user_id !== $user->id) {
+            return redirect()->route('mypage.mypageIndex')->with('error', '不正なアクセスです。');
+        }
+
+        // 予約情報を更新
+        $reservation->update($request->only('date', 'time', 'number'));
+
+        return redirect()->route('mypage.mypageIndex')->with('success', '予約情報を更新しました。');
     }
 
 }

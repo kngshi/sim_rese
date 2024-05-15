@@ -59,3 +59,12 @@ Route::get('/mypage', [ShopController::class, 'mypageIndex'])->name('mypage.mypa
 
 //マイページ予約削除機能
 Route::delete('/reservations/{id}', [ReservationController::class, 'destroy'])->name('reservation.destroy');
+
+//マイページ予約更新機能
+Route::put('/reservation/{id}', [ReservationController::class, 'update'])->name('reservation.update')->middleware('auth');
+
+// 予約情報編集フォーム表示
+Route::get('/reservations/{reservation}/edit', [ReservationController::class, 'edit'])->name('reservations.edit')->middleware('auth');
+
+// 予約情報更新
+Route::put('/reservations/{reservation}', [ReservationController::class, 'update'])->name('reservations.update')->middleware('auth');

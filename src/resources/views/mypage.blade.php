@@ -10,8 +10,8 @@
     <script src="https://kit.fontawesome.com/7f44e1f3ad.js" crossorigin="anonymous"></script>
 </head>
 <body>
-  <header class="header">
-     <div class="header__inner">
+<header class="header">
+    <div class="header__inner">
         @if(auth()->check())
         <a href="#modal-02">
         <div class="openbtn6"><span></span><span></span><span></span></div>
@@ -24,28 +24,33 @@
         <div class="header__logo">
             Rese
         </div>
-  </header>
-  <main>
-      @if (session('success'))
-    <div class="flash-message__success">
-      {{ session('success') }}
-    </div>
+</header>
+<main>
+    @if (session('success'))
+        <div class="flash-message__success">
+            {{ session('success') }}
+        </div>
+    @endif
+    @if (session('error'))
+        <div class="flash-message__success">
+            {{ session('error') }}
+        </div>
     @endif
     <div class="mypage__content">
-      <div class="mypage__heading">
-        @auth
-        <h2>{{Auth::user()->name}}さん</h2>
-        @endauth
-      </div>
+        <div class="mypage__heading">
+            @auth
+            <h2>{{Auth::user()->name}}さん</h2>
+            @endauth
+        </div>
     </div>
 <div class="container">
     <!-- 左側の予約情報表示 -->
     <div class="reservation-form">
-        <h2>予約状況</h2>
+        <h2 class="reservation-form-ttl">予約状況</h2>
         @foreach ($reservations as $reservation)
         <div class="card">
             <div class="card-header">
-                <h2><i class="far fa-clock xl"></i> 予約１</h2>
+                <h2><i class="far fa-clock xl"></i> 予約{{ $loop->iteration }}</h2>
                 <form action="{{ route('reservation.destroy', $reservation->id) }}" class="reservation-delete-form" method="POST">
                     @csrf
                     @method('DELETE')
@@ -71,7 +76,7 @@
                     <td>{{ $reservation->number }}人</td>
                 </tr>
             </table>
-            <button class="reservation-form-button">予約する</button>
+            <a href="{{ route('reservations.edit', $reservation->id) }}" class="reservation-form-button">予約を変更する</a>
         </div>
         @endforeach
     </div>
@@ -143,6 +148,7 @@
         </div>
     </div>
 @endif
+</div>
 </main>
 </body>
 </html>
