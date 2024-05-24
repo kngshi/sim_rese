@@ -47,7 +47,9 @@
         <form action="{{ route('reservation.store') }}" method="POST">
             @csrf
             <input type="date" id="date" name="date" required>
-
+            @error('date')
+                {{ $message }} 
+            @enderror
             <select id="time" name="time" required>
                 <!-- ここに時刻の選択肢を追加 -->
             <option value="">-- 選択してください --</option>
@@ -60,6 +62,9 @@
             <option value="{{ sprintf('%02d', $hour) }}:30">{{ sprintf('%02d', $hour) }}:30</option>
             @endfor
             </select>
+            @error('time')
+                {{ $message }}
+            @enderror
 
             <select id="number" name="number" required>
                 <!-- ここに人数の選択肢を追加 -->
@@ -68,7 +73,10 @@
             <option value="{{ $i }}">{{ $i }}人</option>
             @endfor
             </select>
-            
+            @error('number')
+                {{ $message }} 
+            @enderror
+
         <!-- 予約情報のテーブル -->
         <table class="reservation-form-table">
             <tr>

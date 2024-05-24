@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\ReservationRequest;
 use App\Http\Controllers\Controller;
 use App\Models\Shop;
 use App\Models\Reservation;
@@ -10,11 +11,11 @@ use Illuminate\Support\Facades\Auth;
 
 class ReservationController extends Controller
 {
-    public function store(Request $request)
+    public function store(ReservationRequest $request)
     {
         // バリデーション
         $request->validate([
-            'date' => 'required|date',
+            'date' => 'required',
             'time' => 'required',
             'number' => 'required|numeric|min:1|max:10',
         ]);
@@ -80,11 +81,11 @@ class ReservationController extends Controller
     }
 
     // 予約情報更新
-    public function update(Request $request, Reservation $reservation)
+    public function update(ReservationRequest $request, Reservation $reservation)
     {
         // バリデーション
         $request->validate([
-            'date' => 'required|date',
+            'date' => 'required',
             'time' => 'required',
             'number' => 'required|numeric|min:1|max:10',
         ]);

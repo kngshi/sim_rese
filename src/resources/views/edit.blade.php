@@ -63,27 +63,33 @@
 
     <!-- 右側の予約フォーム -->
     <div class="reservation-form">
-                <h2>予約の変更</h2>
+                <h2>予約内容の変更</h2>
                 <div class="reservation-form-shop">Shop {{ $reservation->shop->name }}</div>
                 <form action="{{ route('reservations.update', $reservation->id) }}" method="POST">
                     @csrf
                     @method('PUT')
                     <input type="date" id="date" name="date" value="{{ $reservation->date }}" required>
-
+                    @error('date')
+                        {{ $message }} 
+                    @enderror
                     <select id="time" name="time" required>
                         <option value="">-- 選択してください --</option>
                         @foreach($times as $time)
                             <option value="{{ $time }}" @if($reservation->time == $time) selected @endif>{{ $time }}</option>
                         @endforeach
                     </select>
-
+                    @error('time')
+                        {{ $message }} 
+                    @enderror
                     <select id="number" name="number" required>
                         <option value="">-- 選択してください --</option>
                         @for ($i = 1; $i <= 10; $i++)
                             <option value="{{ $i }}" @if($reservation->number == $i) selected @endif>{{ $i }}人</option>
                         @endfor
                     </select>
-                    
+                    @error('number')
+                        {{ $message }} 
+                    @enderror
                     <input type="hidden" name="shop_id" value="{{ $reservation->shop_id }}">
                     <button type="submit">予約を変更する</button>
                 </form>

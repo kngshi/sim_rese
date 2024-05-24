@@ -60,7 +60,7 @@
   <div class="modal-window">
     <div class="modal-content">
       <ul>
-            <li><a href="{{ route('login') }}">Home</a></li>
+            <li><a href="/">Home</a></li>
             <li><a href="{{ route('register') }}">Registration</a></li>
             <li><a href="{{ route('login') }}">Login</a></li>
         </ul>
