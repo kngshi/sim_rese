@@ -102,6 +102,44 @@
     </div>
 </div>
 </div>
+<!-- モーダルウィンドウ -->
+@if(auth()->check())
+    <div class="modal-wrapper" id="modal-02">
+    <a href="#!" class="modal-overlay"></a>
+        <div class="modal-window">
+            <div class="modal-content">
+            <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="{{ route('logout') }}">Logout</a></li>
+                    <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <x-responsive-nav-link :href="route('logout')"
+                            onclick="event.preventDefault();
+                                        this.closest('form').submit();">
+                        {{ __('Logout') }}
+                    </x-responsive-nav-link>
+                    </form>
+                    <li><a href="/mypage">Mypage</a></li>
+                </ul>
+            </div>
+            <a href="#!" class="modal-close">×</a>
+        </div>
+    </div>
+@else
+    <div class="modal-wrapper" id="modal-01">
+    <a href="#!" class="modal-overlay"></a>
+        <div class="modal-window">
+            <div class="modal-content">
+            <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="{{ route('register') }}">Registration</a></li>
+                    <li><a href="{{ route('login') }}">Login</a></li>
+                </ul>
+            </div>
+            <a href="#!" class="modal-close">×</a>
+        </div>
+    </div>
+@endif
 </main>
 </body>
 </html>
