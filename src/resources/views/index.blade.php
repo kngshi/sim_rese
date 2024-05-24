@@ -115,19 +115,20 @@
     <a href="#!" class="modal-overlay"></a>
         <div class="modal-window">
             <div class="modal-content">
-            <ul>
-                    <li><a href="/">Home</a></li>
-                    <li><a href="{{ route('logout') }}">Logout</a></li>
-                    <form method="POST" action="{{ route('logout') }}">
-                    @csrf
-                    <x-responsive-nav-link :href="route('logout')"
-                            onclick="event.preventDefault();
-                                        this.closest('form').submit();">
-                        {{ __('Logout') }}
-                    </x-responsive-nav-link>
-                    </form>
-                    <li><a href="/mypage">Mypage</a></li>
-                </ul>
+              <ul>
+                <li><a href="/">Home</a></li>
+                <li>
+                <form method="POST" action="{{ route('logout') }}">
+                  @csrf
+                <x-responsive-nav-link :href="route('logout')" class="logout"
+                        onclick="event.preventDefault();
+                                    this.closest('form').submit();">
+                    {{ __('Logout') }}
+                </x-responsive-nav-link>
+                </form>
+                </li>
+                <li><a href="/mypage">Mypage</a></li>
+              </ul>
             </div>
             <a href="#!" class="modal-close">×</a>
         </div>

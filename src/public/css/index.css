@@ -378,3 +378,7 @@ main {
     line-height: 30px;
     text-decoration: none;
 }
+
+.logout{
+    text-decoration: none;
+}
