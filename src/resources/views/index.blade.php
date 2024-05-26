@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Atte</title>
+  <title>Rese</title>
   <link rel="stylesheet" href="{{ asset('css/sanitize.css') }}" />
   <link rel="stylesheet" href="{{ asset('css/index.css') }}" />
   
@@ -24,7 +24,7 @@
     @endif
     <div class="header__logo">
             Rese
-        </div>
+    </div>
     <div class="search__form">
         <form class="search-form" action="/search" method="get">
        @csrf

@@ -7,7 +7,7 @@
     padding: 20px 0;
     max-width: 1230px;
     display: flex;
-    align-items: center;
+    justify-content: center;
 }
 
 .header__logo {
@@ -172,24 +172,23 @@ main {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
-    padding: 5px 30px;
 }
 
 .object-container {
     display: flex;
     justify-content:center;
     flex-wrap: wrap;
-    gap: 20px;
-    padding:0px 25px;
+    gap: 15px;
+    padding:0px 10px;
 }
 
 .object {
     border-radius: 5px;
     overflow: hidden;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-    width: calc(25% - 20px);
     /* カード間の間隔を含めて均等に並べる */
-    max-width: 280px;
+    width: 300px;
+    margin: 5px 5px;
 }
 
 .object-img-top {
@@ -205,7 +204,7 @@ main {
 
 .object-title {
     font-size: 18px;
-    margin-bottom: 3px;
+    margin-bottom: 5px;
 }
 
 .tag {
