@@ -1,6 +1,7 @@
 @extends('layouts.common')
 
 @section('css')
+<link rel="stylesheet" href="{{ asset('css/common.css') }}" />
 <link rel="stylesheet" href="{{ asset('css/mypage.css') }}" />
 @endsection
 
