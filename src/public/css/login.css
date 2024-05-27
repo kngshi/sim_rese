@@ -140,7 +140,6 @@ main {
     background-color: blue;
     cursor: pointer;
 }
-
 /* モーダルウィンドウ */
 .modal-wrapper {
     z-index: 999;
@@ -202,9 +201,11 @@ main {
 
 .modal-wrapper .modal-close {
     z-index: 20;
-    position: absolute;
-    top: 0;
-    right: 0;
+    position: fixed;
+    top: 50px;
+    /* 画面の上端からの位置 */
+    left: 50px;
+    /* 画面の左端からの位置 */
     width: 35px;
     font-size: 20px;
     font-weight: 700;
@@ -222,6 +223,21 @@ main {
     font-size: 36px;
     color: blue;
     margin: 20px auto;
+
+}
+
+.modal-content ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.modal-content ul li {
+    margin-bottom: 5px;
+    /* リストアイテムの間隔を調整 */
+}
+
+.modal-content ul li a {
+    text-decoration: none;
 }
 
 .modal-close {
@@ -236,6 +252,10 @@ main {
     font-size: 30px;
     text-align: center;
     line-height: 30px;
+    text-decoration: none;
+}
+
+.logout {
     text-decoration: none;
 }
 

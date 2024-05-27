@@ -195,9 +195,11 @@ main {
 
 .modal-wrapper .modal-close {
     z-index: 20;
-    position: absolute;
-    top: 0;
-    right: 0;
+    position: fixed;
+    top: 50px;
+    /* 画面の上端からの位置 */
+    left: 50px;
+    /* 画面の左端からの位置 */
     width: 35px;
     font-size: 20px;
     font-weight: 700;
@@ -211,25 +213,44 @@ main {
     color: white !important
 }
 
-.modal-content{
+.modal-content {
     font-size: 36px;
-    color:blue;
-    margin:20px auto;
+    color: blue;
+    margin: 20px auto;
+
+}
+
+.modal-content ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.modal-content ul li {
+    margin-bottom: 5px;
+    /* リストアイテムの間隔を調整 */
+}
+
+.modal-content ul li a {
+    text-decoration: none;
 }
 
 .modal-close {
     position: absolute;
-        top: 0;
-        left: 0;
-        width: 40px;
-        height: 40px;
-        border-radius: 5px;
-        background-color: blue;
-        color: white;
-        font-size: 30px;
-        text-align: center;
-        line-height: 30px;
-        text-decoration: none;
+    top: 0;
+    left: 0;
+    width: 40px;
+    height: 40px;
+    border-radius: 5px;
+    background-color: blue;
+    color: white;
+    font-size: 30px;
+    text-align: center;
+    line-height: 30px;
+    text-decoration: none;
+}
+
+.logout {
+    text-decoration: none;
 }
 
 @media screen and (max-width: 768px) {

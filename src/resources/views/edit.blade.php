@@ -72,6 +72,7 @@
                     @error('date')
                         {{ $message }} 
                     @enderror
+
                     <select id="time" name="time" required>
                         <option value="">-- 選択してください --</option>
                         @foreach($times as $time)

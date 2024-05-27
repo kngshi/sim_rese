@@ -1,48 +1,23 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Atte</title>
-  <link rel="stylesheet" href="{{ asset('css/sanitize.css') }}" />
-  <link rel="stylesheet" href="{{ asset('css/mypage.css') }}" />
-    <script src="https://kit.fontawesome.com/7f44e1f3ad.js" crossorigin="anonymous"></script>
-</head>
-<body>
-<header class="header">
-    <div class="header__inner">
-        @if(auth()->check())
-        <a href="#modal-02">
-        <div class="openbtn6"><span></span><span></span><span></span></div>
-        </a>
-        @else
-        <a href="#modal-01">
-        <div class="openbtn6"><span></span><span></span><span></span></div>
-        </a>
-        @endif
-        <div class="header__logo">
-            Rese
-        </div>
-</header>
-<main>
-    @if (session('success'))
-        <div class="flash-message__success">
-            {{ session('success') }}
-        </div>
-    @endif
-    @if (session('error'))
-        <div class="flash-message__success">
-            {{ session('error') }}
-        </div>
-    @endif
-    <div class="mypage__content">
-        <div class="mypage__heading">
-            @auth
-            <h2>{{Auth::user()->name}}さん</h2>
-            @endauth
-        </div>
+@extends('layouts.common')
+
+@section('css')
+<link rel="stylesheet" href="{{ asset('css/mypage.css') }}" />
+@endsection
+
+@section('content')
+@if (session('success'))
+    <div class="flash-message__success">{{ session('success') }}</div>
+@endif
+@if (session('error'))
+    <div class="flash-message__success">{{ session('error') }}</div>
+@endif
+<div class="mypage__content">
+    <div class="mypage__heading">
+        @auth
+        <h2>{{Auth::user()->name}}さん</h2>
+        @endauth
     </div>
+</div>
 <div class="container">
     <!-- 左側の予約情報表示 -->
     <div class="reservation-form">
@@ -52,8 +27,8 @@
             <div class="card-header">
                 <h2><i class="far fa-clock xl"></i> 予約{{ $loop->iteration }}</h2>
                 <form action="{{ route('reservation.destroy', $reservation->id) }}" class="reservation-delete-form" method="POST">
-                    @csrf
-                    @method('DELETE')
+                @csrf
+                @method('DELETE')
                     <button type="submit" class="close-btn-reservation">&times;</button>
                 </form>
             </div>
@@ -110,45 +85,4 @@
         </div>
     </div>
 </div>
-<!-- モーダルウィンドウ -->
-@if(auth()->check())
-    <div class="modal-wrapper" id="modal-02">
-    <a href="#!" class="modal-overlay"></a>
-        <div class="modal-window">
-            <div class="modal-content">
-            <ul>
-                    <li><a href="/">Home</a></li>
-                    <li><a href="{{ route('logout') }}">Logout</a></li>
-                    <form method="POST" action="{{ route('logout') }}">
-                    @csrf
-                    <x-responsive-nav-link :href="route('logout')"
-                            onclick="event.preventDefault();
-                                        this.closest('form').submit();">
-                        {{ __('Logout') }}
-                    </x-responsive-nav-link>
-                    </form>
-                    <li><a href="/mypage">Mypage</a></li>
-                </ul>
-            </div>
-            <a href="#!" class="modal-close">×</a>
-        </div>
-    </div>
-@else
-    <div class="modal-wrapper" id="modal-01">
-    <a href="#!" class="modal-overlay"></a>
-        <div class="modal-window">
-            <div class="modal-content">
-            <ul>
-                    <li><a href="/">Home</a></li>
-                    <li><a href="{{ route('register') }}">Registration</a></li>
-                    <li><a href="{{ route('login') }}">Login</a></li>
-                </ul>
-            </div>
-            <a href="#!" class="modal-close">×</a>
-        </div>
-    </div>
-@endif
-</div>
-</main>
-</body>
-</html>
+@endsection

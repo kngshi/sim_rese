@@ -52,7 +52,7 @@
             </div>
             </table>
             <div class="flex items-center justify-end">
-                <x-button class="form-button" href="/thanks">
+                <x-button class="form-button" href="thanks">
                     {{ __('登録') }}
                 </x-button>
             </div>
