@@ -35,10 +35,6 @@
       </button>
       <input class="search-form__keyword-input" type="text" name="keyword" placeholder="Search ..." type="submit"
       value="{{request('keyword')}}">
-      <div class="search-form__actions">
-        <input class="search-form__search-btn btn" type="submit" value="検索">
-        <input class="search-form__reset-btn btn" type="submit" value="リセット" name="reset">
-      </div>
     </form>
   </div>
 @endsection

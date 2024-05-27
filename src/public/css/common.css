@@ -7,10 +7,12 @@
     padding: 20px 0;
     max-width: 1230px;
     display: flex;
-    align-items: center;
+    justify-content: spa;
 }
 
 .header__logo {
+    position: relative;
+        left: 10px;
     color: blue;
     text-decoration: none;
     font-weight: bold;
@@ -21,9 +23,8 @@
 /* モーダルウィンドウのリンクボタン */
 .openbtn6 {
     position: relative;
-    /*ボタン内側の基点となるためrelativeを指定*/
+    left: 10px;
     background: blue;
-    margin-left: 50px;
     cursor: pointer;
     width: 50px;
     height: 50px;
@@ -42,7 +43,6 @@
     background: #fff;
 }
 
-
 .openbtn6 span:nth-of-type(1) {
     top: 15px;
     width: 30%;
@@ -57,6 +57,7 @@
     top: 31px;
     width: 20%;
 }
+
 
 
 /* モーダルウィンドウ */
@@ -176,4 +177,60 @@
 
 .logout {
     text-decoration: none;
+}
+
+
+@media screen and (max-width: 768px) {
+
+    .header__inner {
+        margin: 0 auto;
+        padding: 20px 15px;
+        max-width: 768px;
+        display: flex;
+    }
+    .header__logo {
+        color: blue;
+        text-decoration: none;
+        font-weight: bold;
+        font-size: 30px;
+    }
+
+    /* モーダルウィンドウのリンクボタン */
+    .openbtn6 {
+        position: relative;
+        left: 10px;
+        background: blue;
+        cursor: pointer;
+        width: 50px;
+        height: 50px;
+        border-radius: 5px;
+    }
+
+    /*ボタン内側*/
+    .openbtn6 span {
+        display: inline-block;
+        transition: all .4s;
+        /*アニメーションの設定*/
+        position: absolute;
+        left: 14px;
+        height: 3px;
+        border-radius: 2px;
+        background: #fff;
+    }
+
+    .openbtn6 span:nth-of-type(1) {
+        top: 15px;
+        width: 30%;
+    }
+
+    .openbtn6 span:nth-of-type(2) {
+        top: 23px;
+        width: 45%;
+    }
+
+    .openbtn6 span:nth-of-type(3) {
+        top: 31px;
+        width: 20%;
+    }
+
 }

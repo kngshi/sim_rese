@@ -7,17 +7,18 @@
     padding: 20px 15px;
     max-width: 1230px;
     display: flex;
-    align-items: center;
 }
 
-
 .header__logo {
+    position: absolute;
+        left: 160px;
     color: blue;
     text-decoration: none;
     font-weight: bold;
     font-size: 30px;
     margin: 0 20px;
 }
+
 .openbtn6 {
     position: relative;
     /*ボタン内側の基点となるためrelativeを指定*/
@@ -140,6 +141,7 @@ main {
     background-color: blue;
     cursor: pointer;
 }
+
 /* モーダルウィンドウ */
 .modal-wrapper {
     z-index: 999;
@@ -270,6 +272,16 @@ main {
         display: flex;
         align-items: center;
         justify-content: space-between;
+    }
+
+    .header__logo {
+        position: absolute;
+        left: 120px;
+        color: blue;
+        text-decoration: none;
+        font-weight: bold;
+        font-size: 40px;
+        margin: 0 20px;
     }
 
 }

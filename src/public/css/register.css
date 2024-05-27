@@ -263,7 +263,7 @@ main {
     }
 
     .card{
-        max-width: 70%;
+        width: 60%;
     }
     
 }

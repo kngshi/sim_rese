@@ -44,3 +44,19 @@ main {
     display: flex;
     justify-content: center;
 }
+
+@media screen and (max-width: 768px) {
+
+    .done-page__inner {
+        padding: 40px 60px;
+        border: none;
+        border-radius: 5px;
+        background-color: #FDFEFE;
+        box-shadow: 3px 3px 3px gray;
+        position: absolute;
+        cursor: pointer;
+        left: auto;
+        top: 20%;
+
+    }
+}

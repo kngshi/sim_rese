@@ -5,7 +5,9 @@
     flex-wrap: wrap;
     height: 40px;
     box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);
-    border-radius: 10px;
+    border-radius: 3px;
+    position: absolute;
+    right: 30px;
 }
 
 .search-form__area,
@@ -33,7 +35,7 @@
 }
 
 .search-form__keyword-input {
-    min-width: 360px;
+    min-width: 340px;
     padding: 8px 12px;
     border: none;
     background-color: #FBFBFB;
@@ -110,6 +112,7 @@ main {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
+    margin-bottom: 30px;
 }
 
 .object-container {
@@ -198,4 +201,53 @@ main {
 .my-red.active {
     color: red;
     /* アクティブな状態の色 */
+}
+
+@media screen and (max-width: 768px) {
+    /* 検索フォーム */
+    .search-form {
+        display: flex;
+        align-items: stretch;
+        height: 40px;
+        box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);
+        border-radius: 10px;
+
+    }
+
+    .search-form__area,
+    .search-form__genre {
+        position: relative;
+    }
+
+    .search-form__area-select {
+        min-width: 40px;
+        height: 40px;
+        padding: 8px 12px;
+        /* placeholderが表示される最低限の幅を最小値とする */
+        border: none;
+        background-color: #FBFBFB;
+        border-radius: 10px 0 0 10px;
+
+    }
+
+    .search-form__genre-select {
+        min-width: 60px;
+        height: 40px;
+        padding: 8px 12px;
+        border: none;
+        background-color: #FBFBFB;
+    }
+
+    .search-form__keyword-input {
+        min-width: 100px;
+        padding: 8px 12px;
+        border: none;
+        background-color: #FBFBFB;
+        border-radius: 0 10px 10px 0;
+    }
+
+    .search-form__keyword-input {
+        padding-right: 40px;
+        /* 検索アイコン分のスペースを確保 */
+    }
 }
