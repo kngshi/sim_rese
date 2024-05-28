@@ -69,12 +69,12 @@ class ReservationController extends Controller
         // 時間の選択肢を生成
         $times = [];
         for ($hour = 12; $hour <= 15; $hour++) {
-            $times[] = sprintf('%02d:00', $hour);
-            $times[] = sprintf('%02d:30', $hour);
+            $times[] = sprintf('%02d:00:00', $hour);
+            $times[] = sprintf('%02d:30:00', $hour);
         }
         for ($hour = 17; $hour <= 23; $hour++) {
-            $times[] = sprintf('%02d:00', $hour);
-            $times[] = sprintf('%02d:00', $hour);
+            $times[] = sprintf('%02d:00:00', $hour);
+            $times[] = sprintf('%02d:00:00', $hour);
         }
 
         return view('edit', compact('reservation', 'times'));

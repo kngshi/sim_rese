@@ -53,6 +53,7 @@
                 </tr>
             </table>
             <a href="{{ route('reservations.edit', $reservation->id) }}" class="reservation-form-button">予約を変更する</a>
+            <a href="{{ route('reviews.create', $reservation->shop->id) }}" class="reservation-form-button">お店を評価する</a>
         </div>
         @endforeach
     </div>

@@ -57,6 +57,12 @@ class Shop extends Model
     {
         return $this->belongsToMany(User::class, 'reservations', 'shop_id', 'user_id')->withTimestamps();
     }
+
+    public function reviews()
+    {
+        return $this->hasMany(Review::class);
+    }
+    
 }
 
 

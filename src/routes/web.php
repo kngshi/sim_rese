@@ -6,6 +6,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\FavoriteController;
+use App\Http\Controllers\ReviewController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,8 +33,10 @@ Route::get('/thanks', function () {
 });
 
 Route::get('/', [ShopController::class, 'index']);
+
 //飲食店詳細取得機能
 Route::get('/shop/{shop}', [ShopController::class, 'detail'])->name('shop.detail');
+
 //飲食店一覧ページ検索機能
 Route::get('/search', [ShopController::class, 'search']);
 
@@ -60,11 +63,15 @@ Route::get('/mypage', [ShopController::class, 'mypageIndex'])->name('mypage.mypa
 //マイページ予約削除機能
 Route::delete('/reservations/{id}', [ReservationController::class, 'destroy'])->name('reservation.destroy');
 
-//マイページ予約更新機能
-Route::put('/reservation/{id}', [ReservationController::class, 'update'])->name('reservation.update')->middleware('auth');
-
 // 予約情報編集フォーム表示
 Route::get('/reservations/{reservation}/edit', [ReservationController::class, 'edit'])->name('reservations.edit')->middleware('auth');
 
 // 予約情報更新
 Route::put('/reservations/{reservation}', [ReservationController::class, 'update'])->name('reservations.update')->middleware('auth');
+
+
+// 評価機能
+Route::middleware(['auth'])->group(function () {
+    Route::get('/reviews/create/{shop}', [ReviewController::class, 'create'])->name('reviews.create');
+Route::post('/create', [ReviewController::class, 'store'])->name('reviews.store');
+});

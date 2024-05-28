@@ -9,6 +9,7 @@ use App\Models\Area;
 use App\Models\Genre;
 use App\Models\Favorite;
 use App\Models\Reservation;
+use App\Models\Review;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -27,7 +28,9 @@ class ShopController extends Controller
 
     public function detail(Shop $shop)
     {
-    return view('detail', compact('shop'));
+        $reviews = $shop->reviews()->with('user')->latest()->get();
+
+        return view('detail', compact('shop', 'reviews'));
     }
 
     

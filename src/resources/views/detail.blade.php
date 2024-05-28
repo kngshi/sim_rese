@@ -19,6 +19,17 @@
             <span class="tag">#{{ $shop->genre->name }}</span>
         </div>
         <p class="description">{{ $shop->description }}</p>
+        <div class="review-list">
+            <h3 class="review-ttl">お店の評価</h3>
+            @forelse ($reviews as $review)
+                <div class="review">
+                    <p><strong>{{ $review->rating_text}}</strong>  ({{ $review->created_at }})</p>
+                    <p>{{ $review->comment }}</p>
+                </div>
+            @empty
+                <p>まだレビューはありません。</p>
+            @endforelse
+        </div>
     </div>
 
     <!-- 右側の予約フォーム -->

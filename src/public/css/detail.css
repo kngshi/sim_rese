@@ -13,6 +13,7 @@ main {
 
 .shop-details {
     padding: 50px;
+    padding-top: 25px;
     margin-left: 20px;
     margin-bottom: 30px;
     font-size:14px;
@@ -56,6 +57,28 @@ h2{
 .tag {
     display: inline-block;
     padding: 20px 2px;
+}
+
+/* 画面左下のお店の評価 */
+.review-list {
+    margin-top: 10px;
+    width: 100%;
+}
+
+.review-ttl {
+    margin: 15px 0;
+}
+
+.review {
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 10px;
+}
+
+.review p {
+    margin: 5px 5px;
 }
 
 /* 右側の予約フォーム */
@@ -128,7 +151,7 @@ h2{
     cursor: pointer;
     object-fit: cover;
     /* ボタンの上部のマージンを追加 */
-    margin-top: 100px;
+    margin-top: 40px;
 }
 
 @media screen and (max-width: 768px) {

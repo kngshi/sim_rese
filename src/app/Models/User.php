@@ -69,8 +69,4 @@ class User extends Authenticatable
         return $this->belongsToMany(Shop::class, 'reservations', 'user_id', 'shop_id')->withTimestamps();
     }
 
-    
-
-
-
 }

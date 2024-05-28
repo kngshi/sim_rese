@@ -1,0 +1,264 @@
+main {
+    background-color: #f5f5f5;
+}
+
+/* マイページのお気に入り削除メッセージ */
+.flash-message__success {
+    padding: 15px 30px;
+    margin-bottom: 10px;
+    border-color: #badbcc;
+    background-color: #d1e7dd;
+    color: #0f5132;
+    font-size: 20px;
+    margin-bottom:35px;
+}
+
+/* 左側の飲食店詳細情報 */
+.container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    /* 左右2列のレイアウト */
+    gap: 20px;
+    /* グリッド要素間の間隔 */
+}
+
+.shop-details {
+    padding: 50px;
+    padding-top: 20px;
+    margin-left: 20px;
+    margin-bottom: 30px;
+    font-size: 14px;
+    width: 90%;
+}
+
+.object-header {
+    display: flex;
+    align-items: center;
+    /* 垂直方向の中央揃え */
+}
+
+.back-button {
+    background-color: #fff;
+    color: #333;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 3px 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-decoration: none;
+}
+
+.back-button:hover {
+    background-color: #f2f2f2;
+}
+
+h2 {
+    padding-left: 10px;
+}
+
+.shop-details img {
+    width: 100%;
+    max-height: 300px;
+    object-fit: cover;
+}
+
+.tags {
+    margin-bottom: -10px;
+}
+
+.tag {
+    display: inline-block;
+    padding: 20px 2px;
+}
+
+/* 画面左下のお店の評価 */
+.review-list {
+    margin-top: 10px;
+    width: 100%;
+}
+
+.review-ttl {
+    margin: 15px 0;
+}
+
+.review {
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 10px;
+}
+
+.review p {
+    margin: 5px 5px;
+}
+
+
+/* 右側の予約フォーム */
+.reservation-form {
+    position: relative;
+    width: 90%;
+    padding: 20px;
+    border: none;
+    color: white;
+    background-color: rgba(0, 0, 255, 0.6);
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 100px;
+    margin-top: -25px;
+}
+
+.reservation-form input[type="date"],
+.reservation-form select {
+    margin-bottom: 10px;
+    width: 40%;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.reservation-form input,
+.reservation-form select {
+    margin: 10px;
+    padding: 8px;
+    width: 90%;
+    border-radius: 5px;
+
+}
+
+.reservation-form textarea {
+    margin: 10px;
+    padding: 8px;
+    width: 90%;
+    height: 150px;
+    border-radius: 5px;
+}
+
+.reservation-form-table {
+    background-color: rgb(0, 140, 255, 0.6);
+    width: 85%;
+    font-size: 14px;
+    border-radius: 5px;
+    margin: 20px 10px;
+
+}
+
+.reservation-form-table tr {
+    padding-top: 30px;
+}
+
+.reservation-form-table th {
+    padding: 5px 20px;
+    width: 30%;
+    text-align: left;
+}
+
+.reservation-form-table td {
+    padding: 5px 10px;
+    text-align: left;
+}
+
+.reservation-form button {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    font-size: 20px;
+    padding: 15px;
+    background-color: blue;
+    color: #fff;
+    border: none;
+    border-radius: 0 0 5px 5px;
+    cursor: pointer;
+    object-fit: cover;
+    /* ボタンの上部のマージンを追加 */
+    margin-top: 40px;
+}
+
+@media screen and (max-width: 768px) {
+
+    /* 右側の予約フォーム */
+    .reservation-form {
+        position: relative;
+        width: 90%;
+        padding: 20px;
+        border: none;
+        color: white;
+        background-color: rgba(0, 0, 255, 0.6);
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        margin-bottom: 60px;
+        margin-top: -35px;
+    }
+
+    .reservation-form input[type="date"],
+    .reservation-form select {
+        margin-bottom: 10px;
+        width: 50%;
+        padding: 8px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+    }
+
+    .reservation-form input,
+    .reservation-form select {
+        margin: 10px;
+        padding: 8px;
+        width: 90%;
+        border-radius: 5px;
+    }
+
+        .comment {
+            margin: 10px;
+            padding: 8px;
+            width: 90%;
+            height: 300px;
+            border-radius: 5px;
+        }
+
+    .reservation-form-table {
+        background-color: rgb(0, 140, 255, 0.6);
+        width: 90%;
+        font-size: 14px;
+        border-radius: 5px;
+        margin: 10px 10px;
+
+    }
+
+    .reservation-form-table tr {
+        margin-top: 30px;
+    }
+
+    .reservation-form-table th {
+        padding: 5px 10px;
+        width: 35%;
+        text-align: left;
+    }
+
+
+    .reservation-form-table td {
+        padding: 5px 10px;
+        text-align: left;
+    }
+
+
+    .reservation-form button {
+        position: absolute;
+        /* 絶対位置付け */
+        right: 0;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        font-size: 20px;
+        padding: 15px;
+        background-color: blue;
+        color: #fff;
+        border: none;
+        border-radius: 0 0 5px 5px;
+        cursor: pointer;
+        object-fit: cover;
+        margin-top: 100px;
+        /* ボタンの上部のマージンを追加 */
+    }
+
+}
