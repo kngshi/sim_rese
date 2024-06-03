@@ -1,0 +1,133 @@
+main {
+    background-color: #f5f5f5;
+    height: 90vh;
+}
+
+/* セッションメッセージの表示 */
+.alert-success {
+    padding: 15px 15px;
+    margin-bottom: 10px;
+    border-color: #badbcc;
+    background-color: #d1e7dd;
+    color: #0f5132;
+}
+
+.alert-danger {
+    padding: 15px 15px;
+    margin-bottom: 10px;
+    border-color: #f5c2c7;
+    background-color: #f8d7da;
+    color: #842029;
+}
+
+/* 左側の飲食店詳細情報 */
+.container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    /* 左右2列のレイアウト */
+    gap: 10px;
+    /* グリッド要素間の間隔 */
+}
+
+.shop-details {
+    padding: 50px;
+    padding-top: 25px;
+    margin-left: 20px;
+    margin-bottom: 30px;
+    font-size: 14px;
+    width: 90%;
+}
+
+.object-header {
+    display: flex;
+    align-items: center;
+    /* 垂直方向の中央揃え */
+}
+
+.back-button {
+    background-color: #fff;
+    color: #333;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 3px 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-decoration: none;
+}
+
+.back-button:hover {
+    background-color: #f2f2f2;
+}
+
+h2 {
+    padding-left: 10px;
+}
+
+.shop-details img {
+    width: 100%;
+    max-height: 300px;
+    object-fit: cover;
+}
+
+.tags {
+    margin-bottom: -10px;
+}
+
+.tag {
+    display: inline-block;
+    padding: 20px 2px;
+}
+
+.update-form {
+    background: white;
+    padding:10px 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.update-form h2 {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.update-form .form-group {
+    margin-bottom: 15px;
+}
+
+.update-form .form-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.update-form .form-group input,
+.update-form .form-group select,
+.update-form .form-group textarea {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.update-form .btn-primary {
+    display: block;
+    width: 100%;
+    font-size: 16px;
+    padding: 10px;
+    margin: 20px 0;
+    background-color: blue;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.update-form .btn-primary:hover {
+    background-color: #0056b3;
+}
+
+@media screen and (max-width: 768px) {
+
+
+}

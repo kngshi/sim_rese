@@ -7,7 +7,6 @@
     padding: 20px 0;
     max-width: 1230px;
     display: flex;
-    justify-content: spa;
 }
 
 .header__logo {
@@ -57,7 +56,6 @@
     top: 31px;
     width: 20%;
 }
-
 
 
 /* モーダルウィンドウ */

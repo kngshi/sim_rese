@@ -1,0 +1,107 @@
+main {
+    background-color: #f5f5f5;
+    height: 90vh;
+    text-align: center;
+}
+
+
+.shop-managers {
+    display: flex;
+    justify-content: space-around;
+}
+
+.shop-managers-section {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px 30px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.shop-managers-section h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+
+.shop-managers-section th {
+    padding-right: 30px;
+    padding: 8px 16px;
+
+}
+
+.shop-managers-section td {
+    padding-right: 30px;
+    padding: 8px 16px;
+
+}
+
+.back-link {
+    display: inline-block;
+    margin-top: 50px;
+    padding: 10px 15px;
+    text-decoration: none;
+    border: 1px solid #007bff;
+    border-radius: 5px;
+    color: #007bff;
+}
+
+.back-link:hover {
+    background-color: #007bff;
+    color: white;
+}
+
+
+
+.form-group {
+    display: grid;
+    align-items: center;
+    margin-top: 32px;
+    grid-template-columns: 1fr 2fr;
+}
+
+
+.form__required {
+    color: #FF9494;
+}
+
+.form__input {
+    padding: 8px 16px;
+    background-color: #F4F4F4;
+    color: #BEB1A6;
+}
+
+.shop-managers-section form {
+    text-align: center;
+}
+
+.shop-managers-section .form-group label {
+    display: block;
+    padding:5px;
+    margin-bottom: 5px;
+    text-align: center;
+}
+
+.shop-managers-section .form-control {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.shop-managers-section .create-form-button {
+    display: block;
+    width: 50%;
+    margin: 0 auto;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.shop-managers-section .create-form-button:hover {
+    background-color: #0056b3;
+}

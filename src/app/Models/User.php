@@ -20,6 +20,7 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'role',
         'password',
     ];
 
@@ -42,7 +43,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-     public function reservations()
+
+    public function reservations()
     {
         return $this->hasMany(Reservation::class);
     }
@@ -67,6 +69,11 @@ class User extends Authenticatable
     public function shopReservation()
     {
         return $this->belongsToMany(Shop::class, 'reservations', 'user_id', 'shop_id')->withTimestamps();
+    }
+
+    public function shopAdmin()
+    {
+        return $this->belongsTo(Shop::class);
     }
 
 }

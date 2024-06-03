@@ -62,7 +62,12 @@ class Shop extends Model
     {
         return $this->hasMany(Review::class);
     }
-    
+
+    public function manager()
+    {
+        return $this->hasOne(User::class);
+    }
+
 }
 
 

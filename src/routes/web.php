@@ -7,6 +7,7 @@ use App\Http\Controllers\ShopController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\AdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,6 +46,7 @@ Route::get('/done', function () {
     return view('done');
 });
 
+
 // 予約情報追加機能
 Route::post('/reservation', [ReservationController::class, 'store'])->name('reservation.store')->middleware('auth');
 
@@ -74,4 +76,26 @@ Route::put('/reservations/{reservation}', [ReservationController::class, 'update
 Route::middleware(['auth'])->group(function () {
     Route::get('/reviews/create/{shop}', [ReviewController::class, 'create'])->name('reviews.create');
 Route::post('/create', [ReviewController::class, 'store'])->name('reviews.store');
+});
+
+
+// 管理者用ルート
+Route::middleware(['auth'])->prefix('admin')->group(function () {
+    Route::get('/dashboard', [AdminController::class, 'shopManagersIndex']);
+    Route::get('/create', [AdminController::class, 'shopManagerCreate'])->name('admin.create');
+    Route::post('/create', [AdminController::class, 'shopManagerStore'])->name('admin.store');
+    Route::get('/shop', [AdminController::class, 'shopsIndex'])->name('admin.shop.create');
+    Route::post('/shop', [AdminController::class, 'shopCreate'])->name('admin.shop.edit');
+});
+
+
+// 店舗代表者用ルート
+Route::middleware(['auth'])->prefix('manager')->group(function () {
+    Route::get('/dashboard', [AdminController::class, 'managerDashboard'])->name('manager.dashboard');
+    Route::get('/create', [AdminController::class, 'shopInformation'])->name('shop.info');
+    Route::post('/create', [AdminController::class, 'createShop'])->name('shop.create');
+    Route::post('/index', [AdminController::class, 'updateShop'])->name('shop.update');
+    Route::get('/index', [AdminController::class, 'reservationsIndex'])->name('reservation.index');
+    Route::get('/edit', [AdminController::class, 'editShop'])->name('manager.edit');
+    Route::post('/edit', [AdminController::class, 'updateShop'])->name('manager.update');
 });

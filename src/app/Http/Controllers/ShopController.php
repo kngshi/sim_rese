@@ -28,9 +28,8 @@ class ShopController extends Controller
 
     public function detail(Shop $shop)
     {
-        $reviews = $shop->reviews()->with('user')->latest()->get();
 
-        return view('detail', compact('shop', 'reviews'));
+        return view('detail', compact('shop'));
     }
 
     
