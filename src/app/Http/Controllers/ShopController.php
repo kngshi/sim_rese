@@ -10,6 +10,7 @@ use App\Models\Genre;
 use App\Models\Favorite;
 use App\Models\Reservation;
 use App\Models\Review;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -65,7 +66,11 @@ class ShopController extends Controller
         $favorites = Favorite::where('user_id', $user_id)->with('shop')->get();
 
         // 予約情報の取得
-        $reservations = Reservation::where('user_id', $user_id)->with('shop')->orderBy('date', 'asc')->get();
+        $reservations = Reservation::where('user_id', $user_id)->with('shop')->orderBy('date', 'asc')->get()->map(function ($reservation) {
+                                    // 時刻のフォーマットを変更
+                                    $reservation->time = Carbon::createFromFormat('H:i:s', $reservation->time)->format('H:i');
+                                    return $reservation;
+                                });
 
         return view('mypage', compact('favorites', 'reservations'));
     }

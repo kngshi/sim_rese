@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Http\Requests\ReservationRequest;
 use App\Http\Controllers\Controller;
 use App\Models\Shop;
 use App\Models\Reservation;
+use Carbon\Carbon;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class ReservationController extends Controller
@@ -69,13 +70,17 @@ class ReservationController extends Controller
         // 時間の選択肢を生成
         $times = [];
         for ($hour = 12; $hour <= 15; $hour++) {
-            $times[] = sprintf('%02d:00:00', $hour);
-            $times[] = sprintf('%02d:30:00', $hour);
+            $times[] = sprintf('%02d:00', $hour);
+            $times[] = sprintf('%02d:30', $hour);
         }
         for ($hour = 17; $hour <= 23; $hour++) {
-            $times[] = sprintf('%02d:00:00', $hour);
-            $times[] = sprintf('%02d:00:00', $hour);
+            $times[] = sprintf('%02d:00', $hour);
+            $times[] = sprintf('%02d:00', $hour);
         }
+
+        // 予約の時刻をフォーマット
+        $reservation->time = Carbon::createFromFormat('H:i:s', $reservation->time)->format('H:i');
+
 
         return view('edit', compact('reservation', 'times'));
     }

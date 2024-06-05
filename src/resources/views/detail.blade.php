@@ -65,15 +65,15 @@
             </tr>
             <tr>
                 <th>Date</th>
-                <td>2024-05-05</td>
+                <td id="reservation-date"></td>
             </tr>
             <tr>
                 <th>Time</th>
-                <td>17:00</td>
+                <td id="reservation-time"></td>
             </tr>
             <tr>
                 <th>Number</th>
-                <td>1人</td>
+                <td id="reservation-number"></td>
             </tr>
         </table>
         <input type="hidden" name="shop_id" value="{{ $shop->id }}">
@@ -82,4 +82,22 @@
     </div>
 </div>
 </div>
+
+ <!-- JavaScript -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // DOMの読み込みが完了したらここにJavaScriptの処理を記述する
+            document.getElementById('date').addEventListener('change', function() {
+                document.getElementById('reservation-date').innerText = this.value;
+            });
+
+            document.getElementById('time').addEventListener('change', function() {
+                document.getElementById('reservation-time').innerText = this.value;
+            });
+
+            document.getElementById('number').addEventListener('change', function() {
+                document.getElementById('reservation-number').innerText = this.options[this.selectedIndex].text;
+            });
+        });
+    </script>
 @endsection

@@ -57,7 +57,7 @@
         </div>
         <div class="comment">
             <label for="comment">コメント:</label>
-            <textarea id="comment" name="comment" rows="5"></textarea>
+            <textarea id="comment" name="comment"></textarea>
             @error('comment')
                 <div>{{ $message }}</div>
             @enderror
