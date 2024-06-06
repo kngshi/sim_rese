@@ -7,6 +7,7 @@ use App\Models\Shop;
 use App\Models\Area;
 use App\Models\Genre;
 use App\Models\Reservation;
+use App\Notifications\UserNotification;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -179,6 +180,33 @@ class AdminController extends Controller
         $nextDate = Carbon::parse($date)->addDay()->toDateString();
 
         return view('manager.index', compact('reservations', 'date', 'previousDate', 'nextDate'));
+    }
+
+    public function adminNotifyMail(Request $request)
+    {
+
+        return view("admin/notify");
+    }
+
+    public function managerNotifyMail(Request $request)
+    {
+
+        return view("manager/notify");
+    }
+
+    public function send(Request $request)
+    {
+        $request->validate([
+            'subject' => 'required|string|max:255',
+            'message' => 'required|string',
+        ]);
+
+        $users = User::all();
+        foreach ($users as $user) {
+            $user->notify(new UserNotification($request->subject, $request->message));
+        }
+
+        return redirect()->route('admin.notify')->with('success', 'メールの送信に成功しました。');
     }
 
 }

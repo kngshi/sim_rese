@@ -18,7 +18,7 @@
     <div class="dashboard-sections">
         <div class="dashboard-section">
             <a href="/manager/index" class="link">予約情報の確認</a>
-            <a href="/manager/index" class="link">お知らせメールの送信</a>
+            <a href="/manager/notify" class="link">お知らせメールの送信</a>
         </div>
     </div>
 @endsection

@@ -24,6 +24,7 @@
             <a href="/manager/create" class="btn-primary">店舗情報の作成と更新</a>
         </div>
     </div>
+    <a href="/admin/notify" class="">お知らせメールの送信</a>
     </div>
 @endsection
 

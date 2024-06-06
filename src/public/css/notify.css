@@ -1,0 +1,91 @@
+main {
+    display: flex;
+    justify-content: center;
+    height: 90vh;
+    background-color: #f5f5f5;
+}
+
+/* sessionメッセージ */
+.flash-message__success {
+    min-width: 100%;
+    padding: 15px 30px;
+    margin-bottom: 10px;
+    border-color: #badbcc;
+    background-color: #d1e7dd;
+    color: #0f5132;
+    font-size: 20px;
+}
+
+.notify-form-container {
+    width: 100%;
+    max-width: 600px;
+    padding: 30px;
+    margin: 10px 40px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+    text-align: center;
+}
+
+.notify-form-container h1 {
+    margin-bottom: 20px;
+}
+
+.notify-form-container form {
+    display: flex;
+    flex-direction: column;
+}
+
+.notify-form-container label {
+    text-align: left;
+    margin-bottom: 5px;
+}
+
+.notify-form-container input[type="text"],
+.notify-form-container textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+.notify-form-container textarea {
+    width: 100%;
+    height: 200px;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+.notify-form-container button {
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.notify-form-container button:hover {
+    background-color: #0056b3;
+}
+
+
+.back-link {
+    display: block;
+    text-align: center;
+    padding: 10px 10px;
+    color: #007bff;
+    text-decoration: none;
+    border-radius: 5px;
+    margin: 0 auto;
+    width: 100px;
+}
+
+.back-link:hover {
+    cursor: pointer;
+}

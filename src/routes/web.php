@@ -86,6 +86,8 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
     Route::post('/create', [AdminController::class, 'shopManagerStore'])->name('admin.store');
     Route::get('/shop', [AdminController::class, 'shopsIndex'])->name('admin.shop.create');
     Route::post('/shop', [AdminController::class, 'shopCreate'])->name('admin.shop.edit');
+    Route::get('/notify', [AdminController::class, 'adminNotifyMail'])->name('admin.notify');
+    Route::post('/notify', [AdminController::class, 'send'])->name('admin.notify.send');
 });
 
 
@@ -98,4 +100,6 @@ Route::middleware(['auth'])->prefix('manager')->group(function () {
     Route::get('/index', [AdminController::class, 'reservationsIndex'])->name('reservation.index');
     Route::get('/edit', [AdminController::class, 'editShop'])->name('manager.edit');
     Route::post('/edit', [AdminController::class, 'updateShop'])->name('manager.update');
+    Route::get('/notify', [AdminController::class, 'managerNotifyMail'])->name('manager.notify');
+    Route::post('/notify', [AdminController::class, 'send'])->name('admin.notify.send');
 });
