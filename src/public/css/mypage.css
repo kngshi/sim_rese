@@ -126,6 +126,11 @@ main {
     background-color: rgb(251, 0, 255);
 }
 
+.qr-code {
+    padding-top: 20px;
+
+}
+
 
 /* 右側のお気に入り店舗一覧 */
 .favorite-index {

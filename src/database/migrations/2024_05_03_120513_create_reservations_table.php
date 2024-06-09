@@ -20,6 +20,7 @@ class CreateReservationsTable extends Migration
             $table->date('date');
             $table->time('time');
             $table->integer('number');
+            $table->tinyInteger('status');
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

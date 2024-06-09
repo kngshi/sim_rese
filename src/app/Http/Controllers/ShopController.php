@@ -13,6 +13,8 @@ use App\Models\Review;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
+
 
 class ShopController extends Controller
 {
@@ -70,9 +72,30 @@ class ShopController extends Controller
                                     // 時刻のフォーマットを変更
                                     $reservation->time = Carbon::createFromFormat('H:i:s', $reservation->time)->format('H:i');
                                     return $reservation;
+                                    // QRコードを生成
+                                    $reservation->qrCode = QrCode::size(100)->generate(route('mypage.mypageIndex', ['id' => $reservation->id]));
+
+                                    return $reservation;
                                 });
 
         return view('mypage', compact('favorites', 'reservations'));
+    }
+
+    public function qrConfirm(Request $request)
+    {
+
+        $qrCodeData = $request->input('qr_code_data');
+        
+        $reservation_id = $request->input('reservation_id');
+        $reservation = Reservation::find($reservation_id);
+
+        if ($reservation) {
+            $reservation->status = 2; // 来店済
+            $reservation->save();
+            return response()->json(['message' => '来店が確認されました。']);
+        }
+
+        return response()->json(['message' => '予約が見つかりませんでした。'], 404);
     }
 
 }

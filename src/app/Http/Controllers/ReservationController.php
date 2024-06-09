@@ -9,6 +9,8 @@ use App\Models\Reservation;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
+
 
 class ReservationController extends Controller
 {
@@ -32,15 +34,20 @@ class ReservationController extends Controller
             'date' => $request->input('date'),
             'time' => $request->input('time'),
             'number' => $request->input('number'),
-            // その他必要な情報があれば追加
+            'status' => 1,
         ];
 
         // 予約情報を保存
         $reservation = Reservation::create($reservationData);
 
-        // 予約が成功した場合の処理
+
+        // 予約が成功した場合、QRコードを生成して保存
         if ($reservation) {
-            return view('/done');
+            $qrUrl = route('reservation.store', ['id' => $reservation->id]);
+            $qrCode = QrCode::size(200)->generate($qrUrl);
+
+
+            return view('done', compact('qrCode'));
         } else {
             return redirect()->back()->with('error', '予約に失敗しました。');
         }
@@ -105,6 +112,20 @@ class ReservationController extends Controller
         $reservation->update($request->only('date', 'time', 'number'));
 
         return redirect()->route('mypage.mypageIndex')->with('success', '予約情報を更新しました。');
+    }
+
+    public function show()
+    {
+        // 予約情報の取得
+        $reservation = Reservation::find($id);
+
+        // QRコードにエンコードするURL
+        $url = route('reservation.show', ['id' => $reservation->id]);
+
+        // QRコードを生成
+        $qrCode = QrCode::size(300)->generate($url);
+
+        return view('reservations.show', compact('reservation', 'qrCode'));
     }
 
 }

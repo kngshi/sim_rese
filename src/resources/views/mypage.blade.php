@@ -54,6 +54,9 @@
             </table>
             <a href="{{ route('reservations.edit', $reservation->id) }}" class="reservation-form-button">予約を変更する</a>
             <a href="{{ route('reviews.create', $reservation->shop->id) }}" class="reservation-form-button">お店を評価する</a>
+            <div class="qr-code">
+            {!! QrCode::size(300)->generate(route('reservation.store', ['id' => $reservation->id])) !!}
+            </div>
         </div>
         @endforeach
     </div>
@@ -87,4 +90,7 @@
         </div>
     </div>
 </div>
+<script>
+    
+</script>
 @endsection

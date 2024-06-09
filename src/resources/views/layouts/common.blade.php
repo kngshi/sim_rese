@@ -8,6 +8,10 @@
   <link rel="stylesheet" href="{{ asset('css/sanitize.css') }}" />
   @yield('css')
   <script src="https://kit.fontawesome.com/7f44e1f3ad.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/quagga/dist/quagga.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <!-- manager/dashboard.blade.php -->
+  <script src="https://cdn.jsdelivr.net/npm/quagga/dist/quagga.min.js"></script>
 </head>
 <body>
 <header class="header">

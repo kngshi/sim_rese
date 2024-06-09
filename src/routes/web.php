@@ -62,6 +62,8 @@ Route::delete('/mypage/delete/', [FavoriteController::class, 'delete'])->name('m
 //マイページお気に入り、予約情報一覧取得
 Route::get('/mypage', [ShopController::class, 'mypageIndex'])->name('mypage.mypageIndex')->middleware('auth');
 
+Route::post('/mypage', [ShopController::class, 'qrConfirm'])->name('shop.qeConfirm');
+
 //マイページ予約削除機能
 Route::delete('/reservations/{id}', [ReservationController::class, 'destroy'])->name('reservation.destroy');
 
@@ -102,4 +104,6 @@ Route::middleware(['auth'])->prefix('manager')->group(function () {
     Route::post('/edit', [AdminController::class, 'updateShop'])->name('manager.update');
     Route::get('/notify', [AdminController::class, 'managerNotifyMail'])->name('manager.notify');
     Route::post('/notify', [AdminController::class, 'send'])->name('admin.notify.send');
+
+    Route::post('/mypage', [ShopController::class, 'qrConfirm'])->name('shop.qrConfirm');
 });
