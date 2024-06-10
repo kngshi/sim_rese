@@ -8,6 +8,7 @@ use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\PaymentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -79,6 +80,11 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/reviews/create/{shop}', [ReviewController::class, 'create'])->name('reviews.create');
 Route::post('/create', [ReviewController::class, 'store'])->name('reviews.store');
 });
+
+// Stripe決済
+Route::get('/payment', [PaymentController::class, 'viewPayment']);
+Route::post('/payment', [PaymentController::class, 'processPayment'])->name('payment.store');
+Route::get('/payment-result', [PaymentController::class, 'paymentResult'])->name('payment.result');
 
 
 // 管理者用ルート

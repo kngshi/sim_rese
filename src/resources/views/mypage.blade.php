@@ -53,10 +53,15 @@
                 </tr>
             </table>
             <a href="{{ route('reservations.edit', $reservation->id) }}" class="reservation-form-button">予約を変更する</a>
+            <!-- usersテーブルのstatusカラムが"2"(来店済）の場合に表示 -->
             <a href="{{ route('reviews.create', $reservation->shop->id) }}" class="reservation-form-button">お店を評価する</a>
+            <!-- ここは予約が完了した時に表示。この表示とともに、statusは "1" になっている状態に。 -->
             <div class="qr-code">
-            {!! QrCode::size(300)->generate(route('reservation.store', ['id' => $reservation->id])) !!}
+            {!! QrCode::size(200)->generate(route('reservation.store', ['id' => $reservation->id])) !!}
             </div>
+            <a href="/payment" class="payment-button">支払いをする</a>
+            
+            
         </div>
         @endforeach
     </div>
