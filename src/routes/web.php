@@ -104,6 +104,7 @@ Route::middleware(['auth'])->prefix('manager')->group(function () {
     Route::get('/dashboard', [AdminController::class, 'managerDashboard'])->name('manager.dashboard');
     Route::get('/create', [AdminController::class, 'shopInformation'])->name('shop.info');
     Route::post('/create', [AdminController::class, 'createShop'])->name('shop.create');
+    // 以下の記述は不要？　なぜupdateShopが２つあるのか
     Route::post('/index', [AdminController::class, 'updateShop'])->name('shop.update');
     Route::get('/index', [AdminController::class, 'reservationsIndex'])->name('reservation.index');
     Route::get('/edit', [AdminController::class, 'editShop'])->name('manager.edit');

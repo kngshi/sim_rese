@@ -36,6 +36,7 @@ class AdminController extends Controller
 
     public function shopManagerStore(Request $request)
     {
+        $shopManagers = User::where('role', 2)->get();
 
         $request->validate([
             'name' => 'required|string|max:255',
@@ -51,7 +52,7 @@ class AdminController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-        return view('admin.create', compact('user'))->with('success', '店舗代表者を作成しました。');
+        return view('admin.create', compact('user','shopManagers'))->with('success', '店舗代表者を作成しました。');
     }
 
 
