@@ -89,11 +89,9 @@ Route::get('/payment-result', [PaymentController::class, 'paymentResult'])->name
 
 // 管理者用ルート
 Route::middleware(['auth'])->prefix('admin')->group(function () {
-    Route::get('/dashboard', [AdminController::class, 'shopManagersIndex']);
-    Route::get('/create', [AdminController::class, 'shopManagerCreate'])->name('admin.create');
-    Route::post('/create', [AdminController::class, 'shopManagerStore'])->name('admin.store');
-    Route::get('/shop', [AdminController::class, 'shopsIndex'])->name('admin.shop.create');
-    Route::post('/shop', [AdminController::class, 'shopCreate'])->name('admin.shop.edit');
+    Route::get('/dashboard', [AdminController::class, 'adminDashboard']);
+    Route::get('/create', [AdminController::class, 'createManager'])->name('admin.create');
+    Route::post('/create', [AdminController::class, 'storeManager'])->name('admin.store');
     Route::get('/notify', [AdminController::class, 'adminNotifyMail'])->name('admin.notify');
     Route::post('/notify', [AdminController::class, 'send'])->name('admin.notify.send');
 });
@@ -102,6 +100,7 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
 // 店舗代表者用ルート
 Route::middleware(['auth'])->prefix('manager')->group(function () {
     Route::get('/dashboard', [AdminController::class, 'managerDashboard'])->name('manager.dashboard');
+    Route::post('/dashboard', [ShopController::class, 'qrConfirm'])->name('manager.qrConfirm');
     Route::get('/create', [AdminController::class, 'shopInformation'])->name('shop.info');
     Route::post('/create', [AdminController::class, 'createShop'])->name('shop.create');
     // 以下の記述は不要？　なぜupdateShopが２つあるのか
@@ -112,5 +111,5 @@ Route::middleware(['auth'])->prefix('manager')->group(function () {
     Route::get('/notify', [AdminController::class, 'managerNotifyMail'])->name('manager.notify');
     Route::post('/notify', [AdminController::class, 'send'])->name('admin.notify.send');
 
-    Route::post('/mypage', [ShopController::class, 'qrConfirm'])->name('shop.qrConfirm');
+    
 });

@@ -22,10 +22,10 @@
         </div>
     </div>
     <h2>QRコードの読み取り</h2>
-    <div class="dashboard-section">
+    <div class="dashboard-sections">
     <a href="#" id="scanQRCode" class="link">QRコードを読み取る</a>
+    </div>
     <div id="scanner-container"></div>
-</div>
 <script>
     document.getElementById('scanQRCode').addEventListener('click', function() {
         Quagga.init({
@@ -51,7 +51,7 @@
             console.log("Detected code: " + code);
 
             // バックエンドのqrConfirmアクションにリクエストを送信する
-            axios.post('/mypage', { reservation_id: code })
+            axios.post('/manager/dashboard', { reservation_id: code })
             .then(function (response) {
                 // バックエンドからのレスポンスに応じて処理を行う
                 const data = response.data;

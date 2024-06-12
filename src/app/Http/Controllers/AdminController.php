@@ -16,25 +16,21 @@ use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
 {
-
     // 管理者用ダッシュボード
-
-    // 管理者
-    public function shopManagersIndex()
+    public function adminDashboard()
     {
-        $shopManagers = User::where('role', 2)->get();
-        
-        return view('admin.dashboard', compact('shopManagers'));
+
+        return view('admin.dashboard');
     }
 
-    public function shopManagerCreate(Request $request)
+    public function createManager(Request $request)
     {
         $shopManagers = User::where('role', 2)->get();
-        
+
         return view('admin.create', compact('shopManagers'));
     }
 
-    public function shopManagerStore(Request $request)
+    public function storeManager(Request $request)
     {
         $shopManagers = User::where('role', 2)->get();
 
@@ -55,6 +51,12 @@ class AdminController extends Controller
         return view('admin.create', compact('user','shopManagers'))->with('success', '店舗代表者を作成しました。');
     }
 
+    // 店舗代表者用ダッシュボード
+    public function managerDashboard()
+    {
+
+        return view('manager.dashboard');
+    }
 
     public function shopInformation(Request $request)
     {
@@ -63,17 +65,9 @@ class AdminController extends Controller
 
         $areas = Area::all();
         $genres = Genre::all();
-    
+
         return view('admin.shop.create', compact('shops','areas', 'genres'));
     }
-
-    // 店舗代表者用ダッシュボード
-    public function managerDashboard()
-    {
-
-        return view('manager.dashboard');
-    }
-
 
     public function createShop(Request $request)
     {

@@ -7,7 +7,7 @@
 
 
 @section('content')
-<h1>店舗代表者管理ページ</h1>
+<h1>店舗代表者作成ページ</h1>
 @if (session('success'))
     <div class="alert alert-success">
         {{ session('success') }}
