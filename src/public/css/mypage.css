@@ -445,3 +445,12 @@ main {
 
 }
 
+@media screen and (max-width: 480px) {
+.container {
+        display: grid;
+        grid-template-columns: 1fr;
+        /* 左右2列のレイアウト */
+        gap: 0px;
+        /* グリッド要素間の間隔 */
+    }
+}

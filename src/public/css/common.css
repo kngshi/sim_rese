@@ -232,3 +232,26 @@
     }
 
 }
+
+@media screen and (max-width: 480px) {
+    .header {
+        background: #f5f5f5;
+    }
+
+    .header__inner {
+        margin: 0 auto;
+        padding: 20px 0;
+        max-width: px;
+        display: flex;
+    }
+
+    .header__logo {
+        position: relative;
+        left: 10px;
+        color: blue;
+        text-decoration: none;
+        font-weight: bold;
+        font-size: 30px;
+        margin: 2px 10px;
+    }
+}

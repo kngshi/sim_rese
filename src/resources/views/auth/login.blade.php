@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Rese</title>
     <link rel="stylesheet" href="{{ asset('css/sanitize.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/common.css') }}">
     <link rel="stylesheet" href="{{ asset('css/login.css') }}">
     <script src="https://kit.fontawesome.com/7f44e1f3ad.js" crossorigin="anonymous"></script>
 </head>

@@ -60,3 +60,36 @@ main {
 
     }
 }
+
+@media screen and (max-width: 480px) {
+
+    .done-page__inner {
+        padding: 30px 45px;
+        border: none;
+        border-radius: 5px;
+        background-color: #FDFEFE;
+        box-shadow: 3px 3px 3px gray;
+        position: absolute;
+        cursor: pointer;
+        left: auto;
+        top: 20%;
+
+    }
+
+    .done-page__btn {
+        margin: 32px auto 0;
+        color: white;
+        background-color: blue;
+        border: none;
+        border-radius: 5px;
+        font-size: 14px;
+        text-align: center;
+        align-items: center;
+        height: 40px;
+        margin-top: 40px;
+        margin-bottom: 30px;
+        width: 25%;
+        display: flex;
+        justify-content: center;
+    }
+}

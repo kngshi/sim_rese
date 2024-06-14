@@ -9,8 +9,7 @@
 <div class="container">
 <!-- 左側の予約情報表示 -->
     <div class="reservation-info">
-        <div class="reservation-info-card-header">
-            <div class="reservation-info-card-item">
+            <div class="reservation-info-header">
                 <h2><i class="far fa-clock xl"></i> 予約詳細</h2>
                 <form action="{{ route('reservation.destroy', $reservation->id) }}" class="reservation-delete-form" method="POST">
                 @csrf
@@ -18,7 +17,6 @@
                 <button type="submit" class="close-btn-reservation">&times;</button>
                 </form>
             </div>
-        </div>
             <table class="reservation-info-table">
                 <tr>
                     <th>Shop</th>

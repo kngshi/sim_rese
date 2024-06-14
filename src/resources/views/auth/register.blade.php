@@ -6,6 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Rese</title>
         <link rel="stylesheet" href="{{ asset('css/sanitize.css') }}" />
+        <link rel="stylesheet" href="{{ asset('css/common.css') }}">
         <link rel="stylesheet" href="{{ asset('css/register.css') }}">
         <script src="https://kit.fontawesome.com/7f44e1f3ad.js" crossorigin="anonymous"></script>
     </head>
@@ -22,7 +23,7 @@
         <x-slot name="logo"></x-slot>
         <!-- Validation Errors -->
         <x-auth-validation-errors class="mb-4" :errors="$errors" />
-            <div class="form_ttl mb-4">Registration</div>
+            <div class="form_ttl">Registration</div>
         <form method="POST" action="{{ route('register') }}">
             @csrf
             <!-- Name -->
@@ -33,11 +34,11 @@
             </tr>
             <tr>
             <th class="form-icon"><i class="fa-solid fa-envelope"></i></th>
-            <td class="form-input"><x-input id="email" class="block mt-1 w-full border-none" type="email" name="email" :value="old('email')" placeholder="Email" required /></td>
+            <td class="form-input"><x-input id="email" class="block mt-1 w-full  border-none" type="email" name="email" :value="old('email')" placeholder="Email" required /></td>
             </tr>
             <tr>
             <th class="form-icon"><i class="fa-solid fa-unlock-keyhole fa-lg"></i></th>
-            <td class="form-input"><x-input id="password" class="block mt-1 w-full border-none"
+            <td class="form-input"><x-input id="password" class="block mt-1 w-full  border-none"
                                 type="password"
                                 name="password"
                                 placeholder="Password"

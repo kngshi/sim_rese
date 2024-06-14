@@ -262,3 +262,19 @@ h2 {
     }
 
 }
+
+@media screen and (max-width: 480px) {
+    .container {
+        grid-template-columns: 1fr;
+    }
+
+    .reservation-form {
+        width: 90%;
+        margin-top: 0;
+    }
+
+    .shop-details {
+        width: 90%;
+        margin-left: 0;
+    }
+}
