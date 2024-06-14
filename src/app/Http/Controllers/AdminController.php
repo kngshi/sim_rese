@@ -12,6 +12,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 
 class AdminController extends Controller
@@ -202,6 +203,23 @@ class AdminController extends Controller
         }
 
         return redirect()->route('admin.notify')->with('success', 'メールの送信に成功しました。');
+    }
+
+    public function qrConfirm(Request $request)
+    {
+
+        $qrCodeData = $request->input('qr_code_data');
+        
+        $reservation_id = $request->input('reservation_id');
+        $reservation = Reservation::find($reservation_id);
+
+        if ($reservation) {
+            $reservation->status = 2; // 来店済
+            $reservation->save();
+            return response()->json(['message' => '来店が確認されました。']);
+        }
+
+        return response()->json(['message' => '予約が見つかりませんでした。'], 404);
     }
 
 }

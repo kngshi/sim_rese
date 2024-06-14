@@ -63,8 +63,6 @@ Route::delete('/mypage/delete/', [FavoriteController::class, 'delete'])->name('m
 //マイページお気に入り、予約情報一覧取得
 Route::get('/mypage', [ShopController::class, 'mypageIndex'])->name('mypage.mypageIndex')->middleware('auth');
 
-Route::post('/mypage', [ShopController::class, 'qrConfirm'])->name('shop.qeConfirm');
-
 //マイページ予約削除機能
 Route::delete('/reservations/{id}', [ReservationController::class, 'destroy'])->name('reservation.destroy');
 
@@ -100,16 +98,14 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
 // 店舗代表者用ルート
 Route::middleware(['auth'])->prefix('manager')->group(function () {
     Route::get('/dashboard', [AdminController::class, 'managerDashboard'])->name('manager.dashboard');
-    Route::post('/dashboard', [ShopController::class, 'qrConfirm'])->name('manager.qrConfirm');
+    Route::post('/dashboard', [AdminController::class, 'qrConfirm'])->name('dashboard.qrConfirm');
     Route::get('/create', [AdminController::class, 'shopInformation'])->name('shop.info');
     Route::post('/create', [AdminController::class, 'createShop'])->name('shop.create');
-    // 以下の記述は不要？　なぜupdateShopが２つあるのか
-    Route::post('/index', [AdminController::class, 'updateShop'])->name('shop.update');
     Route::get('/index', [AdminController::class, 'reservationsIndex'])->name('reservation.index');
     Route::get('/edit', [AdminController::class, 'editShop'])->name('manager.edit');
     Route::post('/edit', [AdminController::class, 'updateShop'])->name('manager.update');
     Route::get('/notify', [AdminController::class, 'managerNotifyMail'])->name('manager.notify');
     Route::post('/notify', [AdminController::class, 'send'])->name('admin.notify.send');
 
-    
+    Route::post('/mypage', [AdminController::class, 'qrConfirm'])->name('manager.qrConfirm');
 });
