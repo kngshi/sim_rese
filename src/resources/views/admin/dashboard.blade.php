@@ -17,14 +17,17 @@
     <div class="dashboard-sections">
         <div class="dashboard-section">
             <h2>店舗代表者の作成</h2>
-            <a href="/admin/create" class="btn-primary" >店舗代表者の一覧と作成</a>
+            <a href="/admin/create" class="btn-primary" >店舗代表者の作成</a>
         </div>
         <div class="dashboard-section">
             <h2>店舗管理</h2>
-            <a href="/manager/create" class="btn-primary">店舗情報の作成と更新</a>
+            <a href="/manager/create" class="btn-primary">店舗情報の作成</a>
         </div>
     </div>
-    <a href="/admin/notify" class="">お知らせメールの送信</a>
+    <div class="dashboard-section">
+            <h2>お知らせメールの送信</h2>
+            <a href="/admin/notify" class="btn-primary">お知らせメールの送信</a>
+        </div>
     </div>
 @endsection
 

@@ -11,7 +11,8 @@ main {
 }
 
 .shop-managers-section {
-    max-width: 600px;
+    width: 400px;
+    height: 450px;
     margin: 0 auto;
     padding: 20px 30px;
     background-color: white;

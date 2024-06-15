@@ -63,10 +63,6 @@
                 <input type="password" name="password" id="password" class="form-control" required>
             </div>
             <div class="form-group">
-            <label for="password_confirmation">確認用パスワード</label>
-            <input type="password" name="password_confirmation" class="form-control" required>
-            </div>
-            <div class="form-group">
             <input type="hidden" name="role" value="2">
             </div>
             <button type="submit" class="create-form-button">作成</button>

@@ -22,7 +22,8 @@
             <br>
             <button type="submit">メール送信</button>
         </form>
+        <a href="/admin/dashboard" class="back-link" >戻る</a>
     </div>
 </div>
-<a href="/admin/dashboard" class="back-link" >戻る</a>
+
 @endsection
