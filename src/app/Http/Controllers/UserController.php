@@ -10,8 +10,7 @@ class UserController extends Controller
     public function getUser(){
 
         $user= User::select('id')->get();
-        
-
+    
         return view('mypage', compact('user'));
     }
 

@@ -34,6 +34,7 @@ Route::get('/thanks', function () {
     return view('thanks');
 });
 
+// 飲食店一覧ページ表示
 Route::get('/', [ShopController::class, 'index']);
 
 //飲食店詳細取得機能
@@ -42,14 +43,11 @@ Route::get('/shop/{shop}', [ShopController::class, 'detail'])->name('shop.detail
 //飲食店一覧ページ検索機能
 Route::get('/search', [ShopController::class, 'search']);
 
-// 予約完了ページへの遷移
-Route::get('/done', function () {
-    return view('done');
-});
-
-
-// 予約情報追加機能
+// 飲食店予約情報追加
 Route::post('/reservation', [ReservationController::class, 'store'])->name('reservation.store')->middleware('auth');
+
+// 予約完了ページの表示
+Route::get('/done', [ReservationController::class, 'done'])->name('done');
 
 //お気に入り追加機能
 Route::post('/favorite', [FavoriteController::class, 'addFavorite'])->name('favorite.addFavorite')->middleware('auth');
@@ -57,25 +55,27 @@ Route::post('/favorite', [FavoriteController::class, 'addFavorite'])->name('favo
 //お気に入り削除機能
 Route::delete('/favorites/delete', [FavoriteController::class, 'deleteFavorite'])->name('favorites.delete')->middleware('auth');
 
+
+//ユーザー飲食店お気に入り一覧取得、ユーザー飲食店予約情報取得
+Route::get('/mypage', [ShopController::class, 'mypageIndex'])->name('mypage.mypageIndex')->middleware('auth');
+
 //マイページでのお気に入り削除機能
 Route::delete('/mypage/delete/', [FavoriteController::class, 'delete'])->name('mypage.delete')->middleware('auth');
-
-//マイページお気に入り、予約情報一覧取得
-Route::get('/mypage', [ShopController::class, 'mypageIndex'])->name('mypage.mypageIndex')->middleware('auth');
 
 //マイページ予約削除機能
 Route::delete('/reservations/{id}', [ReservationController::class, 'destroy'])->name('reservation.destroy');
 
-// 予約情報編集フォーム表示
+// 飲食店予約情報変更ページ表示
 Route::get('/reservations/{reservation}/edit', [ReservationController::class, 'edit'])->name('reservations.edit')->middleware('auth');
 
-// 予約情報更新
+// 飲食店予約情報変更
 Route::put('/reservations/{reservation}', [ReservationController::class, 'update'])->name('reservations.update')->middleware('auth');
 
 
 // 評価機能
 Route::middleware(['auth'])->group(function () {
-    Route::get('/reviews/create/{shop}', [ReviewController::class, 'create'])->name('reviews.create');
+
+Route::get('/reviews/create/{shop}', [ReviewController::class, 'create'])->name('reviews.create');
 Route::post('/create', [ReviewController::class, 'store'])->name('reviews.store');
 });
 

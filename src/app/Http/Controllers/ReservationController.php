@@ -47,11 +47,20 @@ class ReservationController extends Controller
             $qrCode = QrCode::size(200)->generate($qrUrl);
 
 
-            return view('done', compact('qrCode'));
+            return view('done', ['shop_id' => $reservation->shop_id, 'qrCode' => $qrCode]);
         } else {
             return redirect()->back()->with('error', '予約に失敗しました。');
         }
     }
+
+    public function done(Request $request)
+    {
+        $shop_id = $request->query('shop_id');
+        $qrCode = $request->query('qrCode');
+
+        return view('done', compact('shop_id', 'qrCode'));
+    }
+
 
     public function destroy($id)
     {
