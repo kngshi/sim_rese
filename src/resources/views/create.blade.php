@@ -36,7 +36,7 @@
     </div>
 
     <!-- 右側の評価フォーム -->
-    <div class="reservation-form">
+    <div class="review-form">
     <h2>{{ $shop->name }} を評価する</h2>
     <form action="{{ route('reviews.store') }}" method="POST">
         @csrf
@@ -57,7 +57,7 @@
         </div>
         <div class="comment">
             <label for="comment">コメント:</label>
-            <textarea id="comment" name="comment"></textarea>
+            <textarea id="comment" name="comment" placeholder="コメントを入力してください。"></textarea>
             @error('comment')
                 <div>{{ $message }}</div>
             @enderror

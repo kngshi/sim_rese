@@ -21,7 +21,6 @@ use App\Http\Controllers\PaymentController;
 |
 */
 
-
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
@@ -29,61 +28,56 @@ Route::get('/dashboard', function () {
 
 require __DIR__.'/auth.php';
 
-
-Route::get('/thanks', function () {
-    return view('thanks');
-});
-
-// 飲食店一覧ページ表示
+// 飲食店一覧取得
 Route::get('/', [ShopController::class, 'index']);
 
-//飲食店詳細取得機能
+//飲食店詳細取得
 Route::get('/shop/{shop}', [ShopController::class, 'detail'])->name('shop.detail');
 
 //飲食店一覧ページ検索機能
 Route::get('/search', [ShopController::class, 'search']);
 
-// 飲食店予約情報追加
-Route::post('/reservation', [ReservationController::class, 'store'])->name('reservation.store')->middleware('auth');
-
-// 予約完了ページの表示
-Route::get('/done', [ReservationController::class, 'done'])->name('done');
-
-//お気に入り追加機能
-Route::post('/favorite', [FavoriteController::class, 'addFavorite'])->name('favorite.addFavorite')->middleware('auth');
-
-//お気に入り削除機能
-Route::delete('/favorites/delete', [FavoriteController::class, 'deleteFavorite'])->name('favorites.delete')->middleware('auth');
-
-
-//ユーザー飲食店お気に入り一覧取得、ユーザー飲食店予約情報取得
-Route::get('/mypage', [ShopController::class, 'mypageIndex'])->name('mypage.mypageIndex')->middleware('auth');
-
-//マイページでのお気に入り削除機能
-Route::delete('/mypage/delete/', [FavoriteController::class, 'delete'])->name('mypage.delete')->middleware('auth');
-
-//マイページ予約削除機能
-Route::delete('/reservations/{id}', [ReservationController::class, 'destroy'])->name('reservation.destroy');
-
-// 飲食店予約情報変更ページ表示
-Route::get('/reservations/{reservation}/edit', [ReservationController::class, 'edit'])->name('reservations.edit')->middleware('auth');
-
-// 飲食店予約情報変更
-Route::put('/reservations/{reservation}', [ReservationController::class, 'update'])->name('reservations.update')->middleware('auth');
-
-
-// 評価機能
 Route::middleware(['auth'])->group(function () {
+    //サンクスページ表示
+    Route::get('/thanks', function () {
+        return view('thanks');
+    });
 
-Route::get('/reviews/create/{shop}', [ReviewController::class, 'create'])->name('reviews.create');
-Route::post('/create', [ReviewController::class, 'store'])->name('reviews.store');
+    //ユーザー飲食店お気に入り一覧取得、ユーザー飲食店予約情報取得
+    Route::get('/mypage', [ShopController::class, 'mypageIndex'])->name('mypage.mypageIndex');
+
+    //お気に入り追加
+    Route::post('/favorite', [FavoriteController::class, 'addFavorite'])->name('favorite.addFavorite');
+
+    //飲食店一覧ページでのお気に入り削除
+    Route::delete('/favorites/delete', [FavoriteController::class, 'deleteFavorite'])->name('favorites.delete');
+
+    //マイページでのお気に入り削除
+    Route::delete('/mypage/delete/', [FavoriteController::class, 'delete'])->name('mypage.delete');
+
+    // 飲食店予約情報追加、QRコード作成
+    Route::post('/reservation', [ReservationController::class, 'store'])->name('reservation.store');
+
+    // 予約完了ページの表示
+    Route::get('/done', [ReservationController::class, 'done'])->name('done');
+
+    //飲食店予約情報削除
+    Route::delete('/reservations/{id}', [ReservationController::class, 'destroy'])->name('reservation.destroy');
+
+    // 飲食店予約情報変更
+    Route::get('/reservations/{reservation}/edit', [ReservationController::class, 'edit'])->name('reservations.edit');
+    Route::put('/reservations/{reservation}', [ReservationController::class, 'update'])->name('reservations.update');
+
+    // 評価機能
+    Route::get('/reviews/create/{shop}', [ReviewController::class, 'create'])->name('reviews.create');
+    Route::post('/create', [ReviewController::class, 'store'])->name('reviews.store');
+
+    // Stripe決済
+    Route::get('/payment', [PaymentController::class, 'viewPayment']);
+    Route::post('/payment', [PaymentController::class, 'processPayment'])->name('payment.store');
+    Route::get('/payment-result', [PaymentController::class, 'paymentResult'])->name('payment.result');
+
 });
-
-// Stripe決済
-Route::get('/payment', [PaymentController::class, 'viewPayment']);
-Route::post('/payment', [PaymentController::class, 'processPayment'])->name('payment.store');
-Route::get('/payment-result', [PaymentController::class, 'paymentResult'])->name('payment.result');
-
 
 // 管理者用ルート
 Route::middleware(['auth'])->prefix('admin')->group(function () {
