@@ -16,7 +16,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('send:reservation-reminders')->everyMinute()->appendOutputTo(storage_path('logs/schedule.log'));
+        $schedule->command('send:reservation-reminders')->dailyAt('07:00')->appendOutputTo(storage_path('logs/schedule.log'));
     }
 
     /**
