@@ -19,7 +19,7 @@ class UsersTableSeeder extends Seeder
         'name' => '管理者',
         'email' => 'admin@example.com',
         'role' => '1',
-        'password' => 'admin1234',
+        'password' => bcrypt('admin1234'),
         ];
 
         DB::table('users')->insert($param);
