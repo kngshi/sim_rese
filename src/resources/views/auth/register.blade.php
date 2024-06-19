@@ -10,7 +10,6 @@
         <link rel="stylesheet" href="{{ asset('css/register.css') }}">
         <script src="https://kit.fontawesome.com/7f44e1f3ad.js" crossorigin="anonymous"></script>
     </head>
-
     <header class="header">
         <div class="header__inner">
             <a href="#modal-01">
@@ -26,7 +25,6 @@
             <div class="form_ttl">Registration</div>
         <form method="POST" action="{{ route('register') }}">
             @csrf
-            <!-- Name -->
             <table>
             <tr>
             <th class="form-icon"><i class="fa-solid fa-user fa-xl"></i></th>
@@ -52,7 +50,6 @@
             </div>
         </form>
     </x-auth-card>
-    <!-- モーダルウィンドウ -->
     <div class="modal-wrapper" id="modal-01">
     <a href="#!" class="modal-overlay"></a>
     <div class="modal-window">
