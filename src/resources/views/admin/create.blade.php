@@ -66,7 +66,6 @@
             <input type="hidden" name="role" value="2">
             </div>
             <button type="submit" class="create-form-button">作成</button>
-            <!-- classの設定を忘れずに -->
         </form>
     </div>
 </div>

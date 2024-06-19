@@ -24,7 +24,6 @@
         </tr>
         @foreach ($reservations as $reservation)
         <tr>
-           
             <td>{{ $reservation->user->name }}</td>
             <td>{{ $reservation->time }}</td>
             <td>{{ $reservation->number }}</td>

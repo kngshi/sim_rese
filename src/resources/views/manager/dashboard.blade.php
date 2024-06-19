@@ -26,49 +26,44 @@
     <a href="#" id="scanQRCode" class="link">QRコードを読み取る</a>
     </div>
     <div id="scanner-container"></div>
-<script>
-    document.getElementById('scanQRCode').addEventListener('click', function() {
-        Quagga.init({
-            inputStream: {
-                name: "Live",
-                type: "LiveStream",
-                target: document.querySelector('#scanner-container'), // カメラプレビューを表示するための要素
-            },
-            decoder: {
-                readers: ["code_128_reader"] // QRコードを読み取るためのリーダー
-            }
-        }, function(err) {
-            if (err) {
-                console.error(err);
-                return;
-            }
-            Quagga.start();
-        });
-            // バックエンドの処理を呼び出すなどの追加処理を行う
-            // QRコード読み取り時の処理
-            Quagga.onDetected(function (result) {
-            const code = result.codeResult.code; // QRコードの内容
-            console.log("Detected code: " + code);
-
-            // バックエンドのqrConfirmアクションにリクエストを送信する
-            axios.post('/manager/dashboard', { reservation_id: code })
-            .then(function (response) {
-                // バックエンドからのレスポンスに応じて処理を行う
-                const data = response.data;
-                if (data.message === '来店が確認されました。') {
-                    alert(data.message); // 成功メッセージを表示
-                    // 予約情報のステータスが変更されたため、ページを更新して最新の情報を表示する
-                    location.reload();
-                } else {
-                    alert(data.message); // エラーメッセージを表示
+    <script>
+        document.getElementById('scanQRCode').addEventListener('click', function() {
+            Quagga.init({
+                inputStream: {
+                    name: "Live",
+                    type: "LiveStream",
+                    target: document.querySelector('#scanner-container'),
+                },
+                decoder: {
+                    readers: ["code_128_reader"]
                 }
-            })
-            .catch(function (error) {
-                console.error(error);
+            }, function(err) {
+                if (err) {
+                    console.error(err);
+                    return;
+                }
+                Quagga.start();
             });
-        });
+                Quagga.onDetected(function (result) {
+                const code = result.codeResult.code;
+                console.log("Detected code: " + code);
 
-            Quagga.stop();
-        });
-</script>
+                axios.post('/manager/dashboard', { reservation_id: code })
+                .then(function (response) {
+                    const data = response.data;
+                    if (data.message === '来店が確認されました。') {
+                        alert(data.message);
+                        location.reload();
+                    } else {
+                        alert(data.message);
+                    }
+                })
+                .catch(function (error) {
+                    console.error(error);
+                });
+            });
+
+                Quagga.stop();
+            });
+    </script>
 @endsection

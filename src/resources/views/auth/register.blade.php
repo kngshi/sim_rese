@@ -52,7 +52,6 @@
             </div>
         </form>
     </x-auth-card>
-
     <!-- モーダルウィンドウ -->
     <div class="modal-wrapper" id="modal-01">
     <a href="#!" class="modal-overlay"></a>

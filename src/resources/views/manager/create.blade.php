@@ -5,7 +5,6 @@
 <link rel="stylesheet" href="{{ asset('css/manager/create.css') }}" />
 @endsection
 
-
 @section('content')
 <div class="container">
     @if (session('success'))
