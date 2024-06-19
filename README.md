@@ -101,3 +101,4 @@ php artisan db:seed
 3. `php artisan migrate`
 4. `npm install`
 5. `npm run dev`
+# sim_rese
