@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Http\Controllers;
 
 use App\Models\User;
@@ -15,19 +14,16 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
-
 class ShopController extends Controller
 {
     public function index(Request $request)
     {
+        $shops = Shop::with('area', 'genre')->get();
+        $areas = Area::all();
+        $genres = Genre::all();
 
-    $shops = Shop::with('area', 'genre')->get();
-    $areas = Area::all();
-    $genres = Genre::all();
-
-    return view('index', compact('shops', 'areas', 'genres' ));
+        return view('index', compact('shops', 'areas', 'genres' ));
     }
-
 
     public function detail(Shop $shop)
     {
@@ -35,7 +31,6 @@ class ShopController extends Controller
         return view('detail', compact('shop'));
     }
 
-    
     public function search(Request $request)
     {
         if ($request->has('reset')) {
@@ -55,24 +50,18 @@ class ShopController extends Controller
         $areas = Area::all();
         $genres = Genre::all();
 
-
         return view('index', compact('shops', 'areas', 'genres'));
     }
-
 
     public function mypageIndex()
     {
         $user_id = Auth::id();
-
-        // お気に入り店舗の取得
         $favorites = Favorite::where('user_id', $user_id)->with('shop')->get();
 
-        // 予約情報の取得
         $reservations = Reservation::where('user_id', $user_id)->with('shop')->orderBy('date', 'asc')->get()->map(function ($reservation) {
-                                    // 時刻のフォーマットを変更
                                     $reservation->time = Carbon::createFromFormat('H:i:s', $reservation->time)->format('H:i');
                                     return $reservation;
-                                    // QRコードを生成
+
                                     $reservation->qrCode = QrCode::size(100)->generate($reservation->id);
 
                                     return $reservation;
@@ -80,5 +69,4 @@ class ShopController extends Controller
 
         return view('mypage', compact('favorites', 'reservations'));
     }
-
 }

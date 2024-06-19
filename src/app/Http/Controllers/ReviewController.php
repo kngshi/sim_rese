@@ -13,14 +13,13 @@ class ReviewController extends Controller
     public function create($shopId)
     {
         $shop = Shop::findOrFail($shopId);
-        $reviews = Review::latest()->get(); // 最新のレビューを取得
+        $reviews = Review::latest()->get();
 
         return view('create', compact('shop', 'reviews'));
     }
 
     public function store(Request $request)
     {
-    
         $request->validate([
             'shop_id' => 'required|exists:shops,id',
             'rating' => 'required|integer|min:1|max:5',

@@ -16,19 +16,16 @@ class PaymentController extends Controller
     {
         return view('payment');
     }
+    
     public function processPayment(Request $request)
     {
-
         try{
             Stripe::setApiKey(env('STRIPE_SECRET')); //①
 
-            //ここで顧客情報を登録②
             $customer = Customer::create(array('email' => $request->stripeEmail,
-                                               'source' => 'tok_visa',
-                                              )
-                                         );
+                                        'source' => 'tok_visa',)
+            );
 
-            // PaymentIntentを作成③
             $paymentIntent = PaymentIntent::create([
                 'customer' => $customer->id,
                 'amount' => 100, // 金額は最小通貨単位で指定（例：100円 = 100）
@@ -42,12 +39,11 @@ class PaymentController extends Controller
 
             return view("/payment-result");
 
-        }catch(Exception $e){
+        } catch(Exception $e){
 
             return $e->getMessage();
 
         }
-
     }
 
     public function paymentResult(Request $request)

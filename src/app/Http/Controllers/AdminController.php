@@ -17,10 +17,8 @@ use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class AdminController extends Controller
 {
-    // 管理者用ダッシュボード
     public function adminDashboard()
     {
-
         return view('admin.dashboard');
     }
 
@@ -52,16 +50,14 @@ class AdminController extends Controller
         return view('admin.create', compact('user','shopManagers'))->with('success', '店舗代表者を作成しました。');
     }
 
-    // 店舗代表者用ダッシュボード
+
     public function managerDashboard()
     {
-
         return view('manager.dashboard');
     }
 
     public function shopInformation(Request $request)
     {
-
         $shops = Shop::with('area', 'genre')->get();
 
         $areas = Area::all();
@@ -72,18 +68,14 @@ class AdminController extends Controller
 
     public function createShop(Request $request)
     {
-        // 現在のユーザーを取得
         $user = auth()->user();
+        $areas = Area::all();
+        $genres = Genre::all();
 
-        // ユーザーがすでに店舗を持っているかどうかをチェック
         if ($user->shop_id) {
             return redirect()->route('shop.create')->with('error', 'あなたは既に店舗を持っています。');
         }
 
-        $areas = Area::all();
-        $genres = Genre::all();
-
-        // バリデーション
         $request->validate([
             'name' => 'required|string|max:255',
             'area_id' => 'required|exists:areas,id',
@@ -92,7 +84,6 @@ class AdminController extends Controller
             'image_path' => 'nullable|string',
         ]);
 
-        // 店舗情報の作成
         $shopInfo = Shop::create([
             'name' => $request->name,
             'area_id' => $request->area_id,
@@ -101,7 +92,6 @@ class AdminController extends Controller
             'image_path' => $request->image_path,
         ]);
 
-        // 店舗と店舗責任者を紐付ける
         $user->shop_id = $shopInfo->id;
         $user->save();
 
@@ -110,11 +100,7 @@ class AdminController extends Controller
 
     public function editShop()
     {
-
-        // 現在ログインしている店舗責任者の店舗IDを取得
         $shopId = Auth::user()->shop_id;
-
-        // 店舗IDを使って店舗情報を取得
         $shop = Shop::findOrFail($shopId);
 
         $areas = Area::all();
@@ -125,14 +111,9 @@ class AdminController extends Controller
 
     public function updateShop(Request $request)
     {
-
-        // 現在ログインしている店舗責任者の店舗IDを取得
         $shopId = Auth::user()->shop_id;
-
-        // 店舗IDを使って店舗情報を取得
         $shop = Shop::findOrFail($shopId);
 
-        // バリデーション
         $request->validate([
             'name' => 'required|string|max:255',
             'area_id' => 'required|exists:areas,id',
@@ -140,7 +121,6 @@ class AdminController extends Controller
             'description' => 'required|string',
             'image_path' => 'nullable|string',
         ]);
-
 
         $shop->update([
             'name' => $request->name,
@@ -153,25 +133,18 @@ class AdminController extends Controller
         return redirect()->back()->with('success', '店舗情報を更新しました。');
     }
 
-    // 予約管理
     public function reservationsIndex(Request $request)
     {
-        
-        // 現在ログインしている店舗責任者の店舗IDを取得
         $shopId = Auth::user()->shop_id;
 
-        // 日付をリクエストから取得、デフォルトは今日の日付
         $date = $request->input('date', Carbon::today()->toDateString());
 
-
-        // 店舗の予約情報を日付ごとに、時間の早い順に取得
         $reservations = Reservation::where('shop_id', $shopId)
                                     ->whereDate('date', $date)
                                     ->orderBy('date')
                                     ->orderBy('time')
                                     ->get();
 
-        // 前後の日付を計算
         $previousDate = Carbon::parse($date)->subDay()->toDateString();
         $nextDate = Carbon::parse($date)->addDay()->toDateString();
 
@@ -180,13 +153,11 @@ class AdminController extends Controller
 
     public function adminNotifyMail(Request $request)
     {
-
         return view("admin/notify");
     }
 
     public function managerNotifyMail(Request $request)
     {
-
         return view("manager/notify");
     }
 
@@ -207,9 +178,8 @@ class AdminController extends Controller
 
     public function qrConfirm(Request $request)
     {
-
         $qrCodeData = $request->input('qr_code_data');
-        
+
         $reservation_id = $request->input('reservation_id');
         $reservation = Reservation::find($reservation_id);
 
@@ -221,5 +191,4 @@ class AdminController extends Controller
 
         return response()->json(['message' => '予約が見つかりませんでした。'], 404);
     }
-
 }

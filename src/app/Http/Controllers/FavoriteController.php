@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\Auth;
 
 class FavoriteController extends Controller
 {
-
     public function addFavorite(Request $request)
     {
         $user_id = Auth::id();
@@ -34,7 +33,6 @@ class FavoriteController extends Controller
         $user_id = Auth::id();
         $shop_id = $request->input('shop_id');
 
-        // ログインユーザーのお気に入りを削除する
         $deleted = Favorite::where('user_id', $user_id)
                             ->where('shop_id', $shop_id)
                             ->delete();
@@ -48,10 +46,9 @@ class FavoriteController extends Controller
 
     public function delete(Request $request)
     {
-        $user_id = $request->user()->id; // ログインユーザーのID
-        $shop_id = $request->input('shop_id'); // 削除するお気に入りの店舗ID
+        $user_id = $request->user()->id;
+        $shop_id = $request->input('shop_id');
 
-        // ユーザーIDと店舗IDに基づいてお気に入りを削除する
         $deleted = Favorite::where('user_id', $user_id)
                             ->where('shop_id', $shop_id)
                             ->delete();
