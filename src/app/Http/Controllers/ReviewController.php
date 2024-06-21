@@ -14,7 +14,7 @@ class ReviewController extends Controller
     public function create($shopId)
     {
         $shop = Shop::findOrFail($shopId);
-        $reviews = Review::latest()->get();
+        $reviews = Review::where('shop_id', $shopId)->latest()->get();
 
         return view('create', compact('shop', 'reviews'));
     }
