@@ -2,7 +2,6 @@ main {
     background-color: #f5f5f5;
 }
 
-/* マイページのお気に入り削除メッセージ */
 .flash-message__success {
     padding: 15px 30px;
     margin-bottom: 10px;
@@ -13,13 +12,10 @@ main {
     margin-bottom:35px;
 }
 
-/* 左側の飲食店詳細情報 */
 .container {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    /* 左右2列のレイアウト */
     gap: 20px;
-    /* グリッド要素間の間隔 */
 }
 
 .shop-details {
@@ -34,7 +30,6 @@ main {
 .object-header {
     display: flex;
     align-items: center;
-    /* 垂直方向の中央揃え */
 }
 
 .back-button {
@@ -70,7 +65,6 @@ h2 {
     padding: 20px 2px;
 }
 
-/* 画面左下のお店の評価 */
 .review-list {
     margin-top: 10px;
     width: 100%;
@@ -92,8 +86,6 @@ h2 {
     margin: 5px 5px;
 }
 
-
-/* 右側の予約フォーム */
 .review-form {
     position: relative;
     width: 90%;
@@ -171,13 +163,11 @@ h2 {
     border-radius: 0 0 5px 5px;
     cursor: pointer;
     object-fit: cover;
-    /* ボタンの上部のマージンを追加 */
     margin-top: 40px;
 }
 
 @media screen and (max-width: 768px) {
 
-    /* 右側の予約フォーム */
     .review-form {
         position: relative;
         width: 90%;
@@ -244,7 +234,6 @@ h2 {
 
     .review-form button {
         position: absolute;
-        /* 絶対位置付け */
         right: 0;
         bottom: 0;
         left: 0;
@@ -258,7 +247,6 @@ h2 {
         cursor: pointer;
         object-fit: cover;
         margin-top: 100px;
-        /* ボタンの上部のマージンを追加 */
     }
 
 }
@@ -278,7 +266,6 @@ h2 {
         margin: 0 auto;
     }
 
-    /* 右側の予約フォーム */
     .review-form {
         position: relative;
         width: 90%;

@@ -2,13 +2,10 @@ main {
     background-color: #f5f5f5;
 }
 
-/* 左側の飲食店詳細情報 */
 .container {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    /* 左右2列のレイアウト */
     gap: 20px;
-    /* グリッド要素間の間隔 */
 }
 
 .shop-details {
@@ -23,7 +20,6 @@ main {
 .object-header {
     display: flex;
     align-items: center;
-    /* 垂直方向の中央揃え */
 }
 
 .back-button {
@@ -59,7 +55,6 @@ h2{
     padding: 20px 2px;
 }
 
-/* 画面左下のお店の評価 */
 .review-list {
     margin-top: 10px;
     width: 100%;
@@ -81,7 +76,6 @@ h2{
     margin: 5px 5px;
 }
 
-/* 右側の予約フォーム */
 .reservation-form {
     position: relative;
     width: 90%;
@@ -155,15 +149,13 @@ h2{
 }
 
 @media screen and (max-width: 768px) {
-    
+
     .container {
             display:grid;
             grid-template-columns: 1fr 1fr;
-            /* 左右2列のレイアウト */
             gap: 20px;
-            /* グリッド要素間の間隔 */
         }
-    /* 右側の予約フォーム */
+
     .reservation-form {
         position: relative;
         width: 90%;
@@ -213,12 +205,10 @@ h2{
         text-align: left;
     }
 
-
     .reservation-form-table td {
         padding: 5px 10px;
         text-align: left;
     }
-
 
     .reservation-form button {
         position: absolute;
@@ -245,32 +235,25 @@ h2{
 
     .container {
             grid-template-columns: 1fr;
-            /* 1列レイアウト */
-        }
-    
-        .shop-details,
-        .reservation-form {
-            width: 90%;
-            /* 幅を100%に */
-            margin: 0 auto;
-            /* 中央揃え */
-            height: 500px;
         }
 
+    .shop-details,
+    .reservation-form {
+        width: 90%;
+        margin: 0 auto;
+        height: 500px;
+    }
 
-        .reservation-form input[type="date"] {
-            width: 50%;
-            /* 幅を100%に */
-        }
-    
-        .reservation-form select {
-            width: 90%;
-            /* 幅を100%に */
-        }
-    
-        .reservation-form-table {
-            width: 90%;
-            /* 幅を100%に */
-        }
+    .reservation-form input[type="date"] {
+        width: 50%;
+    }
+
+    .reservation-form select {
+        width: 90%;
+    }
+
+    .reservation-form-table {
+        width: 90%;
+    }
 
 }

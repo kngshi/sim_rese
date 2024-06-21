@@ -14,7 +14,6 @@ main {
     margin-left: -3%;
 }
 
-/* マイページの予約更新メッセージ */
 .flash-message__success {
     padding: 15px 30px;
     margin-bottom: 10px;
@@ -31,7 +30,6 @@ main {
     background-color: #f5f5f5;
 }
 
-/* 左側の予約情報取得 */
 .reservation-form {
     margin: 20px 40px;
 }
@@ -69,13 +67,9 @@ main {
     font-size: 20px;
     cursor: pointer;
     color: white;
-    /* 文字色を白に変更 */
     border-radius: 50%;
-    /* 丸みを持たせる */
     width: 30px;
-    /* 幅を指定 */
     height: 30px;
-    /* 高さを指定 */
     margin-top: -5px;
 }
 
@@ -91,7 +85,6 @@ main {
 
 .reservation-form-table th {
     width: 30%;
-    /* 右側を広めに */
     text-align: left;
     padding: 8px 0;
 }
@@ -103,7 +96,6 @@ main {
 
 .reservation-form-table th {
     width: 30%;
-    /* 右側を広めに */
     text-align: left;
     padding: 8px 0;
 }
@@ -146,8 +138,6 @@ main {
     background-color: rgb(251, 0, 255);
 }
 
-
-/* 右側のお気に入り店舗一覧 */
 .favorite-index {
     margin: 0px 40px;
     margin-left: 20px;
@@ -172,7 +162,6 @@ main {
     overflow: hidden;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
     width: 50%;
-    /* カード間の間隔を含めて均等に並べる */
     max-width: 280px;
 }
 
@@ -208,7 +197,6 @@ main {
     cursor: pointer;
     transition: background-color 0.3s ease;
     text-decoration: none;
-    /* リンクのデフォルトの下線を消す */
 }
 
 .btn-details:hover {
@@ -235,19 +223,15 @@ main {
 
 .btn-favorite .far.fa-heart {
     font-size: 2em;
-    /* ハートマークのサイズに合わせる */
     color: gray;
-    /* デフォルトの色 */
 }
 
 .btn-favorite.active .far.fa-heart {
     color: red;
-    /* アクティブな状態の色 */
 }
 
 @media screen and (max-width: 768px) {
 
-    /* 画面上部のユーザー名表示 */
     .mypage__content {
         margin: 0 auto;
         padding: 10px 10px;
@@ -259,7 +243,6 @@ main {
         margin-left: 20%;
     }
 
-    /* 左側の予約情報取得 */
     .reservation-form {
         margin: 20px 40px;
     }
@@ -297,13 +280,9 @@ main {
         font-size: 20px;
         cursor: pointer;
         color: white;
-        /* 文字色を白に変更 */
         border-radius: 50%;
-        /* 丸みを持たせる */
         width: 30px;
-        /* 幅を指定 */
         height: 30px;
-        /* 高さを指定 */
         margin-top: -5px;
     }
 
@@ -319,7 +298,6 @@ main {
 
     .reservation-form-table th {
         width: 30%;
-        /* 右側を広めに */
         text-align: left;
         padding: 8px 0;
     }
@@ -331,7 +309,6 @@ main {
 
     .reservation-form-table th {
         width: 30%;
-        /* 右側を広めに */
         text-align: left;
         padding: 8px 0;
     }
@@ -352,7 +329,6 @@ main {
         background-color: rgb(251, 0, 255);
     }
 
-    /* 右側のお気に入り店舗一覧 */
     .favorite-ttl {
         margin: 20px 10px;
         padding-left: 10px;
@@ -371,7 +347,6 @@ main {
         overflow: hidden;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
         width: 90%;
-        /* カード間の間隔を含めて均等に並べる */
         max-width: 280px;
     }
 
@@ -407,7 +382,6 @@ main {
         cursor: pointer;
         transition: background-color 0.3s ease;
         text-decoration: none;
-        /* リンクのデフォルトの下線を消す */
     }
 
     .btn-details:hover {
@@ -434,7 +408,6 @@ main {
 
     .btn-favorite .far.fa-heart {
         font-size: 2em;
-        /* ハートマークのサイズに合わせる */
         color: gray;
     }
 
@@ -448,8 +421,6 @@ main {
 .container {
         display: grid;
         grid-template-columns: 1fr;
-        /* 左右2列のレイアウト */
         gap: 0px;
-        /* グリッド要素間の間隔 */
     }
 }
