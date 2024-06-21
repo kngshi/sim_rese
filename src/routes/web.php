@@ -24,55 +24,33 @@ use App\Http\Controllers\PaymentController;
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
-// ※マイページは認証で入れるように設定。
 
 require __DIR__.'/auth.php';
 
-// 飲食店一覧取得
 Route::get('/', [ShopController::class, 'index']);
-
-//飲食店詳細取得
-Route::get('/shop/{shop}', [ShopController::class, 'detail'])->name('shop.detail');
-
-//飲食店一覧ページ検索機能
+Route::get('/detail/{shop}', [ShopController::class, 'detail'])->name('detail');
 Route::get('/search', [ShopController::class, 'search']);
 
 Route::middleware(['auth'])->group(function () {
-    //サンクスページ表示
-    Route::get('/thanks', function () {
-        return view('thanks');
-    });
+    Route::get('/thanks', [UserController::class, 'thanks'])->name('thanks');
 
-    //ユーザー飲食店お気に入り一覧取得、ユーザー飲食店予約情報取得
     Route::get('/mypage', [ShopController::class, 'mypageIndex'])->name('mypage.mypageIndex');
-
-    //お気に入り追加
-    Route::post('/favorite', [FavoriteController::class, 'addFavorite'])->name('favorite.addFavorite');
-
-    //飲食店一覧ページでのお気に入り削除
-    Route::delete('/favorites/delete', [FavoriteController::class, 'deleteFavorite'])->name('favorites.delete');
-
-    //マイページでのお気に入り削除
     Route::delete('/mypage/delete/', [FavoriteController::class, 'delete'])->name('mypage.delete');
 
-    // 飲食店予約情報追加、QRコード作成
-    Route::post('/reservation', [ReservationController::class, 'store'])->name('reservation.store');
+    Route::post('/favorite', [FavoriteController::class, 'addFavorite'])->name('favorite.addFavorite');
+    Route::delete('/favorites/delete', [FavoriteController::class, 'deleteFavorite'])->name('favorites.delete');
 
-    // 予約完了ページの表示
     Route::get('/done', [ReservationController::class, 'done'])->name('done');
 
-    //飲食店予約情報削除
+    Route::post('/reservation', [ReservationController::class, 'store'])->name('reservation.store');
     Route::delete('/reservations/{id}', [ReservationController::class, 'destroy'])->name('reservation.destroy');
 
-    // 飲食店予約情報変更
     Route::get('/reservations/{reservation}/edit', [ReservationController::class, 'edit'])->name('reservations.edit');
     Route::put('/reservations/{reservation}', [ReservationController::class, 'update'])->name('reservations.update');
 
-    // 評価機能
     Route::get('/reviews/create/{shop}', [ReviewController::class, 'create'])->name('reviews.create');
     Route::post('/create', [ReviewController::class, 'store'])->name('reviews.store');
 
-    // Stripe決済
     Route::get('/payment', [PaymentController::class, 'viewPayment']);
     Route::post('/payment', [PaymentController::class, 'processPayment'])->name('payment.store');
     Route::get('/payment-result', [PaymentController::class, 'paymentResult'])->name('payment.result');
@@ -100,6 +78,4 @@ Route::middleware(['auth'])->prefix('manager')->group(function () {
     Route::post('/edit', [AdminController::class, 'updateShop'])->name('manager.update');
     Route::get('/notify', [AdminController::class, 'managerNotifyMail'])->name('manager.notify');
     Route::post('/notify', [AdminController::class, 'send'])->name('admin.notify.send');
-
-    Route::post('/mypage', [AdminController::class, 'qrConfirm'])->name('manager.qrConfirm');
 });

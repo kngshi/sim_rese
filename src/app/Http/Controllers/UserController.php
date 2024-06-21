@@ -13,4 +13,9 @@ class UserController extends Controller
 
         return view('mypage', compact('user'));
     }
+
+    public function thanks()
+    {
+        return view('thanks');
+    }
 }

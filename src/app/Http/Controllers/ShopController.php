@@ -27,7 +27,6 @@ class ShopController extends Controller
 
     public function detail(Shop $shop)
     {
-
         return view('detail', compact('shop'));
     }
 

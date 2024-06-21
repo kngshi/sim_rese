@@ -58,7 +58,7 @@
                 <span class="tag">#{{ $shop->genre->name }}</span>
               </div>
               <div class="object-item">
-                <a href="{{ route('shop.detail', $shop->id) }}" class="btn-details">詳しくみる</a>
+                <a href="{{ route('detail', $shop->id) }}" class="btn-details">詳しくみる</a>
                 @if(Auth::check() && Auth::user()->favorites()->where('shop_id', $shop->id)->exists())
                 <form action="{{ route('favorites.delete') }}" method="POST">
                   @csrf
