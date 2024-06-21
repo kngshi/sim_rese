@@ -40,13 +40,12 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/favorite', [FavoriteController::class, 'addFavorite'])->name('favorite.addFavorite');
     Route::delete('/favorites/delete', [FavoriteController::class, 'deleteFavorite'])->name('favorites.delete');
 
-    Route::get('/done', [ReservationController::class, 'done'])->name('done');
-
     Route::post('/reservation', [ReservationController::class, 'store'])->name('reservation.store');
-    Route::delete('/reservations/{id}', [ReservationController::class, 'destroy'])->name('reservation.destroy');
+    Route::get('/done', [ReservationController::class, 'done'])->name('done');
 
     Route::get('/reservations/{reservation}/edit', [ReservationController::class, 'edit'])->name('reservations.edit');
     Route::put('/reservations/{reservation}', [ReservationController::class, 'update'])->name('reservations.update');
+    Route::delete('/reservations/{id}', [ReservationController::class, 'destroy'])->name('reservation.destroy');
 
     Route::get('/reviews/create/{shop}', [ReviewController::class, 'create'])->name('reviews.create');
     Route::post('/create', [ReviewController::class, 'store'])->name('reviews.store');
@@ -54,7 +53,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/payment', [PaymentController::class, 'viewPayment']);
     Route::post('/payment', [PaymentController::class, 'processPayment'])->name('payment.store');
     Route::get('/payment-result', [PaymentController::class, 'paymentResult'])->name('payment.result');
-
 });
 
 // 管理者用ルート

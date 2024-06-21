@@ -46,7 +46,11 @@ class ReservationController extends Controller
             $qrUrl = route('reservation.store', ['id' => $reservation->id]);
             $qrCode = QrCode::size(200)->generate($qrUrl);
 
-            return view('done', ['shop_id' => $reservation->shop_id, 'qrCode' => $qrCode]);
+            // セッションにQRコードを保存してからリダイレクト
+            session()->flash('qrCode', $qrCode);
+            session()->flash('shop_id', $reservation->shop_id);
+
+            return redirect()->route('done');
         } else {
             return redirect()->back()->with('error', '予約に失敗しました。');
         }
@@ -56,6 +60,9 @@ class ReservationController extends Controller
     {
         $shop_id = $request->query('shop_id');
         $qrCode = $request->query('qrCode');
+
+        $qrCode = session('qrCode');
+        $shop_id = session('shop_id');
 
         return view('done', compact('shop_id', 'qrCode'));
     }
