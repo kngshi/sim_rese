@@ -35,12 +35,12 @@ class ReviewRequest extends FormRequest
         return [
             'shop_id.required' => '店舗IDは必須です。',
             'shop_id.exists' => '選択された店舗IDは存在しません。',
-            'rating.required' => '評価は必須です。',
+            'rating.required' => '評価を選択してください。',
             'rating.integer' => '評価は数値でなければなりません。',
             'rating.min' => '評価は1以上でなければなりません。',
             'rating.max' => '評価は5以下でなければなりません。',
             'comment.string' => 'コメントは文字列でなければなりません。',
-            'comment.max' => 'コメントは100字以内でなければなりません。',
+            'comment.max' => 'コメントは100字以内で入力してください。',
         ];
     }
 }

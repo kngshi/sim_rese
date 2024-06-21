@@ -25,9 +25,13 @@ class ShopController extends Controller
         return view('index', compact('shops', 'areas', 'genres' ));
     }
 
-    public function detail(Shop $shop)
+    public function detail($shop_id)
     {
-        return view('detail', compact('shop'));
+        $shop = Shop::findOrFail($shop_id);
+        $reviews = Review::where('shop_id', $shop_id)->get();
+
+        return view('detail', compact('shop', 'reviews'));
+
     }
 
     public function search(Request $request)
