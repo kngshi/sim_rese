@@ -54,7 +54,7 @@
             </div>
             <div class="comment">
                 <label for="comment">コメント:</label>
-                <textarea id="comment" name="comment" placeholder="コメントを入力してください。"></textarea>
+                <textarea id="comment" name="comment" placeholder="コメントを100字以内で入力してください。"></textarea>
                 @error('comment')
                     <div>{{ $message }}</div>
                 @enderror

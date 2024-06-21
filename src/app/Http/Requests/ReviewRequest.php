@@ -13,7 +13,7 @@ class ReviewRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -26,7 +26,7 @@ class ReviewRequest extends FormRequest
         return [
             'shop_id' => 'required|exists:shops,id',
             'rating' => 'required|integer|min:1|max:5',
-            'comment' => 'nullable|string',
+            'comment' => 'nullable|string|max:100',
         ];
     }
 
@@ -40,6 +40,7 @@ class ReviewRequest extends FormRequest
             'rating.min' => '評価は1以上でなければなりません。',
             'rating.max' => '評価は5以下でなければなりません。',
             'comment.string' => 'コメントは文字列でなければなりません。',
+            'comment.max' => 'コメントは100字以内でなければなりません。',
         ];
     }
 }
