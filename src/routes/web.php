@@ -76,4 +76,6 @@ Route::middleware(['auth'])->prefix('manager')->group(function () {
     Route::post('/edit', [AdminController::class, 'updateShop'])->name('manager.update');
     Route::get('/notify', [AdminController::class, 'managerNotifyMail'])->name('manager.notify');
     Route::post('/notify', [AdminController::class, 'send'])->name('admin.notify.send');
+
+    Route::get('/reservation/confirm/{id}', [AdminController::class, 'qrConfirm'])->name('reservation.confirm');
 });

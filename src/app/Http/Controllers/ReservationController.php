@@ -43,7 +43,7 @@ class ReservationController extends Controller
         // 予約が成功した場合、QRコードを生成して保存
         if ($reservation) {
 
-            $qrUrl = route('reservation.store', ['id' => $reservation->id]);
+            $qrUrl = route('reservation.confirm', ['id' => $reservation->id]);
             $qrCode = QrCode::size(200)->generate($qrUrl);
 
             // セッションにQRコードを保存してからリダイレクト

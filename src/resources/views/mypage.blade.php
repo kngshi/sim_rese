@@ -53,7 +53,7 @@
                 <a href="{{ route('reservations.edit', $reservation->id) }}" class="reservation-form-button">予約を変更する</a>
                 <a href="{{ route('reviews.create', $reservation->shop->id) }}" class="reservation-form-button">お店を評価する</a>
                 <div class="qr-code">
-                {!! QrCode::size(200)->generate(route('reservation.store', ['id' => $reservation->id])) !!}
+                {!! QrCode::size(200)->generate(route('reservation.confirm', ['id' => $reservation->id])) !!}
                 </div>
                 <a href="/payment" class="payment-button">支払いをする</a>
             </div>
@@ -72,7 +72,7 @@
                                 <span class="tag">#{{ $favorite->shop->genre->name }}</span>
                             </div>
                             <div class="object-item">
-                                <a href="{{ route('shop.detail', $favorite->shop->id) }}" class="btn-details">詳しくみる</a>
+                                <a href="{{ route('detail', $favorite->shop->id) }}" class="btn-details">詳しくみる</a>
                                 <form action="{{ route('mypage.delete') }}" method="POST">
                                     @csrf
                                     @method('DELETE')

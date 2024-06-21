@@ -48,7 +48,7 @@
                 const code = result.codeResult.code;
                 console.log("Detected code: " + code);
 
-                axios.post('/manager/dashboard', { reservation_id: code })
+                axios.post('/manager/dashboard/qrConfirm', { reservation_id: code })
                 .then(function (response) {
                     const data = response.data;
                     if (data.message === '来店が確認されました。') {

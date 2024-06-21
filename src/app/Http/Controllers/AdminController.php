@@ -180,8 +180,6 @@ class AdminController extends Controller
 
     public function qrConfirm(Request $request)
     {
-        $qrCodeData = $request->input('qr_code_data');
-
         $reservation_id = $request->input('reservation_id');
         $reservation = Reservation::find($reservation_id);
 
