@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+
 use App\Models\User;
 use App\Models\Shop;
 use App\Models\Area;
@@ -10,6 +11,7 @@ use App\Models\Reservation;
 use App\Notifications\UserNotification;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use App\Http\Requests\AdminRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
@@ -29,7 +31,7 @@ class AdminController extends Controller
         return view('admin.create', compact('shopManagers'));
     }
 
-    public function storeManager(Request $request)
+    public function storeManager(AdminRequest $request)
     {
         $shopManagers = User::where('role', 2)->get();
 
