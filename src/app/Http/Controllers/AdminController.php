@@ -15,6 +15,7 @@ use App\Http\Requests\AdminRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
+use Illuminate\Support\Facades\Storage;
 
 
 class AdminController extends Controller
@@ -26,6 +27,7 @@ class AdminController extends Controller
 
     public function createManager(Request $request)
     {
+
         $shopManagers = User::where('role', 2)->get();
 
         return view('admin.create', compact('shopManagers'));
@@ -65,7 +67,7 @@ class AdminController extends Controller
         $areas = Area::all();
         $genres = Genre::all();
 
-        return view('admin.shop.create', compact('shops','areas', 'genres'));
+        return view('manager.create', compact('shops','areas', 'genres'));
     }
 
     public function createShop(Request $request)
@@ -83,21 +85,33 @@ class AdminController extends Controller
             'area_id' => 'required|exists:areas,id',
             'genre_id' => 'required|exists:genres,id',
             'description' => 'required|string',
-            'image_path' => 'nullable|string',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
+
+        // 画像ファイルを取得
+        $imageFile = $request->file('image');
+
+        // オリジナルのファイル名を取得
+        $fileName = $imageFile->getClientOriginalName();
+
+        // S3にファイルを保存
+        $path = Storage::disk('s3')->putFileAs('images', $imageFile, $fileName);
+
+
+        $url = Storage::disk('s3')->url($path);
 
         $shopInfo = Shop::create([
             'name' => $request->name,
             'area_id' => $request->area_id,
             'genre_id' => $request->genre_id,
             'description' => $request->description,
-            'image_path' => $request->image_path,
+            'image_path' => $url,
         ]);
 
         $user->shop_id = $shopInfo->id;
         $user->save();
 
-        return view('admin.shop.create', compact('areas', 'genres','shopInfo'))->with('success', '店舗情報を作成しました。');
+        return view('manager.create', compact('areas', 'genres','shopInfo'))->with('success', '店舗情報を作成しました。');
     }
 
     public function editShop()

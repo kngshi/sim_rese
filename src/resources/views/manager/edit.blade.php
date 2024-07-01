@@ -28,7 +28,7 @@
 
     <div class="update-form">
     <h2>店舗情報の更新</h2>
-    <form action="{{ route('shop.update') }}" method="POST">
+    <form action="{{ route('manager.update') }}" method="POST">
         @csrf
         @method('POST')
         <div class="form-group">

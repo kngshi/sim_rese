@@ -6,36 +6,56 @@
 @endsection
 
 @section('content')
+@if (session('success'))
+    <div class="alert-success">
+        {{ session('success') }}
+    </div>
+@endif
+@if (session('error'))
+    <div class="alert-danger">
+        {{ session('error') }}
+    </div>
+@endif
 <div class="container">
-    @if (session('success'))
-        <div class="alert alert-success">
-            {{ session('success') }}
-        </div>
-    @endif
-    <h1>店舗情報の作成</h1>
-    <form action="{{ route('shop.create') }}" method="POST">
+    <div class="shop-create-form">
+    <h2>店舗情報の作成</h2>
+    <form action="{{ route('shop.create') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="form-group">
             <label for="name">店舗名</label>
-            <input type="text" name="name" id="name" class="form-control" required>
+            <input type="text" name="name" id="name" class="form-control" placeholder="店名を入力してください。" autocomplete="name" required>
         </div>
         <div class="form-group">
-            <label for="area_id">エリアID</label>
-            <input type="text" name="area_id" id="area_id" class="form-control" required>
+            <label for="area_id">地域</label>
+            <select name="area_id" id="area_id" class="form-control" autocomplete="off" required>
+                <option value="" disabled selected>選択してください</option>
+                @foreach ($areas as $area)
+                    <option value="{{ $area->id }}">{{ $area->name }}</option>
+                @endforeach
+            </select>
         </div>
         <div class="form-group">
-            <label for="genre_id">ジャンルID</label>
-            <input type="text" name="genre_id" id="genre_id" class="form-control" required>
+            <label for="genre_id">ジャンル</label>
+            <select name="genre_id" id="genre_id" class="form-control" autocomplete="off" required>
+                <option value="" disabled selected>選択してください</option>
+                @foreach ($genres as $genre)
+                    <option value="{{ $genre->id }}">{{ $genre->name }}</option>
+                @endforeach
+            </select>
         </div>
         <div class="form-group">
-            <label for="description">説明</label>
-            <textarea name="description" id="description" class="form-control" required></textarea>
+            <label for="description">店舗概要</label>
+            <textarea name="description" id="description" class="form-control" placeholder="店舗の概要を120字以内で入力してください。" autocomplete="off" required></textarea>
         </div>
         <div class="form-group">
-            <label for="image_path">画像パス</label>
-            <input type="text" name="image_path" id="image_path" class="form-control">
+            <label for="image">画像</label>
+            <input type="file" name="image" id="image" class="form-control" autocomplete="off" required>
         </div>
-        <button type="submit" class="btn btn-primary" >作成</button>
+        <button type="submit" class="button">作成</button>
     </form>
+    <!-- このページは、managerのときにも表示されているようなので要修正 -->
+    <a href="/manager/dashboard" class="back-link">戻る</a>
+
+    </div>
 </div>
 @endsection
