@@ -160,6 +160,15 @@ php artisan migrate
 php artisan db:seed
 ```
 
+> シーディングの際に、管理者のテストユーザーを登録しています。
+> 店舗代表者を作成する際は、こちらのテストユーザーとしてログインをしてください。
+
+```bash
+name: admin
+email: admin@exadpmle.com
+password: admin1234
+```
+
 **Laravel Breeze のインストール**
 
 1. `composer require laravel/breeze --dev`
