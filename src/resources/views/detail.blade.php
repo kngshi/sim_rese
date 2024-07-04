@@ -31,7 +31,7 @@
             </div>
         </div>
         <div class="reservation-form">
-            <h2>予約</h2>
+            <h2 class="reservation-form-ttl">予約</h2>
             <form action="{{ route('reservation.store') }}" method="POST">
                 @csrf
                 <input type="date" id="date" name="date" required>
