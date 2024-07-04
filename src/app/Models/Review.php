@@ -16,9 +16,9 @@ class Review extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function reservation()
+    public function shop()
     {
-        return $this->belongsTo(Reservation::class);
+        return $this->belongsTo(Shop::class);
     }
 
     public function getRatingTextAttribute()
