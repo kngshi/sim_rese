@@ -212,7 +212,6 @@ h2{
 
     .reservation-form button {
         position: absolute;
-        /* 絶対位置付け */
         right: 0;
         bottom: 0;
         left: 0;
@@ -226,7 +225,6 @@ h2{
         cursor: pointer;
         object-fit: cover;
         margin-top: 100px;
-        /* ボタンの上部のマージンを追加 */
     }
 
 }

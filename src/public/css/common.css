@@ -34,7 +34,6 @@
 .openbtn6 span {
     display: inline-block;
     transition: all .4s;
-    /*アニメーションの設定*/
     position: absolute;
     left: 14px;
     height: 3px;
@@ -57,8 +56,6 @@
     width: 20%;
 }
 
-
-/* モーダルウィンドウ */
 .modal-wrapper {
     z-index: 999;
     position: fixed;
@@ -121,9 +118,7 @@
     z-index: 20;
     position: fixed;
     top: 50px;
-    /* 画面の上端からの位置 */
     left: 50px;
-    /* 画面の左端からの位置 */
     width: 35px;
     font-size: 20px;
     font-weight: 700;
@@ -193,7 +188,6 @@
         font-size: 30px;
     }
 
-    /* モーダルウィンドウのリンクボタン */
     .openbtn6 {
         position: relative;
         left: 10px;
@@ -208,7 +202,6 @@
     .openbtn6 span {
         display: inline-block;
         transition: all .4s;
-        /*アニメーションの設定*/
         position: absolute;
         left: 14px;
         height: 3px;
