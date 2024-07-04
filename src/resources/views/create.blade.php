@@ -47,7 +47,7 @@
                         <option value="3">3:普通</option>
                         <option value="2">2:不満</option>
                         <option value="1">1:非常に不満</option>
-                    </select>
+                </select>
                 @error('rating')
                     <div>{{ $message }}</div>
                 @enderror
