@@ -6,6 +6,9 @@
 @endsection
 
 @section('content')
+    @if (session('error'))
+        <div class="flash-message__success">{{ session('error') }}</div>
+    @endif
     <div class="container">
         <div class="shop-details">
             <div class="object-header">
@@ -36,7 +39,9 @@
                 @csrf
                 <input type="date" id="date" name="date" required>
                 @error('date')
+                    <div class="error-message">
                     {{ $message }}
+                    </div>
                 @enderror
                 <select id="time" name="time" required>
                     <option value="">-- 選択してください --</option>
