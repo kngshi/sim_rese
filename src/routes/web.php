@@ -31,7 +31,7 @@ Route::get('/', [ShopController::class, 'index']);
 Route::get('/detail/{shop}', [ShopController::class, 'detail'])->name('detail');
 Route::get('/search', [ShopController::class, 'search']);
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth','verified'])->group(function () {
     Route::get('/thanks', [UserController::class, 'thanks'])->name('thanks');
 
     Route::get('/mypage', [ShopController::class, 'mypageIndex'])->name('mypage.mypageIndex');
