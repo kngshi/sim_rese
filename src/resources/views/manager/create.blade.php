@@ -53,7 +53,6 @@
         </div>
         <button type="submit" class="button">作成</button>
     </form>
-    <!-- このページは、managerのときにも表示されているようなので要修正 -->
     <a href="/manager/dashboard" class="back-link">戻る</a>
 
     </div>

@@ -117,7 +117,11 @@ class AdminController extends Controller
     public function editShop()
     {
         $shopId = Auth::user()->shop_id;
-        $shop = Shop::findOrFail($shopId);
+        $shop = Shop::find($shopId);
+
+        if (!$shop) {
+            return view('manager.edit', ['shop' => null, 'message' => 'あなたはまだ店舗を持っていません。']);
+        }
 
         $areas = Area::all();
         $genres = Genre::all();

@@ -1,4 +1,4 @@
-@extends('layouts.common')
+
 
 @section('css')
 <link rel="stylesheet" href="{{ asset('css/common.css') }}" />
@@ -11,10 +11,10 @@
             {{ session('success') }}
         </div>
 @endif
+@if ($shop)
 <div class="container">
-    <!-- 左側の店舗詳細情報 -->
     <div class="shop-details">
-        <div class="object-header">
+        <div class="object-@extends('layouts.common')header">
             <a href="/manager/dashboard" class="back-button">&lt;</a>
             <h2>{{ $shop->name }}</h2>
         </div>
@@ -25,7 +25,6 @@
         </div>
         <p class="description">{{ $shop->description }}</p>
     </div>
-
     <div class="update-form">
     <h2>店舗情報の更新</h2>
     <form action="{{ route('manager.update') }}" method="POST">
@@ -63,4 +62,8 @@
     </form>
     </div>
 </div>
+@else
+    <p class="shop-message">{{ $message }}</p>
+    <a href="/manager/dashboard" class="back">戻る</a>
+@endif
 @endsection
