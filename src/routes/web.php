@@ -25,13 +25,13 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
 
 Route::get('/', [ShopController::class, 'index']);
 Route::get('/detail/{shop}', [ShopController::class, 'detail'])->name('detail');
 Route::get('/search', [ShopController::class, 'search']);
 
-Route::middleware(['auth','verified'])->group(function () {
+Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/thanks', [UserController::class, 'thanks'])->name('thanks');
 
     Route::get('/mypage', [ShopController::class, 'mypageIndex'])->name('mypage.mypageIndex');
@@ -49,6 +49,9 @@ Route::middleware(['auth','verified'])->group(function () {
 
     Route::get('/reviews/create/{shop}', [ReviewController::class, 'create'])->name('reviews.create');
     Route::post('/create', [ReviewController::class, 'store'])->name('reviews.store');
+
+    Route::get('reviews/{review}/edit', [ReviewController::class, 'edit'])->name('reviews.edit');
+    Route::put('reviews/{review}', [ReviewController::class, 'update'])->name('reviews.update');
 
     Route::get('/payment', [PaymentController::class, 'viewPayment']);
     Route::post('/payment', [PaymentController::class, 'processPayment'])->name('payment.store');

@@ -26,7 +26,8 @@ class ReviewRequest extends FormRequest
         return [
             'shop_id' => 'required|exists:shops,id',
             'rating' => 'required|integer|min:1|max:5',
-            'comment' => 'nullable|string|max:100',
+            'comment' => 'required|string|max:400',
+            'img_url' => 'required|image|mimes:jpeg,png|max:2048'
         ];
     }
 
@@ -37,10 +38,15 @@ class ReviewRequest extends FormRequest
             'shop_id.exists' => '選択された店舗IDは存在しません。',
             'rating.required' => '評価を選択してください。',
             'rating.integer' => '評価は数値でなければなりません。',
-            'rating.min' => '評価は1以上でなければなりません。',
-            'rating.max' => '評価は5以下でなければなりません。',
-            'comment.string' => 'コメントは文字列でなければなりません。',
-            'comment.max' => 'コメントは100字以内で入力してください。',
+            'rating.min' => '評価は星1つ以上でなければなりません。',
+            'rating.max' => '評価は星5つ以下でなければなりません。',
+            'comment.required' => '口コミは入力必須です。',
+            'comment.string' => '口コミは文字列でなければなりません。',
+            'comment.max' => '口コミは400字以内で入力してください。',
+            'img_url.required' => '画像はアップロード必須です。',
+            'img_url.image' => 'アップロードするファイルは画像でなければなりません。',
+            'img_url.mimes' => '画像はjpegまたはpng形式でアップロードしてください。',
+            'img_url.max' => '画像ファイルのサイズは2MB以下でなければなりません。',
         ];
     }
 }

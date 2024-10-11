@@ -9,7 +9,7 @@ class Review extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['user_id', 'shop_id', 'rating', 'comment'];
+    protected $fillable = ['user_id', 'shop_id', 'rating', 'comment', 'img_url'];
 
     public function user()
     {
@@ -33,5 +33,4 @@ class Review extends Model
 
         return $ratings[$this->rating] ?? '不明';
     }
-
 }

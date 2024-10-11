@@ -22,7 +22,7 @@ class ShopController extends Controller
         $areas = Area::all();
         $genres = Genre::all();
 
-        return view('index', compact('shops', 'areas', 'genres' ));
+        return view('index', compact('shops', 'areas', 'genres'));
     }
 
     public function detail($shop_id)
@@ -30,8 +30,11 @@ class ShopController extends Controller
         $shop = Shop::findOrFail($shop_id);
         $reviews = Review::where('shop_id', $shop_id)->get();
 
-        return view('detail', compact('shop', 'reviews'));
+        $existingReview = Review::where('user_id', auth()->id())
+            ->where('shop_id', $shop_id)
+            ->first();
 
+        return view('detail', compact('shop', 'reviews', 'existingReview'));
     }
 
     public function search(Request $request)
@@ -41,14 +44,14 @@ class ShopController extends Controller
         }
 
         $shops = Shop::with('area', 'genre')
-        ->when($request->filled('area_id'), function ($query) use ($request) {
-            $query->where('area_id', $request->area_id);
-        })
-        ->when($request->filled('genre_id'), function ($query) use ($request) {
-            $query->where('genre_id', $request->genre_id);
-        })
-        ->KeywordSearch($request->keyword)
-        ->get();
+            ->when($request->filled('area_id'), function ($query) use ($request) {
+                $query->where('area_id', $request->area_id);
+            })
+            ->when($request->filled('genre_id'), function ($query) use ($request) {
+                $query->where('genre_id', $request->genre_id);
+            })
+            ->KeywordSearch($request->keyword)
+            ->get();
 
         $areas = Area::all();
         $genres = Genre::all();
@@ -62,13 +65,13 @@ class ShopController extends Controller
         $favorites = Favorite::where('user_id', $user_id)->with('shop')->get();
 
         $reservations = Reservation::where('user_id', $user_id)->with('shop')->orderBy('date', 'asc')->get()->map(function ($reservation) {
-                                    $reservation->time = Carbon::createFromFormat('H:i:s', $reservation->time)->format('H:i');
-                                    return $reservation;
+            $reservation->time = Carbon::createFromFormat('H:i:s', $reservation->time)->format('H:i');
+            return $reservation;
 
-                                    $reservation->qrCode = QrCode::size(100)->generate($reservation->id);
+            $reservation->qrCode = QrCode::size(100)->generate($reservation->id);
 
-                                    return $reservation;
-                                });
+            return $reservation;
+        });
 
         return view('mypage', compact('favorites', 'reservations'));
     }

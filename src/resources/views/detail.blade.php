@@ -6,66 +6,84 @@
 @endsection
 
 @section('content')
-    @if (session('error'))
-        <div class="flash-message__success">{{ session('error') }}</div>
-    @endif
-    <div class="container">
-        <div class="shop-details">
-            <div class="object-header">
-                <a href="/" class="back-button">&lt;</a>
-                <h2>{{ $shop->name }}</h2>
-            </div>
-            <img src="{{ $shop->image_path }}" alt="店舗画像">
-            <div class="tags">
-                <span class="tag">#{{ $shop->area->name }}</span>
-                <span class="tag">#{{ $shop->genre->name }}</span>
-            </div>
-            <p class="description">{{ $shop->description }}</p>
-            <div class="review-list">
-                <h3 class="review-ttl">お店の評価</h3>
-                @forelse ($reviews as $review)
-                    <div class="review">
-                        <p><strong>{{ $review->rating_text}}</strong>  ({{ $review->created_at }})</p>
-                        <p>{{ $review->comment }}</p>
-                    </div>
-                @empty
-                    <p>まだレビューはありません。</p>
-                @endforelse
-            </div>
+@if (session('success'))
+<div class="flash-message__success">{{ session('success') }}</div>
+@endif
+@if (session('error'))
+<div class="flash-message__success">{{ session('error') }}</div>
+@endif
+<div class="container">
+    <div class="shop-details">
+        @if (!isset($existingReview))
+        <div class="object-header">
+            <a href="/" class="back-button">&lt;</a>
+            <h2>{{ $shop->name }}</h2>
         </div>
-        <div class="reservation-form">
-            <h2 class="reservation-form-ttl">予約</h2>
-            <form action="{{ route('reservation.store') }}" method="POST">
-                @csrf
-                <input type="date" id="date" name="date" required>
-                @error('date')
-                    <div class="error-message">
-                    {{ $message }}
-                    </div>
-                @enderror
-                <select id="time" name="time" required>
-                    <option value="">-- 選択してください --</option>
-                    @for ($hour = 12; $hour <= 15; $hour++)
-                        <option value="{{ sprintf('%02d', $hour) }}:00">{{ sprintf('%02d', $hour) }}:00</option>
-                        <option value="{{ sprintf('%02d', $hour) }}:30">{{ sprintf('%02d', $hour) }}:30</option>
+        @endif
+        <img src="{{ $shop->image_path }}" alt="店舗画像" class="{{ isset($existingReview) ? 'small-image' : '' }}">
+        <div class="tags">
+            <span class="tag">#{{ $shop->area->name }}</span>
+            <span class="tag">#{{ $shop->genre->name }}</span>
+        </div>
+        <p class="description">{{ $shop->description }}</p>
+        @if (isset($existingReview))
+        <div class="review-index">
+            <a href="" class="review-index__link">全ての口コミ情報</a>
+        </div>
+        @endif
+        <div class="review-list {{ $reviews->isNotEmpty() ? 'has-reviews' : '' }}">
+            @forelse ($reviews as $review)
+            <div class="review">
+                <div class="review-link__group">
+                    <a href="{{ route('reviews.edit', $review->id) }}" class="review-link">口コミを編集</a>
+                    <a href="" class="review-link">口コミを削除</a>
+                </div>
+                <p class="rating">
+                    @for ($i = 1; $i <= 5; $i++)
+                        <i class="fa fa-star {{ $i <= $review->rating ? 'selected' : '' }}"></i>
+                        @endfor
+                </p>
+                <p class="comment">{{ $review->comment }}</p>
+            </div>
+            @empty
+            <a href="{{ route('reviews.create', $shop->id) }}" class="btn">口コミを投稿する</a>
+            @endforelse
+        </div>
+    </div>
+
+    <div class="reservation-form">
+        <h2 class="reservation-form-ttl">予約</h2>
+        <form action="{{ route('reservation.store') }}" method="POST">
+            @csrf
+            <input type="date" id="date" name="date" required>
+            @error('date')
+            <div class="error-message">
+                {{ $message }}
+            </div>
+            @enderror
+            <select id="time" name="time" required>
+                <option value="">-- 選択してください --</option>
+                @for ($hour = 12; $hour <= 15; $hour++)
+                    <option value="{{ sprintf('%02d', $hour) }}:00">{{ sprintf('%02d', $hour) }}:00</option>
+                    <option value="{{ sprintf('%02d', $hour) }}:30">{{ sprintf('%02d', $hour) }}:30</option>
                     @endfor
                     @for ($hour = 17; $hour <= 23; $hour++)
                         <option value="{{ sprintf('%02d', $hour) }}:00">{{ sprintf('%02d', $hour) }}:00</option>
                         <option value="{{ sprintf('%02d', $hour) }}:30">{{ sprintf('%02d', $hour) }}:30</option>
+                        @endfor
+            </select>
+            @error('time')
+            {{ $message }}
+            @enderror
+            <select id="number" name="number" required>
+                <option value="">-- 選択してください --</option>
+                @for ($i = 1; $i <= 10; $i++)
+                    <option value="{{ $i }}">{{ $i }}人</option>
                     @endfor
-                </select>
-                @error('time')
-                    {{ $message }}
-                @enderror
-                <select id="number" name="number" required>
-                    <option value="">-- 選択してください --</option>
-                    @for ($i = 1; $i <= 10; $i++)
-                        <option value="{{ $i }}">{{ $i }}人</option>
-                    @endfor
-                </select>
-                @error('number')
-                    {{ $message }}
-                @enderror
+            </select>
+            @error('number')
+            {{ $message }}
+            @enderror
             <table class="reservation-form-table">
                 <tr>
                     <th>Shop</th>
@@ -85,23 +103,23 @@
                 </tr>
             </table>
             <input type="hidden" name="shop_id" value="{{ $shop->id }}">
-                <button type="submit">予約する</button>
-            </form>
-        </div>
+            <button type="submit">予約する</button>
+        </form>
     </div>
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            document.getElementById('date').addEventListener('change', function() {
-                document.getElementById('reservation-date').innerText = this.value;
-            });
-
-            document.getElementById('time').addEventListener('change', function() {
-                document.getElementById('reservation-time').innerText = this.value;
-            });
-
-            document.getElementById('number').addEventListener('change', function() {
-                document.getElementById('reservation-number').innerText = this.options[this.selectedIndex].text;
-            });
+</div>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        document.getElementById('date').addEventListener('change', function() {
+            document.getElementById('reservation-date').innerText = this.value;
         });
-    </script>
+
+        document.getElementById('time').addEventListener('change', function() {
+            document.getElementById('reservation-time').innerText = this.value;
+        });
+
+        document.getElementById('number').addEventListener('change', function() {
+            document.getElementById('reservation-number').innerText = this.options[this.selectedIndex].text;
+        });
+    });
+</script>
 @endsection
