@@ -25,6 +25,32 @@ class ShopController extends Controller
         return view('index', compact('shops', 'areas', 'genres'));
     }
 
+    public function sort(Request $request)
+    {
+        $sort = $request->input('sort');
+
+        $shops = Shop::query()
+            ->withCount('reviews') // レビューの件数をカウント
+            ->withAvg('reviews', 'rating'); // レビューの平均評価を計算
+
+        // ソートロジックを追加
+        if ($sort === 'random') {
+            $shops = $shops->inRandomOrder();
+        } elseif ($sort === 'high_rating') {
+            $shops = $shops->orderBy('reviews_avg_rating', 'desc') // 平均評価で降順
+                ->orderBy('id', 'asc'); // 評価がない場合も最後尾に持ってくるためのIDでのソート
+        } elseif ($sort === 'low_rating') {
+            $shops = $shops->orderBy('reviews_avg_rating', 'asc') // 平均評価で昇順
+                ->orderBy('id', 'asc'); // 評価がない場合も最後尾に持ってくるためのIDでのソート
+        }
+
+        $shops = $shops->get();
+        $areas = Area::all();
+        $genres = Genre::all();
+
+        return view('index', compact('shops', 'areas', 'genres'));
+    }
+
     public function detail($shop_id)
     {
         $shop = Shop::findOrFail($shop_id);

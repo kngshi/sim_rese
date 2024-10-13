@@ -28,6 +28,7 @@ Route::get('/dashboard', function () {
 require __DIR__ . '/auth.php';
 
 Route::get('/', [ShopController::class, 'index']);
+Route::get('/sort', [ShopController::class, 'sort'])->name('shops.sort');
 Route::get('/detail/{shop}', [ShopController::class, 'detail'])->name('detail');
 Route::get('/search', [ShopController::class, 'search']);
 

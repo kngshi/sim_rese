@@ -6,35 +6,47 @@
 @endsection
 
 @section('search-form')
-<div class="search__form">
-  <form class="search-form" action="/search" method="get">
-    @csrf
-    <div class="search-form__area">
-      <select class="search-form__area-select" name="area_id" onchange="this.form.submit()">
-        <option disabled selected>All area</option>
-        @foreach($areas as $area)
-        <option value="{{ $area->id }}" @if( request('area_id')==$area->id ) selected @endif
-          >{{$area->name }}
-        </option>
-        @endforeach
+<div class="search-form__group">
+  <div class="search-form__sort">
+    <form action="{{ route('shops.sort') }}" method="GET">
+      <select class="search-form__sort-select" name="sort" onchange="this.form.submit()">
+        <option disabled selected>並び替え：評価高/低</option>
+        <option value="random" @if(request('sort')=='random' ) selected @endif>ランダム</option>
+        <option value="high_rating" @if(request('sort')=='high_rating' ) selected @endif>評価が高い順</option>
+        <option value="low_rating" @if(request('sort')=='low_rating' ) selected @endif>評価が低い順</option>
       </select>
-    </div>
-    <div class="search-form__genre">
-      <select class="search-form__genre-select" name="genre_id">
-        <option disabled selected>All genre</option>
-        @foreach($genres as $genre)
-        <option value="{{ $genre->id }}" @if( request('genre_id')==$genre->id ) selected @endif
-          >{{$genre->name }}
-        </option>
-        @endforeach
-      </select>
-    </div>
-    <button type="submit" class="search-form__submit-button">
-      <i class="fas fa-search"></i>
-    </button>
-    <input class="search-form__keyword-input" type="text" name="keyword" placeholder="Search ..." type="submit"
-      value="{{request('keyword')}}">
-  </form>
+    </form>
+  </div>
+  <div class="search__form">
+    <form class="search-form" action="/search" method="get">
+      @csrf
+      <div class="search-form__area">
+        <select class="search-form__area-select" name="area_id" onchange="this.form.submit()">
+          <option disabled selected>All area</option>
+          @foreach($areas as $area)
+          <option value="{{ $area->id }}" @if( request('area_id')==$area->id ) selected @endif
+            >{{$area->name }}
+          </option>
+          @endforeach
+        </select>
+      </div>
+      <div class="search-form__genre">
+        <select class="search-form__genre-select" name="genre_id">
+          <option disabled selected>All genre</option>
+          @foreach($genres as $genre)
+          <option value="{{ $genre->id }}" @if( request('genre_id')==$genre->id ) selected @endif
+            >{{$genre->name }}
+          </option>
+          @endforeach
+        </select>
+      </div>
+      <button type="submit" class="search-form__submit-button">
+        <i class="fas fa-search"></i>
+      </button>
+      <input class="search-form__keyword-input" type="text" name="keyword" placeholder="Search ..." type="submit"
+        value="{{request('keyword')}}">
+    </form>
+  </div>
 </div>
 @endsection
 
