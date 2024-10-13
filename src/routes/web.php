@@ -52,6 +52,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('reviews/{review}/edit', [ReviewController::class, 'edit'])->name('reviews.edit');
     Route::put('reviews/{review}', [ReviewController::class, 'update'])->name('reviews.update');
+    Route::delete('/reviews/{review}', [ReviewController::class, 'destroy'])->name('reviews.destroy');
+    Route::get('/detail/{shop}/reviews', [ReviewController::class, 'index'])->name('reviews.index');
 
     Route::get('/payment', [PaymentController::class, 'viewPayment']);
     Route::post('/payment', [PaymentController::class, 'processPayment'])->name('payment.store');
@@ -59,7 +61,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 });
 
 // 管理者用ルート
-Route::middleware(['auth'])->prefix('admin')->group(function () {
+Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     Route::get('/dashboard', [AdminController::class, 'adminDashboard']);
     Route::get('/create', [AdminController::class, 'createManager'])->name('admin.create');
     Route::post('/create', [AdminController::class, 'storeManager'])->name('admin.store');
@@ -69,7 +71,7 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
 
 
 // 店舗代表者用ルート
-Route::middleware(['auth'])->prefix('manager')->group(function () {
+Route::middleware(['auth', 'manager'])->prefix('manager')->group(function () {
     Route::get('/dashboard', [AdminController::class, 'managerDashboard'])->name('manager.dashboard');
     Route::post('/dashboard', [AdminController::class, 'qrConfirm'])->name('dashboard.qrConfirm');
     Route::get('/create', [AdminController::class, 'shopInformation'])->name('shop.info');

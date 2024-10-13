@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Shop;
 use App\Models\Review;
 use App\Http\Requests\ReviewRequest;
@@ -65,5 +66,37 @@ class ReviewController extends Controller
         $review->update($validated);
 
         return redirect()->route('detail', $review->shop_id)->with('success', '口コミが更新されました。');
+    }
+
+    public function destroy($id)
+    {
+        $review = Review::findOrFail($id);
+        $user = auth()->user();
+
+        if ($user->role == 1) {
+            $review->delete();
+            return redirect()->route('detail', ['shop' => $review->shop_id])
+                ->with('message', '口コミを削除しました（管理者）。');
+        }
+
+        if ($user->role == 3 && $review->user_id === $user->id) {
+            $review->delete();
+            return redirect()->route('detail', ['shop' => $review->shop_id])
+                ->with('message', '口コミを削除しました。');
+        }
+
+        // 権限がない場合
+        return redirect()->route('detail', ['shop' => $review->shop_id])
+            ->with('error', '削除する権限がありません。');
+    }
+
+    public function index($shopId)
+    {
+        $shop = Shop::find($shopId);
+        $reviews = Review::where('shop_id', $shopId)
+            ->with('user')
+            ->get();
+
+        return view('reviews.review-index', compact('shop', 'reviews'));
     }
 }

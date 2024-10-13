@@ -1,0 +1,91 @@
+.shop-details {
+    background-color: #f5f5f5;
+}
+
+.shop-details h2{
+    text-align: center;
+    padding: 20px;
+}
+
+.review-list {
+    max-height: 600px;
+    overflow-y: auto;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.review-card {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    padding: 15px;
+    margin-bottom: 30px;
+    border-radius: 8px;
+    width: 50%;
+}
+
+.review-link__group {
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 5px;
+}
+
+.review-link {
+    margin-left: 20px;
+}
+
+.review p {
+    margin: 5px 0px;
+}
+
+.review-link__button {
+    background-color: transparent;
+    border: none;
+    text-decoration: underline;
+    color: blue;
+    font-size: 14px;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.fa-star {
+    color: lightgray;
+    font-size: 22px;
+}
+
+.fa-star.selected {
+    color: blue;
+}
+
+.user-name {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.review-img {
+    height: 150px;
+    width:150px;
+    margin-top: 10px;
+    border-radius: 5px;
+}
+
+.back-button-wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.back-button {
+    padding: 10px 20px;
+    margin: 10px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.back-button:hover {
+    background-color: #0056b3;
+}

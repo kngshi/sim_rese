@@ -12,6 +12,9 @@
 @if (session('error'))
 <div class="flash-message__success">{{ session('error') }}</div>
 @endif
+@if (session('message'))
+<div class="alert alert-success">{{ session('message') }}</div>
+@endif
 <div class="container">
     <div class="shop-details">
         @if (!isset($existingReview))
@@ -26,17 +29,27 @@
             <span class="tag">#{{ $shop->genre->name }}</span>
         </div>
         <p class="description">{{ $shop->description }}</p>
-        @if (isset($existingReview))
+        @if (isset($existingReview) || (Auth::check() && (Auth::user()->role == 1 || Auth::user()->role == 2)))
         <div class="review-index">
-            <a href="" class="review-index__link">全ての口コミ情報</a>
+            <form action="{{ route('reviews.index', $shop->id) }}" method="GET">
+                <button type="submit" class="review-index__button">全ての口コミ情報</button>
+            </form>
         </div>
         @endif
         <div class="review-list {{ $reviews->isNotEmpty() ? 'has-reviews' : '' }}">
-            @forelse ($reviews as $review)
+            @if (Auth::check() && $existingReview)
+            @foreach ($reviews as $review)
+            @if (Auth::id() == $review->user_id)
             <div class="review">
                 <div class="review-link__group">
-                    <a href="{{ route('reviews.edit', $review->id) }}" class="review-link">口コミを編集</a>
-                    <a href="" class="review-link">口コミを削除</a>
+                    <form action="{{ route('reviews.edit', $review->id) }}" method="GET">
+                        <button type="submit" class="review-link__button">口コミを編集</button>
+                    </form>
+                    <form action="{{ route('reviews.destroy', ['review' => $review->id]) }}" method="POST" onsubmit="return confirm('本当に削除しますか？');">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="review-link__button">口コミを削除</button>
+                    </form>
                 </div>
                 <p class="rating">
                     @for ($i = 1; $i <= 5; $i++)
@@ -45,12 +58,13 @@
                 </p>
                 <p class="comment">{{ $review->comment }}</p>
             </div>
-            @empty
+            @endif
+            @endforeach
+            @else
             <a href="{{ route('reviews.create', $shop->id) }}" class="btn">口コミを投稿する</a>
-            @endforelse
+            @endif
         </div>
     </div>
-
     <div class="reservation-form">
         <h2 class="reservation-form-ttl">予約</h2>
         <form action="{{ route('reservation.store') }}" method="POST">

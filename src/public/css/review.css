@@ -34,8 +34,9 @@ main {
     position: absolute;
     top: 60px;
     bottom: 0;
-    left: 45%;
+    left: 47%;
     margin-right: 50px;
+    margin-left: 5px;
     width: 1px;
     background-color: gray;
     height: 70%;
@@ -276,14 +277,16 @@ main {
 }
 
 .review-button {
-    display: flex;
-    justify-content: center;
+    margin-top: 10px;
+    position: relative;
+        right:55%;
 }
 
 .post-review {
-    width: 40%;
+    width: 100%;
     font-size: 18px;
     padding: 10px;
+    margin-top: 20px;
     background-color: white;
     color: black;
     border: solid 1px gray;
@@ -298,21 +301,27 @@ main {
 }
 
 @media screen and (max-width: 768px) {
-
     .container {
-            grid-template-columns: 1fr;
-        }
+        grid-template-columns: 1fr;
+    }
 
     .container::before {
         display:none;
     }
 
+    .shop-details {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
 
     .review-form {
         width: 90%;
+        margin: 0 auto;
         padding: 20px auto;
         margin-bottom: 60px;
         margin-top: -35px;
+        justify-content: center;
         align-items: center;
     }
 
@@ -360,29 +369,30 @@ main {
         text-align: left;
     }
 
-
     .review-form-table td {
         padding: 5px 10px;
         text-align: left;
     }
 
-    .review-button{
-        position: absolute;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        font-size: 20px;
-        padding: 15px;
-        background-color: blue;
-        color: #fff;
-        border: none;
-        border-radius: 0 0 5px 5px;
-        cursor: pointer;
-        object-fit: cover;
-        margin-top: 100px;
+    .review-button {
+        margin-top: 20px;
+        position: relative;
+        left:0;
     }
 
+    .post-review {
+        width: 90%;
+        font-size: 18px;
+        padding: 10px;
+        margin-top: 20px;
+        background-color: white;
+        color: black;
+        border: solid 1px gray;
+        border-radius: 30px;
+        cursor: pointer;
+        object-fit: cover;
+        margin-bottom: 20px;
+    }
 }
 
 @media screen and (max-width: 480px) {
@@ -391,26 +401,13 @@ main {
     }
 
     .review-form {
-        width: 90%;
+        width: 80%;
         margin: 0 auto;
     }
 
     .shop-details {
-        width: 90%;
+        width: 80%;
         margin: 0 auto;
     }
 
-    .review-form {
-        position: relative;
-        width: 90%;
-        min-height: 500px;
-        padding: 20px;
-        border: none;
-        color: white;
-        background-color: rgba(0, 0, 255, 0.6);
-        border-radius: 5px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        margin-bottom: 60px;
-        margin-top: -35px;
-    }
 }

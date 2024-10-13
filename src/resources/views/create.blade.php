@@ -91,12 +91,12 @@
                     <div class="img-preview" id="img-preview"></div>
                 </div>
             </div>
+            <div class="review-button">
+                <button type="submit" class="post-review">{{ isset($review) ? '口コミを更新' : '口コミを投稿' }}</button>
+            </div>
+        </form>
     </div>
 </div>
-<div class="review-button">
-    <button type="submit" class="post-review">{{ isset($review) ? '口コミを更新' : '口コミを投稿' }}</button>
-</div>
-</form>
 <script>
     const stars = document.querySelectorAll('.star-rating i');
     const ratingInput = document.getElementById('rating');
@@ -106,10 +106,10 @@
     if (oldRating) {
         stars.forEach(star => {
             if (star.getAttribute('data-value') <= oldRating) {
-                star.classList.add('selected'); // クリックした星とそれ以下の星に「selected」を追加
+                star.classList.add('selected');
             }
         });
-        ratingInput.value = oldRating; // oldの値をhiddenフィールドに設定
+        ratingInput.value = oldRating;
     }
 
     stars.forEach(star => {
