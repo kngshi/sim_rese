@@ -4,13 +4,17 @@ main{
     text-align: center;
 }
 
-
 h2 {
     padding-top: 20px;
 }
 
 .dashboard-sections {
     display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.dashboard-section {
     justify-content: space-around;
 }
 

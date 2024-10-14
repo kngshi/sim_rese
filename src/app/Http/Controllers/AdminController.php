@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 
 
 class AdminController extends Controller
@@ -51,7 +52,7 @@ class AdminController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-        return view('admin.create', compact('user','shopManagers'))->with('success', '店舗代表者を作成しました。');
+        return view('admin.create', compact('user', 'shopManagers'))->with('success', '店舗代表者を作成しました。');
     }
 
 
@@ -67,7 +68,7 @@ class AdminController extends Controller
         $areas = Area::all();
         $genres = Genre::all();
 
-        return view('manager.create', compact('shops','areas', 'genres'));
+        return view('manager.create', compact('shops', 'areas', 'genres'));
     }
 
     public function createShop(Request $request)
@@ -111,7 +112,7 @@ class AdminController extends Controller
         $user->shop_id = $shopInfo->id;
         $user->save();
 
-        return view('manager.create', compact('areas', 'genres','shopInfo'))->with('success', '店舗情報を作成しました。');
+        return view('manager.create', compact('areas', 'genres', 'shopInfo'))->with('success', '店舗情報を作成しました。');
     }
 
     public function editShop()
@@ -126,7 +127,7 @@ class AdminController extends Controller
         $areas = Area::all();
         $genres = Genre::all();
 
-        return view('manager.edit', compact('shop','areas', 'genres'));
+        return view('manager.edit', compact('shop', 'areas', 'genres'));
     }
 
     public function updateShop(Request $request)
@@ -160,10 +161,10 @@ class AdminController extends Controller
         $date = $request->input('date', Carbon::today()->toDateString());
 
         $reservations = Reservation::where('shop_id', $shopId)
-                                    ->whereDate('date', $date)
-                                    ->orderBy('date')
-                                    ->orderBy('time')
-                                    ->get();
+            ->whereDate('date', $date)
+            ->orderBy('date')
+            ->orderBy('time')
+            ->get();
 
         $previousDate = Carbon::parse($date)->subDay()->toDateString();
         $nextDate = Carbon::parse($date)->addDay()->toDateString();
@@ -208,5 +209,59 @@ class AdminController extends Controller
         }
 
         return response()->json(['message' => '予約が見つかりませんでした。'], 404);
+    }
+
+    public function showCsvImportForm()
+    {
+        return view('admin.csv-import');
+    }
+
+    // CSVファイルをインポートする
+    public function importCsv(Request $request)
+    {
+        // バリデーションルールの設定
+        $validator = Validator::make($request->all(), [
+            'csv_file' => 'required|file|mimes:csv,txt|max:2048', // CSVファイルのバリデーション
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        // アップロードされたCSVファイルの処理
+        $filePath = $request->file('csv_file')->store('csv'); // ファイルをストレージに保存
+
+        // CSVファイルの内容を読み取る
+        $file = fopen(storage_path("app/{$filePath}"), 'r');
+        $header = fgetcsv($file); // ヘッダーを取得
+
+        // データをデータベースに保存
+        while (($row = fgetcsv($file)) !== false) {
+            // CSVデータを連想配列に変換
+            $data = array_combine($header, $row);
+
+            // 地域とジャンルのIDを取得するための検索
+            $area = Area::where('name', $data['地域'])->first();
+            $genre = Genre::where('name', $data['ジャンル'])->first();
+
+            // バリデーション: 地域またはジャンルが存在しない場合はスキップ
+            if (!$area || !$genre) {
+                continue;
+            }
+
+            // 新規店舗を作成
+            $shop = new Shop();
+            $shop->name = $data['店舗名'];
+            $shop->area_id = $area->id; // 正しい area_id を設定
+            $shop->genre_id = $genre->id; // 正しい genre_id を設定
+            $shop->description = $data['店舗概要'];
+            $shop->image_path = $data['画像URL']; // 画像パスを設定
+
+            $shop->save(); // データベースに保存
+        }
+
+        fclose($file);
+
+        return redirect()->back()->with('success', 'CSVファイルが正常にインポートされました。');
     }
 }

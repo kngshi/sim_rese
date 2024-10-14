@@ -68,6 +68,9 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     Route::post('/create', [AdminController::class, 'storeManager'])->name('admin.store');
     Route::get('/notify', [AdminController::class, 'adminNotifyMail'])->name('admin.notify');
     Route::post('/notify', [AdminController::class, 'send'])->name('admin.notify.send');
+
+    Route::get('/admin/csv-import', [AdminController::class, 'showCsvImportForm'])->name('admin.csv.import');
+    Route::post('/admin/csv-import', [AdminController::class, 'importCsv'])->name('admin.csv.import.submit');
 });
 
 
