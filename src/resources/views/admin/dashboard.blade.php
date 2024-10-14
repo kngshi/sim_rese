@@ -5,7 +5,6 @@
 <link rel="stylesheet" href="{{ asset('css/admin/dashboard.css') }}" />
 @endsection
 
-
 @section('content')
 <div class="container">
     <h1>管理者ダッシュボード</h1>

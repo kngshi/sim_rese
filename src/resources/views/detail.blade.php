@@ -10,7 +10,7 @@
 <div class="flash-message__success">{{ session('success') }}</div>
 @endif
 @if (session('error'))
-<div class="flash-message__success">{{ session('error') }}</div>
+<div class="flash-message__error">{{ session('error') }}</div>
 @endif
 @if (session('message'))
 <div class="alert alert-success">{{ session('message') }}</div>

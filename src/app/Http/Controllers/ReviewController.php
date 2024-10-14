@@ -12,6 +12,10 @@ class ReviewController extends Controller
 {
     public function create($shopId)
     {
+        if (auth()->user()->role == 1 || auth()->user()->role == 2) {
+            return back()->with('error', '店舗責任者は口コミを投稿できません。');
+        }
+
         $shop = Shop::findOrFail($shopId);
         $reviews = Review::where('shop_id', $shopId)->latest()->get();
 
@@ -20,6 +24,10 @@ class ReviewController extends Controller
 
     public function store(ReviewRequest $request)
     {
+        if (auth()->user()->role == 1 || auth()->user()->role == 2) {
+            return back()->with('error', '店舗責任者は口コミを投稿できません。');
+        }
+
         $existingReview = Review::where('user_id', auth()->id())
             ->where('shop_id', $request->shop_id)
             ->first();
@@ -47,6 +55,10 @@ class ReviewController extends Controller
 
     public function edit(Review $review)
     {
+        if (auth()->user()->role == 1 || auth()->user()->role == 2) {
+            return back()->with('error', '店舗責任者は口コミを編集できません。');
+        }
+
         $shop = $review->shop;
 
         return view('create', compact('review', 'shop'));
@@ -54,6 +66,10 @@ class ReviewController extends Controller
 
     public function update(ReviewRequest $request, Review $review)
     {
+        if (auth()->user()->role == 1 || auth()->user()->role == 2) {
+            return back()->with('error', '店舗責任者は口コミを更新できません。');
+        }
+
         $validated = $request->validated();
 
         if ($request->hasFile('img_url')) {
@@ -73,6 +89,10 @@ class ReviewController extends Controller
         $review = Review::findOrFail($id);
         $user = auth()->user();
 
+        if ($user->role == 2) {
+            return back()->with('error', '店舗責任者は口コミを削除できません。');
+        }
+
         if ($user->role == 1) {
             $review->delete();
             return redirect()->route('detail', ['shop' => $review->shop_id])
@@ -85,7 +105,6 @@ class ReviewController extends Controller
                 ->with('message', '口コミを削除しました。');
         }
 
-        // 権限がない場合
         return redirect()->route('detail', ['shop' => $review->shop_id])
             ->with('error', '削除する権限がありません。');
     }
