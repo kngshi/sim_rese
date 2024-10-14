@@ -19,7 +19,7 @@ class ReviewController extends Controller
         $shop = Shop::findOrFail($shopId);
         $reviews = Review::where('shop_id', $shopId)->latest()->get();
 
-        return view('create', compact('shop', 'reviews'));
+        return view('review', compact('shop', 'reviews'));
     }
 
     public function store(ReviewRequest $request)
@@ -61,7 +61,7 @@ class ReviewController extends Controller
 
         $shop = $review->shop;
 
-        return view('create', compact('review', 'shop'));
+        return view('review', compact('review', 'shop'));
     }
 
     public function update(ReviewRequest $request, Review $review)
