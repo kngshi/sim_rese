@@ -8,14 +8,14 @@
 @section('search-form')
 <div class="search-form__group">
   <div class="search-form__sort">
-    <form action="{{ route('shops.sort') }}" method="GET">
-      <select class="search-form__sort-select" name="sort" onchange="this.form.submit()">
-        <option disabled selected>並び替え：評価高/低</option>
-        <option value="random" @if(request('sort')=='random' ) selected @endif>ランダム</option>
-        <option value="high_rating" @if(request('sort')=='high_rating' ) selected @endif>評価が高い順</option>
-        <option value="low_rating" @if(request('sort')=='low_rating' ) selected @endif>評価が低い順</option>
-      </select>
-    </form>
+    <div class="custom-dropdown">
+      <button class="dropdown-btn">並び替え：評価高/低</button>
+      <div class="dropdown-content">
+        <a href="{{ route('shops.sort', ['sort' => 'random']) }}" class="dropdown-item">ランダム</a>
+        <a href="{{ route('shops.sort', ['sort' => 'high_rating']) }}" class="dropdown-item">評価が高い順</a>
+        <a href="{{ route('shops.sort', ['sort' => 'low_rating']) }}" class="dropdown-item">評価が低い順</a>
+      </div>
+    </div>
   </div>
   <div class="search__form">
     <form class="search-form" action="/search" method="get">
@@ -61,7 +61,13 @@
   <div class="object-container">
     @foreach($shops as $shop)
     <div class="object">
-      <img src="{{ $shop->image_path }}" class="object-img-top" alt="店舗画像">
+      <div class="object-img-top">
+        @if ($shop->image_path)
+        <img src="{{ $shop->image_path }}" alt="店舗画像">
+        @else
+        <span>画像がありません</span>
+        @endif
+      </div>
       <div class="object-body">
         <h5 class="object-title">{{ $shop->name }}</h5>
         <div class="tags">

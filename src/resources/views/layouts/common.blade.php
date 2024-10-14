@@ -17,16 +17,18 @@
 <body>
     <header class="header">
         <div class="header__inner">
-            @if(auth()->check())
-            <a href="#modal-02">
-                <div class="openbtn6"><span></span><span></span><span></span></div>
-            </a>
-            @else
-            <a href="#modal-01">
-                <div class="openbtn6"><span></span><span></span><span></span></div>
-            </a>
-            @endif
-            <div class="header__logo">Rese</div>
+            <div class="header__modal-logo-group">
+                @if(auth()->check())
+                <a href="#modal-02">
+                    <div class="openbtn6"><span></span><span></span><span></span></div>
+                </a>
+                @else
+                <a href="#modal-01">
+                    <div class="openbtn6"><span></span><span></span><span></span></div>
+                </a>
+                @endif
+                <div class="header__logo">Rese</div>
+            </div>
             @yield('search-form')
         </div>
     </header>

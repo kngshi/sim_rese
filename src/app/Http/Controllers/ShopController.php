@@ -30,18 +30,19 @@ class ShopController extends Controller
         $sort = $request->input('sort');
 
         $shops = Shop::query()
-            ->withCount('reviews') // レビューの件数をカウント
-            ->withAvg('reviews', 'rating'); // レビューの平均評価を計算
+            ->withCount('reviews')
+            ->withAvg('reviews', 'rating');
 
-        // ソートロジックを追加
         if ($sort === 'random') {
             $shops = $shops->inRandomOrder();
         } elseif ($sort === 'high_rating') {
-            $shops = $shops->orderBy('reviews_avg_rating', 'desc') // 平均評価で降順
-                ->orderBy('id', 'asc'); // 評価がない場合も最後尾に持ってくるためのIDでのソート
+            $shops = $shops->orderByRaw('reviews_avg_rating IS NULL ASC')
+                ->orderBy('reviews_avg_rating', 'desc')
+                ->orderBy('id', 'asc');
         } elseif ($sort === 'low_rating') {
-            $shops = $shops->orderBy('reviews_avg_rating', 'asc') // 平均評価で昇順
-                ->orderBy('id', 'asc'); // 評価がない場合も最後尾に持ってくるためのIDでのソート
+            $shops = $shops->orderByRaw('reviews_avg_rating IS NULL ASC')
+                ->orderBy('reviews_avg_rating', 'asc')
+                ->orderBy('id', 'asc');
         }
 
         $shops = $shops->get();

@@ -7,16 +7,24 @@
     padding: 20px 0;
     max-width: 1230px;
     display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.header__modal-logo-group {
+    display: flex;
+    align-items: center;
+    padding-left: 30px;
 }
 
 .header__logo {
-    position: relative;
-        left: 10px;
+    margin-left: 10px;
     color: blue;
     text-decoration: none;
     font-weight: bold;
     font-size: 30px;
     margin: 0 20px;
+    min-width: 150px;
 }
 
 /* モーダルウィンドウのリンクボタン */
