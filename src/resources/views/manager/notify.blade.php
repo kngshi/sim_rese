@@ -2,13 +2,14 @@
 
 @section('css')
 <link rel="stylesheet" href="{{ asset('css/common.css') }}" />
+<link rel="stylesheet" href="{{ asset('css/components/header.css') }}" />
 <link rel="stylesheet" href="{{ asset('css/notify.css') }}" />
 @endsection
 
 @section('content')
 <div class="container">
     @if (session('success'))
-        <div class="flash-message__success">{{ session('success') }}</div>
+    <div class="flash-message__success">{{ session('success') }}</div>
     @endif
     <div class="notify-form-container">
         <h1>お知らせメールの送信</h1>
@@ -22,7 +23,7 @@
             <br>
             <button type="submit">メール送信</button>
         </form>
-        <a href="/manager/dashboard" class="back-link" >戻る</a>
+        <a href="/manager/dashboard" class="back-link">戻る</a>
     </div>
 </div>
 @endsection

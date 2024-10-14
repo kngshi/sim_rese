@@ -88,8 +88,8 @@ return [
         'string' => ':attribute は最大191文字までで入力して下さい。 :max 文字.',
         'array' => 'The :attribute must not have more than :max items.',
     ],
-    'mimes' => 'The :attribute must be a file of type: :values.',
-    'mimetypes' => 'The :attribute must be a file of type: :values.',
+    'mimes' => ':attribute は、:values タイプのファイルでなければなりません。',
+    'mimetypes' => ':attribute は、:values タイプのファイルでなければなりません。',
     'min' => [
         'numeric' => 'The :attribute must be at least :min.',
         'file' => 'The :attribute must be at least :min kilobytes.',

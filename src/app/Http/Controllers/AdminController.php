@@ -216,48 +216,65 @@ class AdminController extends Controller
         return view('admin.csv-import');
     }
 
-    // CSVファイルをインポートする
     public function importCsv(Request $request)
     {
-        // バリデーションルールの設定
         $validator = Validator::make($request->all(), [
-            'csv_file' => 'required|file|mimes:csv,txt|max:2048', // CSVファイルのバリデーション
+            'csv_file' => 'required|file|mimes:csv,txt|max:2048',
         ]);
 
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
-        // アップロードされたCSVファイルの処理
-        $filePath = $request->file('csv_file')->store('csv'); // ファイルをストレージに保存
+        $filePath = $request->file('csv_file')->store('csv');
 
-        // CSVファイルの内容を読み取る
         $file = fopen(storage_path("app/{$filePath}"), 'r');
-        $header = fgetcsv($file); // ヘッダーを取得
+        $header = fgetcsv($file);
 
-        // データをデータベースに保存
         while (($row = fgetcsv($file)) !== false) {
-            // CSVデータを連想配列に変換
             $data = array_combine($header, $row);
 
-            // 地域とジャンルのIDを取得するための検索
+            if (empty($data['店舗名']) || empty($data['地域']) || empty($data['ジャンル']) || empty($data['店舗概要']) || empty($data['画像URL'])) {
+                return redirect()->back()->withErrors('必須入力項目が不足しています。')->withInput();
+            }
+
+            if (strlen($data['店舗名']) > 50) {
+                return redirect()->back()->withErrors('店舗名は50文字以内で入力してください。')->withInput();
+            }
+
+            $validAreas = ['東京都', '大阪府', '福岡県'];
+            if (!in_array($data['地域'], $validAreas)) {
+                return redirect()->back()->withErrors('地域は「東京都」「大阪府」「福岡県」のいずれかで入力してください。')->withInput();
+            }
+
+            $validGenres = ['寿司', '焼肉', 'イタリアン', '居酒屋', 'ラーメン'];
+            if (!in_array($data['ジャンル'], $validGenres)) {
+                return redirect()->back()->withErrors('ジャンルは「寿司」「焼肉」「イタリアン」「居酒屋」「ラーメン」のいずれかで入力してください。')->withInput();
+            }
+
+            if (strlen($data['店舗概要']) > 400) {
+                return redirect()->back()->withErrors('店舗概要は400文字以内で入力してください。')->withInput();
+            }
+
+            if (!preg_match('/\.(jpeg|jpg|png)$/i', $data['画像URL'])) {
+                return redirect()->back()->withErrors('画像URLはjpegまたはpng形式の画像を指定してください。')->withInput();
+            }
+
             $area = Area::where('name', $data['地域'])->first();
             $genre = Genre::where('name', $data['ジャンル'])->first();
 
-            // バリデーション: 地域またはジャンルが存在しない場合はスキップ
             if (!$area || !$genre) {
                 continue;
             }
 
-            // 新規店舗を作成
             $shop = new Shop();
             $shop->name = $data['店舗名'];
-            $shop->area_id = $area->id; // 正しい area_id を設定
-            $shop->genre_id = $genre->id; // 正しい genre_id を設定
+            $shop->area_id = $area->id;
+            $shop->genre_id = $genre->id;
             $shop->description = $data['店舗概要'];
-            $shop->image_path = $data['画像URL']; // 画像パスを設定
+            $shop->image_path = $data['画像URL'];
 
-            $shop->save(); // データベースに保存
+            $shop->save();
         }
 
         fclose($file);
