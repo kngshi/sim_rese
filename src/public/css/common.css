@@ -154,7 +154,6 @@
 
 .modal-content ul li {
     margin-bottom: 5px;
-    /* リストアイテムの間隔を調整 */
 }
 
 .modal-content ul li a {
@@ -189,6 +188,11 @@
         max-width: 768px;
         display: flex;
     }
+
+    .header__modal-logo-group {
+        max-width:15%;
+    }
+
     .header__logo {
         color: blue;
         text-decoration: none;
@@ -242,8 +246,14 @@
     .header__inner {
         margin: 0 auto;
         padding: 20px 0;
-        max-width: px;
+        max-width: 480px;
         display: flex;
+    }
+
+    .header__modal-logo-group {
+        position: absolute;
+        top: 30px;
+        left: 5px;
     }
 
     .header__logo {
