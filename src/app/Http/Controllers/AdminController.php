@@ -86,7 +86,7 @@ class AdminController extends Controller
             'area_id' => 'required|exists:areas,id',
             'genre_id' => 'required|exists:genres,id',
             'description' => 'required|string|max:400',
-            'image_path' => 'required|image|mimes:jpeg,png|max:2048',
+            'image' => 'required|image|mimes:jpeg,png|max:2048',
         ]);
 
         $imageFile = $request->file('image');
@@ -135,7 +135,7 @@ class AdminController extends Controller
             'area_id' => 'required|exists:areas,id',
             'genre_id' => 'required|exists:genres,id',
             'description' => 'required|string|max:400',
-            'image_path' => 'required|image|mimes:jpeg,png|max:2048',
+            'image_path' => 'nullable|string',
         ]);
 
         $shop->update([
