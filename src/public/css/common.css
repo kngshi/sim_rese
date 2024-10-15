@@ -7,7 +7,7 @@
     padding: 20px 0;
     max-width: 1230px;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
 }
 
@@ -235,7 +235,6 @@
         top: 31px;
         width: 20%;
     }
-
 }
 
 @media screen and (max-width: 480px) {

@@ -93,7 +93,7 @@
 }
 
 .search-form__keyword-input {
-    padding-right: 40px;
+    padding-right: 0px;
 }
 
 .search-form__submit-button {
@@ -327,11 +327,10 @@ main {
         z-index: 1;
         position: absolute;
         top: 100%;
-        right: 0;
     }
 
     .container {
-        padding-top: 40px;
+        padding-top: 20px;
     }
 
     .search-form {
