@@ -90,3 +90,7 @@
 .back-button:hover {
     background-color: #0056b3;
 }
+
+.modal-content form {
+    margin-bottom: 0;
+}
