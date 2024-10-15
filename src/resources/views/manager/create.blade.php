@@ -41,7 +41,7 @@
                 <select name="area_id" id="area_id" class="form-control" autocomplete="off">
                     <option value="" disabled selected>選択してください</option>
                     @foreach ($areas as $area)
-                    <option value="{{ $area->id }}">{{ $area->name }}</option>
+                    <option value="{{ $area->id }}" {{ old('area_id') == $area->id ? 'selected' : '' }}>{{ $area->name }}</option>
                     @endforeach
                 </select>
             </div>
@@ -50,13 +50,13 @@
                 <select name="genre_id" id="genre_id" class="form-control" autocomplete="off">
                     <option value="" disabled selected>選択してください</option>
                     @foreach ($genres as $genre)
-                    <option value="{{ $genre->id }}">{{ $genre->name }}</option>
+                    <option value="{{ $genre->id }}" {{ old('genre_id') == $genre->id ? 'selected' : '' }}>{{ $genre->name }}</option>
                     @endforeach
                 </select>
             </div>
             <div class="form-group">
                 <label for="description">店舗概要</label>
-                <textarea name="description" id="description" class="form-control" placeholder="店舗の概要を400字以内で入力してください。" autocomplete="off"></textarea>
+                <textarea name="description" id="description" class="form-control" placeholder="店舗の概要を400字以内で入力してください。" autocomplete="off">{{ old('description') }}</textarea>
             </div>
             <div class="form-group">
                 <label for="image">画像</label>
