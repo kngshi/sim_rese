@@ -73,10 +73,10 @@ class ReviewController extends Controller
         $validated = $request->validated();
 
         if ($request->hasFile('img_url')) {
-            // 古い画像がある場合は削除する処理をここに追加（オプション）
-            // 新しい画像を保存
             $imagePath = $request->file('img_url')->store('public/reviews');
             $validated['img_url'] = basename($imagePath);
+        } else {
+            $validated['img_url'] = $review->img_url;
         }
 
         $review->update($validated);

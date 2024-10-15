@@ -89,7 +89,11 @@
                 <div class="img-input_form">
                     <input type="file" id="img_url" name="img_url" accept="image/*" style="display:none;">
                     <span class="upload-text">クリックして写真を追加<br>またはドラッグアンドドロップ</span>
-                    <div class="img-preview" id="img-preview"></div>
+                    <div class="img-preview" id="img-preview">
+                        @if(isset($review->img_url))
+                        <img src="{{ asset('storage/uploads/' . $review->img_url) }}" alt="画像プレビュー">
+                        @endif
+                    </div>
                 </div>
             </div>
             <div class="review-button">
@@ -131,6 +135,9 @@
         const commentInput = document.getElementById('comment');
         const letterCountDisplay = document.querySelector('.letter-count');
         const maxLength = 400;
+
+        const currentLength = commentInput.value.length;
+        letterCountDisplay.textContent = `${currentLength}/${maxLength}(最高文字数)`;
 
         commentInput.addEventListener('input', function() {
             const currentLength = commentInput.value.length;
@@ -178,5 +185,14 @@
             reader.readAsDataURL(file);
         }
     }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const existingImage = "{{ isset($review) && $review->img_url ? asset('storage/reviews/' . $review->img_url) : '' }}";
+        if (existingImage) {
+            const preview = document.getElementById('img-preview');
+            preview.innerHTML = `<img src="${existingImage}" alt="既存画像プレビュー">`;
+            preview.style.display = 'block';
+        }
+    });
 </script>
 @endsection
