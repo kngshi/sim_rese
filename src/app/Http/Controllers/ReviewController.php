@@ -73,8 +73,8 @@ class ReviewController extends Controller
         $validated = $request->validated();
 
         if ($request->hasFile('img_url')) {
-            $imagePath = $request->file('img_url')->store('public/reviews');
-            $validated['img_url'] = basename($imagePath);
+            $imagePath = $request->file('img_url')->store('uploads', 'public');
+            $validated['img_url'] = $imagePath;
         } else {
             $validated['img_url'] = $review->img_url;
         }

@@ -172,6 +172,7 @@
         imgInputForm.classList.remove('dragover');
 
         const file = e.dataTransfer.files[0];
+        fileInput.files = e.dataTransfer.files;
         handleFileUpload(file);
     });
 
@@ -187,7 +188,8 @@
     }
 
     document.addEventListener('DOMContentLoaded', function() {
-        const existingImage = "{{ isset($review) && $review->img_url ? asset('storage/reviews/' . $review->img_url) : '' }}";
+        const existingImage = "{{ isset($review) && $review->img_url ? asset('storage/' . $review->img_url) : '' }}";
+
         if (existingImage) {
             const preview = document.getElementById('img-preview');
             preview.innerHTML = `<img src="${existingImage}" alt="既存画像プレビュー">`;

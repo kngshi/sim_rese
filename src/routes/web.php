@@ -49,8 +49,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::delete('/reservations/{id}', [ReservationController::class, 'destroy'])->name('reservation.destroy');
 
     Route::get('/reviews/create/{shop}', [ReviewController::class, 'create'])->name('reviews.create');
-    Route::post('/create', [ReviewController::class, 'store'])->name('reviews.store');
-
+    Route::post('/review/create', [ReviewController::class, 'store'])->name('reviews.store');
     Route::get('reviews/{review}/edit', [ReviewController::class, 'edit'])->name('reviews.edit');
     Route::put('reviews/{review}', [ReviewController::class, 'update'])->name('reviews.update');
     Route::delete('/reviews/{review}', [ReviewController::class, 'destroy'])->name('reviews.destroy');
