@@ -160,14 +160,38 @@ php artisan migrate
 php artisan db:seed
 ```
 
-> シーディングの際に、管理者のテストユーザーを登録しています。
-> 店舗代表者を作成する際は、こちらのテストユーザーとしてログインをしてください。
+> シーディングの際に、テストユーザーを登録しています。
+> 管理者としてログインする際は、以下を使用をしてください。
 
-```bash
-name: admin
-email: admin@exadpmle.com
+```text
+name: 管理者
+email: admin@example.com
 password: admin1234
 ```
+
+> 店舗責任者としてログインする際は、以下を使用をしてください。
+
+```text
+name: 店舗責任者
+email: manager@example.com
+password: manager1234
+```
+
+> 一般ユーザーとしてログインする際は、以下のいずれかを使用をしてください。
+
+```text
+name: サンプルユーザー
+email: sample@example.com
+password: sample1234
+```
+
+```text
+name: サンプルユーザー2
+email: sample2@example.com
+password: sample1234
+```
+
+> ※一般ユーザーの認証が必要なルートでは、メール認証が必要です。
 
 **Laravel Breeze のインストール**
 
@@ -176,3 +200,27 @@ password: admin1234
 3. `php artisan migrate`
 4. `npm install`
 5. `npm run dev`
+
+**csv ファイル　インポート**
+
+- 管理ユーザーは csv をインポートすることで、店舗情報を追加することができます。
+
+- 以下のリンクから、csv インポート用のサンプルファイルをダウンロードし、次のルールに従って csv ファイルを作成してください。  
+  [リンクテキスト](https://docs.google.com/spreadsheets/d/1O9Uter0i1GyjhzGjGGgyhbLD5uJnCOs4WMRQ2St0vrM/edit?usp=sharing)
+
+```text
+- ルール
+1.各項目は全て入力必須です。
+  セルに入力漏れがあると正常にインポートされないので、注意して下さい。
+2. 店舗名：50文字以内で入力。
+3. 地域：「東京都」「大阪府」「福岡県」のいずれかの文字を入力。
+4. ジャンル：「寿司」「焼肉」「イタリアン」「居酒屋」「ラーメン」のいずれかの文字を入力。
+5. 店舗概要：400文字以内で入力。
+6. 画像URL：画像のURLを入力。なお、ファイル形式はjpeg、pngのみアップロード可能です。
+
+※１行目のセル内にある「店舗名、地域、ジャンル、店舗概要、画像 URL」という、列名を表す文字は削除しないようにして下さい。(※これらの文字を削除した場合にも、エラーが発生します。)
+
+なお、フォーマットの中にある「サンプル」のデータは、見本なので削除して構いません。
+```
+
+以上のルールに従って csv ファイルを作成することで、csv ファイルをインポートし、店舗情報の追加をすることが出来ます。
