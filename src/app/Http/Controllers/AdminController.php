@@ -86,7 +86,7 @@ class AdminController extends Controller
             'area_id' => 'required|exists:areas,id',
             'genre_id' => 'required|exists:genres,id',
             'description' => 'required|string|max:400',
-            'image' => 'required|image|mimes:jpeg,png|max:2048',
+            'image_path' => 'required|image|mimes:jpeg,png|max:2048',
         ]);
 
         $imageFile = $request->file('image');
@@ -131,11 +131,11 @@ class AdminController extends Controller
         $shop = Shop::findOrFail($shopId);
 
         $request->validate([
-            'name' => 'required|string|max:255',
+            'name' => 'required|string|max:50',
             'area_id' => 'required|exists:areas,id',
             'genre_id' => 'required|exists:genres,id',
-            'description' => 'required|string',
-            'image_path' => 'nullable|string',
+            'description' => 'required|string|max:400',
+            'image_path' => 'required|image|mimes:jpeg,png|max:2048',
         ]);
 
         $shop->update([
