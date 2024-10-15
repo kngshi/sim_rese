@@ -39,10 +39,10 @@ class AdminController extends Controller
         $shopManagers = User::where('role', 2)->get();
 
         $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:users',
+            'name' => 'required|string|max:191',
+            'email' => 'required|email|unique:users|max:191',
             'role' => 'required',
-            'password' => 'required|string|min:8',
+            'password' => 'required|string|min:8|max:191',
         ]);
 
         $user = User::create([
@@ -82,35 +82,30 @@ class AdminController extends Controller
         }
 
         $request->validate([
-            'name' => 'required|string|max:255',
+            'name' => 'required|string|max:50',
             'area_id' => 'required|exists:areas,id',
             'genre_id' => 'required|exists:genres,id',
-            'description' => 'required|string',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'description' => 'required|string|max:400',
+            'image' => 'required|image|mimes:jpeg,png|max:2048',
         ]);
 
-        // 画像ファイルを取得
         $imageFile = $request->file('image');
 
-        // オリジナルのファイル名を取得
         $fileName = $imageFile->getClientOriginalName();
 
-        // S3にファイルを保存
-        $path = Storage::disk('s3')->putFileAs('images', $imageFile, $fileName);
+        $localPath = $imageFile->storeAs('images', $fileName, 'public');
+        $localUrl = Storage::url($localPath);
 
-
-        $url = Storage::disk('s3')->url($path);
 
         $shopInfo = Shop::create([
             'name' => $request->name,
             'area_id' => $request->area_id,
             'genre_id' => $request->genre_id,
             'description' => $request->description,
-            'image_path' => $url,
+            'image_path' => $localUrl,
         ]);
 
         $user->shop_id = $shopInfo->id;
-        $user->save();
 
         return view('manager.create', compact('areas', 'genres', 'shopInfo'))->with('success', '店舗情報を作成しました。');
     }

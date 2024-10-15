@@ -6,7 +6,6 @@
 <link rel="stylesheet" href="{{ asset('css/admin/create.css') }}" />
 @endsection
 
-
 @section('content')
 <h1>店舗代表者作成ページ</h1>
 @if (session('success'))

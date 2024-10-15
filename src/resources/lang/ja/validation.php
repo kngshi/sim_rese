@@ -164,7 +164,10 @@ return [
         'password' => 'パスワード',
         'date' => '日付',
         'time' => '時刻',
-        'number' => '人数',
+        'area_id' => '地域',
+        'genre_id' => 'ジャンル',
+        'description' => '店舗概要',
+        'image' => '画像',
     ],
 
 ];
