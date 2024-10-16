@@ -20,7 +20,6 @@ class ReviewsTableSeeder extends Seeder
             'shop_id' => '1',
             'rating' => '5',
             'comment' => 'テストコメント（仙人）byサンプルユーザー',
-            'img_url' => 'https://coachtech-matter.s3-ap-northeast-1.amazonaws.com/image/sushi.jpg',
         ];
         DB::table('reviews')->insert($param);
 
@@ -30,7 +29,6 @@ class ReviewsTableSeeder extends Seeder
             'shop_id' => '2',
             'rating' => '4',
             'comment' => 'テストコメント（牛助）byサンプルユーザー',
-            'img_url' => 'https://coachtech-matter.s3-ap-northeast-1.amazonaws.com/image/yakiniku.jpg',
         ];
         DB::table('reviews')->insert($param);
 
@@ -40,7 +38,6 @@ class ReviewsTableSeeder extends Seeder
             'shop_id' => '1',
             'rating' => '3',
             'comment' => 'テストコメント（仙人）byサンプルユーザー2',
-            'img_url' => 'https://coachtech-matter.s3-ap-northeast-1.amazonaws.com/image/sushi.jpg',
         ];
         DB::table('reviews')->insert($param);
 
@@ -50,7 +47,6 @@ class ReviewsTableSeeder extends Seeder
             'shop_id' => '2',
             'rating' => '3',
             'comment' => 'テストコメント（牛助）byサンプルユーザー2',
-            'img_url' => 'https://coachtech-matter.s3-ap-northeast-1.amazonaws.com/image/yakiniku.jpg',
         ];
         DB::table('reviews')->insert($param);
 
@@ -60,7 +56,6 @@ class ReviewsTableSeeder extends Seeder
             'shop_id' => '3',
             'rating' => '3',
             'comment' => 'テストコメント（戦慄）byサンプルユーザー',
-            'img_url' => 'https://coachtech-matter.s3-ap-northeast-1.amazonaws.com/image/izakaya.jpg',
         ];
         DB::table('reviews')->insert($param);
 
@@ -70,7 +65,6 @@ class ReviewsTableSeeder extends Seeder
             'shop_id' => '4',
             'rating' => '5',
             'comment' => 'テストコメント（ルーク）byサンプルユーザー',
-            'img_url' => 'https://coachtech-matter.s3-ap-northeast-1.amazonaws.com/image/italian.jpg',
         ];
         DB::table('reviews')->insert($param);
     }
