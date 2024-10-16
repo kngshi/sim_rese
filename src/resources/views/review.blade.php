@@ -96,8 +96,8 @@
                     </div>
                 </div>
             </div>
-            <div class="review-button">
-                <button type="submit" class="post-review">{{ isset($review) ? '口コミを更新' : '口コミを投稿' }}</button>
+            <div class="review-button__wrapper">
+                <button type="submit" class="review-button">{{ isset($review) ? '口コミを更新' : '口コミを投稿' }}</button>
             </div>
         </form>
     </div>
@@ -105,7 +105,6 @@
 <script>
     const stars = document.querySelectorAll('.star-rating i');
     const ratingInput = document.getElementById('rating');
-
     const oldRating = "{{ old('rating', isset($review) ? $review->rating : '') }}";
 
     if (oldRating) {

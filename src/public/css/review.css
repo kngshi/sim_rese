@@ -276,28 +276,28 @@ main {
     border-radius: 5px;
 }
 
-.review-button {
+.review-button__wrapper {
     margin-top: 10px;
     position: relative;
         right:55%;
 }
 
-.post-review {
+.review-button {
     width: 100%;
     font-size: 18px;
     padding: 10px;
     margin-top: 20px;
     background-color: white;
     color: black;
-    border: solid 1px gray;
+    border: none;
     border-radius: 30px;
     cursor: pointer;
     object-fit: cover;
     margin-bottom: 20px;
 }
 
-.post-review:hover {
-    background-color: #f9f9f9;
+.review-button:hover {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 @media screen and (max-width: 768px) {
@@ -374,13 +374,13 @@ main {
         text-align: left;
     }
 
-    .review-button {
+    .review-button__wrapper {
         margin-top: 20px;
         position: relative;
         left:0;
     }
 
-    .post-review {
+    .review-button {
         width: 90%;
         font-size: 18px;
         padding: 10px;
